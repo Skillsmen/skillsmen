@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bantalek/senior-thesis.git"
+    "url": "git+https://github.com/PuffyShirts/senior-thesis.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bantalek/senior-thesis/issues"
+    "url": "https://github.com/PuffyShirts/senior-thesis/issues"
   },
-  "homepage": "https://github.com/bantalek/senior-thesis#readme",
+  "homepage": "https://github.com/PuffyShirts/senior-thesis#readme",
   "devDependencies": {
     "eslint": "^3.9.1",
     "eslint-config-airbnb": "^13.0.0",
