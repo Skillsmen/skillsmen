@@ -1,0 +1,8 @@
+{
+  "exponentServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 14192,
+  "exponentServerNgrokUrl": "https://te-ru4.shenders13.thesis.exp.direct",
+  "packagerNgrokUrl": "https://packager.te-ru4.shenders13.thesis.exp.direct",
+  "ngrokPid": 14210
+}

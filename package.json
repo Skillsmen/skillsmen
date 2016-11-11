@@ -4,13 +4,13 @@
   "description": "",
   "author": null,
   "private": true,
-  "main": "./mobile/index.js",
+  "main": "./mobile/index.jsx",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PuffyShirts/senior-thesis.git"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest && grunt lint"
   },
   "jest": {
     "preset": "jest-exponent"
@@ -34,6 +34,9 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0",
+    "grunt": "^1.0.1",
+    "grunt-eslint": "^19.0.0",
+    "grunt-run": "^0.6.0",
     "jest-exponent": "^0.1.3",
     "jest-react-native": "^17.0.0",
     "react-test-renderer": "^15.3.2"
