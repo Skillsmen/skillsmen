@@ -1,3 +1,4 @@
+/* eslint react/jsx-filename-extension: 0 */
 
 import Exponent from 'exponent';
 import React from 'react';
