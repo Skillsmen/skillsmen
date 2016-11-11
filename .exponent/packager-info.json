@@ -1,8 +1,0 @@
-{
-  "exponentServerPort": 19002,
-  "packagerPort": 19003,
-  "packagerPid": 1739,
-  "exponentServerNgrokUrl": "https://gp-zp5.tcwood.senior-thesis.exp.direct",
-  "packagerNgrokUrl": "https://packager.gp-zp5.tcwood.senior-thesis.exp.direct",
-  "ngrokPid": 1754
-}
