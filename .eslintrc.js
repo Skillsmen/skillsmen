@@ -12,6 +12,7 @@ module.exports = {
       "sourceType": "module"
   },
   "plugins": [
-      "react"
+      "react",
+      "react-native"
   ]
 };
