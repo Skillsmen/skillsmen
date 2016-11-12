@@ -23,8 +23,9 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
   },
   backgroundImage: {
+    flexDirection: 'row',
     resizeMode: 'cover',
-    alignItems: 'center',
+    justifyContent: 'space-between',
     width,
   },
   profPic: {
@@ -32,6 +33,13 @@ const styles = StyleSheet.create({
     width: width * 0.4,
     height: width * 0.4,
     marginTop: 0.05 * height,
+    alignSelf: 'center',
+  },
+  editIcon: {
+    backgroundColor: 'transparent',
+    marginTop: 0.05 * height,
+    marginRight: 5,
+    alignSelf: 'flex-end',
   },
   info: {
     paddingLeft: 20,
@@ -59,13 +67,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
-// Picture
-// Name
-// three component thingy... (type of worker, location, experience)
-// Information / Experience
-// Contact Info
-// Eventually can edit
-// Recommendations
+// X- Picture
+// X- Name
+//    three component thingy... (type of worker, location, experience)
+// X- Information / Experience
+// X- Contact Info
+//    Eventually can edit
+// X- Recommendations
 
 class Profile extends React.Component {
   constructor(props) {
@@ -82,10 +90,21 @@ class Profile extends React.Component {
           style={styles.backgroundImage}
           source={bgImg}
         >
-          <Image
-            style={styles.profPic}
-            source={profPic}
-          />
+          <View style={{ flex: 1 }} />
+          <View style={{ flex: 1 }}>
+            <Image
+              style={styles.profPic}
+              source={profPic}
+            />
+          </View>
+          <View style={{ flex: 1 }}>
+            <FontAwesome
+              style={styles.editIcon}
+              name="pencil-square-o"
+              size={40}
+              color="#DCDCDC"
+            />
+          </View>
         </Image>
         <ScrollView
           contentContainerStyle={styles.contentContainer}
