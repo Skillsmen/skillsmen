@@ -10,7 +10,7 @@
     "url": "git+https://github.com/PuffyShirts/senior-thesis.git"
   },
   "scripts": {
-    "test": "jest && grunt lint"
+    "test": "grunt lint && jest"
   },
   "jest": {
     "preset": "jest-exponent"
