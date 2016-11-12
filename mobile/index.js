@@ -44,7 +44,7 @@ class App extends React.Component {
     return (
       <View style={styles.container}>
         <NavigationProvider router={Router}>
-          <StackNavigation initialRoute={this.state.token ? 'profile' : 'signin'} />
+          <StackNavigation initialRoute={this.state.token ? 'profile' : 'entry'} />
           {this.state.token ? (<NavigationBar />) : (null)}
         </NavigationProvider>
       </View>
