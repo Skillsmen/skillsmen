@@ -123,7 +123,7 @@ class Profile extends React.Component {
                 style={styles.editIcon}
                 name="pencil-square-o"
                 size={40}
-                color="#DCDCDC"
+                color={this.state.editMode ? '#7dc4ff' : '#DCDCDC'}
               />
             </TouchableHighlight>
           </View>
