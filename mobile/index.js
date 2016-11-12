@@ -3,10 +3,17 @@
 import Exponent from 'exponent';
 import React from 'react';
 import {
-  StyleSheet,
-  Text,
   View,
+  StyleSheet,
 } from 'react-native';
+
+import {
+  NavigationProvider,
+  StackNavigation,
+} from '@exponent/ex-navigation';
+
+import NavigationBar from './NavigationBar';
+import Router from './Router';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,7 +30,6 @@ class App extends React.Component {
     this.state = {
     };
   }
-
 
   componentWillMount() {
     fetch('http://127.0.0.1:3000/users')
@@ -42,10 +48,14 @@ class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Test test test</Text>
+        <NavigationProvider router={Router}>
+          <StackNavigation initialRoute="profile" />
+          <NavigationBar />
+        </NavigationProvider>
       </View>
     );
   }
 }
 
 Exponent.registerRootComponent(App);
+

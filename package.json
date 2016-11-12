@@ -21,11 +21,12 @@
   },
   "homepage": "https://github.com/PuffyShirts/senior-thesis#readme",
   "dependencies": {
-    "@exponent/vector-icons": "~2.0.3",
-    "eslint-plugin-react": "^6.6.0",
-    "exponent": "~11.0.2",
     "express": "^4.14.0",
-    "react": "^15.3.2",
+    "@exponent/ex-navigation": "^2.0.0",
+    "@exponent/vector-icons": "~2.0.3",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "exponent": "~11.0.2",
+    "react": "~15.3.2",
     "react-native": "git+https://github.com/exponentjs/react-native#sdk-11.0.3"
   },
   "devDependencies": {
