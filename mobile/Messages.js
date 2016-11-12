@@ -5,10 +5,10 @@ import {
   Text,
 } from 'react-native';
 
-const WorkerList = () => (
+const Messages = () => (
   <View >
     <Text> Messages </Text>
   </View>
 );
 
-export default WorkerList;
+export default Messages;

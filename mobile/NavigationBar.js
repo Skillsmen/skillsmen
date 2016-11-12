@@ -12,7 +12,7 @@ import {
 import Router from './Router';
 
 export default class RootNavigation extends React.Component {
-  renderIcon(name, isSelected) {
+  static renderIcon(name, isSelected) {
     return (
       <FontAwesome
         name={name}
@@ -30,7 +30,7 @@ export default class RootNavigation extends React.Component {
       >
         <TabNavigationItem
           id="profile"
-          renderIcon={isSelected => this.renderIcon('home', isSelected)}
+          renderIcon={isSelected => RootNavigation.renderIcon('home', isSelected)}
         >
           <StackNavigation
             id="profile"
@@ -40,7 +40,7 @@ export default class RootNavigation extends React.Component {
         </TabNavigationItem>
         <TabNavigationItem
           id="JobList"
-          renderIcon={isSelected => this.renderIcon('wrench', isSelected)}
+          renderIcon={isSelected => RootNavigation.renderIcon('wrench', isSelected)}
         >
           <StackNavigation
             id="jobList"
@@ -49,7 +49,7 @@ export default class RootNavigation extends React.Component {
         </TabNavigationItem>
         <TabNavigationItem
           id="workerList"
-          renderIcon={isSelected => this.renderIcon('users', isSelected)}
+          renderIcon={isSelected => RootNavigation.renderIcon('users', isSelected)}
         >
           <StackNavigation
             id="workerList"
@@ -58,7 +58,7 @@ export default class RootNavigation extends React.Component {
         </TabNavigationItem>
         <TabNavigationItem
           id="messages"
-          renderIcon={isSelected => this.renderIcon('envelope', isSelected)}
+          renderIcon={isSelected => RootNavigation.renderIcon('envelope', isSelected)}
         >
           <StackNavigation
             id="messages"
