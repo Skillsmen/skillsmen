@@ -89,7 +89,6 @@ class Profile extends React.Component {
         </Image>
         <ScrollView
           contentContainerStyle={styles.contentContainer}
-          showsVerticalScrollIndicator={false}
           alwaysBounceVertical
         >
           <View style={styles.info}>
