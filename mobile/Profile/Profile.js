@@ -7,6 +7,8 @@ import {
   Dimensions,
   StyleSheet,
   ScrollView,
+  TouchableHighlight,
+  TextInput,
 } from 'react-native';
 import {
   FontAwesome,
@@ -40,6 +42,14 @@ const styles = StyleSheet.create({
     marginTop: 0.05 * height,
     marginRight: 5,
     alignSelf: 'flex-end',
+  },
+  editTextBox: {
+    height: 40,
+    fontSize: 16,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   info: {
     paddingLeft: 20,
@@ -79,8 +89,18 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fake: 'stuff',
+      editMode: false,
+      nameText: 'Tim da Toolman',
+      experienceText: 'This is all of my experience. I have got lots of experience. Hire me because of me and this and that and boom.',
+      contactInfo: '(234)567-8910',
     };
+    this.clickOnEdit = this.clickOnEdit.bind(this);
+  }
+
+  clickOnEdit() {
+    this.setState({
+      editMode: !this.state.editMode,
+    });
   }
 
   render() {
@@ -98,12 +118,14 @@ class Profile extends React.Component {
             />
           </View>
           <View style={{ flex: 1 }}>
-            <FontAwesome
-              style={styles.editIcon}
-              name="pencil-square-o"
-              size={40}
-              color="#DCDCDC"
-            />
+            <TouchableHighlight onPress={this.clickOnEdit}>
+              <FontAwesome
+                style={styles.editIcon}
+                name="pencil-square-o"
+                size={40}
+                color="#DCDCDC"
+              />
+            </TouchableHighlight>
           </View>
         </Image>
         <ScrollView
@@ -111,19 +133,42 @@ class Profile extends React.Component {
           alwaysBounceVertical
         >
           <View style={styles.info}>
-            <Text style={styles.name}> Tim da Toolman </Text>
-            <Text style={styles.experience}>
-              This is all of my experience. I have got lots of experience.
-              Hire me because of me and this and that and boom.
-            </Text>
-            <Text style={styles.contact}>
-              <FontAwesome
-                name="phone"
-                size={20}
-                color="#006600"
-              />
-              {'  (234)567-8910'}
-            </Text>
+            {this.state.editMode &&
+              <View style={{ width }}>
+                <TextInput
+                  style={styles.editTextBox}
+                  onChangeText={nameText => this.setState({ nameText })}
+                  value={this.state.nameText}
+                />
+                <TextInput
+                  style={[styles.editTextBox, { height: 80 }]}
+                  onChangeText={experienceText => this.setState({ experienceText })}
+                  value={this.state.experienceText}
+                  multiline
+                />
+                <TextInput
+                  style={styles.editTextBox}
+                  onChangeText={contactInfo => this.setState({ contactInfo })}
+                  value={this.state.contactInfo}
+                />
+              </View>
+            }
+            {!this.state.editMode &&
+              <View>
+                <Text style={styles.name}> {this.state.nameText} </Text>
+                <Text style={styles.experience}>
+                  {this.state.experienceText}
+                </Text>
+                <Text style={styles.contact}>
+                  <FontAwesome
+                    name="phone"
+                    size={20}
+                    color="#006600"
+                  />
+                  {`     ${this.state.contactInfo}`}
+                </Text>
+              </View>
+            }
             <View style={styles.recommendations}>
               <Text style={styles.recTitle}>
                 Recommendations
