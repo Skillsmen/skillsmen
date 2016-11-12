@@ -1,4 +1,5 @@
 /* eslint react/jsx-filename-extension: 0 */
+/* eslint-env browser*/
 
 import Exponent from 'exponent';
 import React from 'react';
@@ -51,5 +52,6 @@ class App extends React.Component {
   }
 }
 
+export default App;
 Exponent.registerRootComponent(App);
 
