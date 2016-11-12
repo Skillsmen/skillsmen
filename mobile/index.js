@@ -4,6 +4,7 @@
 import Exponent from 'exponent';
 import React from 'react';
 import {
+  AsyncStorage,
   View,
   StyleSheet,
 } from 'react-native';
@@ -17,9 +18,6 @@ import Router from './Router';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 
@@ -30,6 +28,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      token: null,
+      user: null,
     };
   }
 
@@ -44,8 +44,8 @@ class App extends React.Component {
     return (
       <View style={styles.container}>
         <NavigationProvider router={Router}>
-          <StackNavigation initialRoute="profile" />
-          <NavigationBar />
+          <StackNavigation initialRoute={this.state.token ? 'profile' : 'signin'} />
+          {this.state.token ? (<NavigationBar />) : (null)}
         </NavigationProvider>
       </View>
     );
