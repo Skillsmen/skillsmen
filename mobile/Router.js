@@ -9,6 +9,7 @@ import Messages from './Messages/Messages';
 import NavigationBar from './NavigationBar';
 import JobProfileScreen from './JobProfile/Profile';
 
+
 export default createRouter(() => ({
   profile: () => ProfileScreen,
   jobList: () => JobListScreen,
