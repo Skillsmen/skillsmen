@@ -14,6 +14,7 @@ import {
   FontAwesome,
 } from '@exponent/vector-icons';
 
+import EditInfo from './EditMode';
 import Recommendation from './Recommendation';
 import ModularBanner from '../reusableComponents/Banner/ModularBanner';
 
@@ -82,6 +83,8 @@ const styles = StyleSheet.create({
 class Profile extends React.Component {
   constructor(props) {
     super(props);
+    // The state is populated with profile information. It will change on edit.
+    // Eventually there may need to be a submit button to trigger a PUT request to DB
     this.state = {
       editMode: false,
       nameText: 'Tim da Toolman',
@@ -90,16 +93,19 @@ class Profile extends React.Component {
     };
     this.clickOnEdit = this.clickOnEdit.bind(this);
 
+    // Populate arrays to send into 'ModularBanner' component which creates icons next to descriptions
     this.icons = ['wrench','globe','clock'];
     this.descriptions = ['handyman', 'Earth', '385 years'];
   }
 
+  // Toggles edit mode for rendering text boxes or regular info
   clickOnEdit() {
     this.setState({
       editMode: !this.state.editMode,
     });
   }
 
+  //The render method is bloated right now. It should be refactored later to simplify (into Header, editable info, Reviews)
   render() {
     return (
       <View style={styles.container}>
@@ -136,22 +142,7 @@ class Profile extends React.Component {
             />
             {this.state.editMode &&
               <View style={{ width }}>
-                <TextInput
-                  style={styles.editTextBox}
-                  onChangeText={nameText => this.setState({ nameText })}
-                  value={this.state.nameText}
-                />
-                <TextInput
-                  style={[styles.editTextBox, { height: 80 }]}
-                  onChangeText={experienceText => this.setState({ experienceText })}
-                  value={this.state.experienceText}
-                  multiline
-                />
-                <TextInput
-                  style={styles.editTextBox}
-                  onChangeText={contactInfo => this.setState({ contactInfo })}
-                  value={this.state.contactInfo}
-                />
+                <EditInfo />
               </View>
             }
             {!this.state.editMode &&
