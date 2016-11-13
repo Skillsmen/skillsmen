@@ -17,7 +17,7 @@ import {
 import Header from './Header';
 import MainInfo from './MainInfo';
 import EditInfo from './EditMode';
-import Recommendation from './Recommendation';
+import RecommendationList from './RecommendationList'
 import ModularBanner from '../reusableComponents/Banner/ModularBanner';
 
 const { height, width } = Dimensions.get('window');
@@ -32,13 +32,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     alignItems: 'center',
-  },
-  recommendations: {
-    width: 0.9 * width,
-    marginTop: 20,
-  },
-  recTitle: {
-    fontSize: 20,
   },
 });
 
@@ -88,15 +81,7 @@ class Profile extends React.Component {
                 contactInfo={this.state.contactInfo}
               />
             }
-            <View style={styles.recommendations}>
-              <Text style={styles.recTitle}>
-                Recommendations
-              </Text>
-              <Recommendation />
-              <Recommendation />
-              <Recommendation />
-              <Recommendation />
-            </View>
+            <RecommendationList width={width}/>
           </View>
         </ScrollView>
       </View>
