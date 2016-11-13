@@ -14,6 +14,7 @@ import {
   FontAwesome,
 } from '@exponent/vector-icons';
 
+import Header from './Header';
 import EditInfo from './EditMode';
 import Recommendation from './Recommendation';
 import ModularBanner from '../reusableComponents/Banner/ModularBanner';
@@ -25,33 +26,6 @@ const profPic = require('./timallen.jpg');
 const styles = StyleSheet.create({
   container: {
     alignItems: 'stretch',
-  },
-  backgroundImage: {
-    flexDirection: 'row',
-    resizeMode: 'cover',
-    justifyContent: 'space-between',
-    width,
-  },
-  profPic: {
-    borderRadius: width * 0.4 * 0.5,
-    width: width * 0.4,
-    height: width * 0.4,
-    marginTop: 0.05 * height,
-    alignSelf: 'center',
-  },
-  editIcon: {
-    backgroundColor: 'transparent',
-    marginTop: 0.05 * height,
-    marginRight: 5,
-    alignSelf: 'flex-end',
-  },
-  editTextBox: {
-    height: 40,
-    fontSize: 16,
-    borderColor: 'gray',
-    borderWidth: 1,
-    paddingLeft: 10,
-    paddingRight: 10,
   },
   info: {
     paddingLeft: 20,
@@ -109,32 +83,8 @@ class Profile extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image
-          style={styles.backgroundImage}
-          source={bgImg}
-        >
-          <View style={{ flex: 1 }} />
-          <View style={{ flex: 1 }}>
-            <Image
-              style={styles.profPic}
-              source={profPic}
-            />
-          </View>
-          <View style={{ flex: 1 }}>
-            <TouchableHighlight onPress={this.clickOnEdit}>
-              <FontAwesome
-                style={styles.editIcon}
-                name="pencil-square-o"
-                size={40}
-                color={this.state.editMode ? '#7dc4ff' : '#DCDCDC'}
-              />
-            </TouchableHighlight>
-          </View>
-        </Image>
-        <ScrollView
-          contentContainerStyle={styles.contentContainer}
-          alwaysBounceVertical
-        >
+        <Header clickOnEdit={this.clickOnEdit} editMode={this.state.editMode} />
+        <ScrollView contentContainerStyle={styles.contentContainer} alwaysBounceVertical>
           <View style={styles.info}>
             <ModularBanner
               iconArr={this.icons}
