@@ -15,6 +15,7 @@ import {
 } from '@exponent/vector-icons';
 
 import Recommendation from './Recommendation';
+import ModularBanner from '../reusableComponents/Banner/ModularBanner';
 
 const { height, width } = Dimensions.get('window');
 const bgImg = require('../assets/bluePatternBackground.png');
@@ -77,13 +78,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
-// X- Picture
-// X- Name
-//    three component thingy... (type of worker, location, experience)
-// X- Information / Experience
-// X- Contact Info
-//    Eventually can edit
-// X- Recommendations
 
 class Profile extends React.Component {
   constructor(props) {
@@ -95,6 +89,9 @@ class Profile extends React.Component {
       contactInfo: '(234)567-8910',
     };
     this.clickOnEdit = this.clickOnEdit.bind(this);
+
+    this.icons = ['wrench','globe','clock'];
+    this.descriptions = ['handyman', 'Earth', '385 years'];
   }
 
   clickOnEdit() {
@@ -133,6 +130,10 @@ class Profile extends React.Component {
           alwaysBounceVertical
         >
           <View style={styles.info}>
+            <ModularBanner
+              iconArr={this.icons}
+              propertyArr={this.descriptions}
+            />
             {this.state.editMode &&
               <View style={{ width }}>
                 <TextInput

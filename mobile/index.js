@@ -33,10 +33,10 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    fetch('http://127.0.0.1:3000/users')
-      .then(res => res.json())
-      .then(json => console.log(json))
-      .catch(err => console.error(err));
+    // fetch('http://127.0.0.1:3000/users')
+    //   .then(res => res.json())
+    //   .then(json => console.log(json))
+    //   .catch(err => console.error(err));
   }
   
   render() {
