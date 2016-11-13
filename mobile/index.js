@@ -4,7 +4,6 @@
 import Exponent from 'exponent';
 import React from 'react';
 import {
-  AsyncStorage,
   View,
   Text,
   StyleSheet,
