@@ -4,15 +4,17 @@
 import Exponent from 'exponent';
 import React from 'react';
 import {
-  AsyncStorage,
   View,
   StyleSheet,
+  AsyncStorage,
+  Navigator,
 } from 'react-native';
 import {
   NavigationProvider,
-  StackNavigation,
 } from '@exponent/ex-navigation';
 import NavigationBar from './NavigationBar';
+import Entry from './Onboarding/Entry';
+import SignUp from './Onboarding/SignUp';
 import Router from './Router';
 
 const styles = StyleSheet.create({
@@ -23,14 +25,18 @@ const styles = StyleSheet.create({
 
 // expects an array of objects and produces a listview of of rows using
 // the information on each tradie in the objects i.e. name, expertise, location
+// [Wallace: What's this? ^]
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       token: null,
-      user: null,
+      username: null,
     };
+
+    this.grantAccess = this.grantAccess.bind(this);
+    this.renderScene = this.renderScene.bind(this);
   }
 
   componentWillMount() {
@@ -38,15 +44,57 @@ class App extends React.Component {
     //   .then(res => res.json())
     //   .then(json => console.log(json))
     //   .catch(err => console.error(err));
+
+    // AsyncStorage.multiGet(['token', 'username'])
+    // .then((data) => {
+    //   if (data[0][1] !== null && data[1][1] !== null) {
+    //     this.setState({
+    //       token: data[0][1],
+    //       username: data[1][1],
+    //     });
+    //   }
+    // });
   }
-  
+
+  grantAccess(username, token) {
+    AsyncStorage.multiSet([
+      ['token', token],
+      ['username', username],
+    ]);
+
+    this.setState({
+      token,
+      username,
+    });
+  }
+
+  renderScene(route, navigator) {
+    if (route.name === 'Entry') {
+      return (<Entry grantAccess={this.grantAccess} navigator={navigator} />);
+    }
+    if (route.name === 'SignUp') {
+      return (<SignUp grantAccess={this.grantAccess} navigator={navigator} />);
+    }
+
+    return (<Text> BAD ROUTE </Text>);
+  }
+
   render() {
+    if (this.state.token) {
+      return (
+        <View style={styles.container}>
+          <NavigationProvider router={Router}>
+            <NavigationBar />
+          </NavigationProvider>
+        </View>
+      );
+    }
     return (
       <View style={styles.container}>
-        <NavigationProvider router={Router}>
-          <StackNavigation initialRoute={this.state.token ? 'profile' : 'entry'} />
-          {this.state.token ? (<NavigationBar />) : (null)}
-        </NavigationProvider>
+        <Navigator
+          initialRoute={{ name: 'Entry' }}
+          renderScene={this.renderScene}
+        />
       </View>
     );
   }
