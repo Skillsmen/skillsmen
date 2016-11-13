@@ -15,6 +15,7 @@ import {
 } from '@exponent/vector-icons';
 
 import Header from './Header';
+import MainInfo from './MainInfo';
 import EditInfo from './EditMode';
 import Recommendation from './Recommendation';
 import ModularBanner from '../reusableComponents/Banner/ModularBanner';
@@ -31,19 +32,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     alignItems: 'center',
-  },
-  name: {
-    fontSize: 34,
-  },
-  experience: {
-    fontSize: 14,
-    marginTop: 10,
-  },
-  contact: {
-    color: '#006600',
-    alignItems: 'center',
-    fontSize: 20,
-    marginTop: 10,
   },
   recommendations: {
     width: 0.9 * width,
@@ -68,7 +56,7 @@ class Profile extends React.Component {
     this.clickOnEdit = this.clickOnEdit.bind(this);
 
     // Populate arrays to send into 'ModularBanner' component which creates icons next to descriptions
-    this.icons = ['wrench','globe','clock'];
+    this.icons = ['wrench','globe','clock-o'];
     this.descriptions = ['handyman', 'Earth', '385 years'];
   }
 
@@ -79,37 +67,26 @@ class Profile extends React.Component {
     });
   }
 
-  //The render method is bloated right now. It should be refactored later to simplify (into Header, editable info, Reviews)
   render() {
     return (
       <View style={styles.container}>
         <Header clickOnEdit={this.clickOnEdit} editMode={this.state.editMode} />
         <ScrollView contentContainerStyle={styles.contentContainer} alwaysBounceVertical>
           <View style={styles.info}>
+            {/* TODO- make below banner editable on edit icon click */}
             <ModularBanner
               iconArr={this.icons}
               propertyArr={this.descriptions}
             />
             {this.state.editMode &&
-              <View style={{ width }}>
-                <EditInfo />
-              </View>
+              <EditInfo />
             }
             {!this.state.editMode &&
-              <View>
-                <Text style={styles.name}> {this.state.nameText} </Text>
-                <Text style={styles.experience}>
-                  {this.state.experienceText}
-                </Text>
-                <Text style={styles.contact}>
-                  <FontAwesome
-                    name="phone"
-                    size={20}
-                    color="#006600"
-                  />
-                  {`     ${this.state.contactInfo}`}
-                </Text>
-              </View>
+              <MainInfo 
+                name={this.state.nameText}
+                experience={this.state.experienceText}
+                contactInfo={this.state.contactInfo}
+              />
             }
             <View style={styles.recommendations}>
               <Text style={styles.recTitle}>
