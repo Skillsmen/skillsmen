@@ -9,6 +9,28 @@ import {
   StyleSheet,
 } from 'react-native';
 
+const { height, width } = Dimensions.get('window');
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    borderWidth: 1,
+    alignItems: 'center',
+  },
+
+  boot: {
+
+  },
+
+  input: {
+    borderWidth: 1,
+    marginBottom: width * 0.01,
+    marginTop: height * 0.01,
+    borderColor: 'gray',
+    height: 30,
+    width: width * 0.7,
+  },
+});
+
 
 class Entry extends React.Component {
   constructor(props) {
@@ -19,28 +41,6 @@ class Entry extends React.Component {
     };
     this.signin = this.signin.bind(this);
     this.signup = this.signup.bind(this);
-    const { height, width } = Dimensions.get('window');
-
-    this.styles = StyleSheet.create({
-      container: {
-        flex: 1,
-        borderWidth: 1,
-        alignItems: 'center',
-      },
-
-      boot: {
-
-      },
-
-      input: {
-        borderWidth: 1,
-        marginBottom: width * 0.01,
-        marginTop: height * 0.01,
-        borderColor: 'gray',
-        height: 30,
-        width: width * 0.7,
-      },
-    });
   }
 
   signin() {
@@ -51,22 +51,30 @@ class Entry extends React.Component {
   }
 
   signup() {
-    console.log('Signing up');
+    const username = this.state.user;
+    if (username) {
+      this.props.navigator.push({
+        name: 'SignUp',
+        passProps: {
+          username,
+        },
+      });
+    }
   }
 
   render() {
     return (
-      <View style={this.styles.container}>
-        <Text style={this.styles.boot}> Image goes here! </Text>
+      <View style={styles.container}>
+        <Text style={styles.boot}> Image goes here! </Text>
         <View >
           <TextInput
-            style={this.styles.input}
+            style={styles.input}
             maxLength={16}
             placeholder="Enter your username here"
             onChangeText={text => this.setState({ user: text })}
           />
           <TextInput
-            style={this.styles.input}
+            style={styles.input}
             placeholder="Enter your password here"
             onChangeText={text => this.setState({ pass: text })}
           />
@@ -84,6 +92,7 @@ class Entry extends React.Component {
 
 Entry.propTypes = {
   grantAccess: React.PropTypes.func.isRequired,
+  navigator: React.PropTypes.object,
 };
 
 export default Entry;
