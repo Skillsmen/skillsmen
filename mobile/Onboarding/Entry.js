@@ -52,11 +52,14 @@ class Entry extends React.Component {
 
   signup() {
     const username = this.state.user;
+    const password = this.state.pass;
     if (username) {
       this.props.navigator.push({
         name: 'SignUp',
         passProps: {
           username,
+          password,
+          which: 'nameText',
         },
       });
     }
@@ -75,6 +78,8 @@ class Entry extends React.Component {
           />
           <TextInput
             style={styles.input}
+            maxLength={16}
+            secureTextEntry
             placeholder="Enter your password here"
             onChangeText={text => this.setState({ pass: text })}
           />
