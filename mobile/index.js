@@ -46,6 +46,10 @@ class App extends React.Component {
     //   .then(json => console.log(json))
     //   .catch(err => console.error(err));
 
+    // Persistant login via device id?
+    // console.log(Exponent.Constants.deviceId);
+
+    // Persistant login via tokens?
     // AsyncStorage.multiGet(['token', 'username'])
     // .then((data) => {
     //   if (data[0][1] !== null && data[1][1] !== null) {
@@ -55,6 +59,8 @@ class App extends React.Component {
     //     });
     //   }
     // });
+
+    // Persistant login via express sessions? (yet to be investigated)
   }
 
   grantAccess(username, token) {
