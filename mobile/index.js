@@ -5,6 +5,7 @@ import Exponent from 'exponent';
 import React from 'react';
 import {
   View,
+  Text,
   StyleSheet,
   AsyncStorage,
   Navigator,
@@ -68,14 +69,14 @@ class App extends React.Component {
     });
   }
 
+  // Scene routing specifically for Onboarding only
   renderScene(route, navigator) {
     if (route.name === 'Entry') {
       return (<Entry grantAccess={this.grantAccess} navigator={navigator} />);
     }
     if (route.name === 'SignUp') {
-      return (<SignUp grantAccess={this.grantAccess} navigator={navigator} />);
+      return (<SignUp grantAccess={this.grantAccess} navigator={navigator} {...route.passProps} />);
     }
-
     return (<Text> BAD ROUTE </Text>);
   }
 
