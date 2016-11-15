@@ -68,7 +68,7 @@ const Header = ({ navigator, userPic, peer, clickOnEdit, editMode }) => (
     source={bgImg}
   >
     <View style={{ flex: 1 }} >
-    {showBackButton(navigator, peer)}
+      {showBackButton(navigator, peer)}
     </View>
     <View style={{ flex: 1 }}>
       <Image
@@ -77,7 +77,7 @@ const Header = ({ navigator, userPic, peer, clickOnEdit, editMode }) => (
       />
     </View>
     <View style={{ flex: 1 }}>
-    { showEdit(navigator, peer, clickOnEdit, editMode) }
+      { showEdit(navigator, peer, clickOnEdit, editMode) }
     </View>
   </Image>
 );

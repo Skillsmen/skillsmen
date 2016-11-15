@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
-})
+});
 
 class EditInfo extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class EditInfo extends React.Component {
       nameText: 'Tim da Toolman',
       experienceText: 'This is all of my experience. I have got lots of experience. Hire me because of me and this and that and boom.',
       contactInfo: '(234)567-8910',
-    }
+    };
   }
 
   render() {
@@ -51,7 +51,7 @@ class EditInfo extends React.Component {
           value={this.state.contactInfo}
         />
       </View>
-    )
+    );
   }
 }
 
