@@ -42,10 +42,15 @@ class Profile extends React.Component {
     };
   }
   render() {
-    const payrate = ('$').concat(jobInfo.pay.toString().concat('/hr'));
-    const propertyArr = [payrate, jobInfo.expertise, jobInfo.location, jobInfo.time, jobInfo.hires];
+    const payrate = this.props.route.params.jobInfo.pay.toString();
+    const propertyArr = [
+      payrate, 
+      this.props.route.params.jobInfo.expertise,
+      this.props.route.params.jobInfo.location,
+      this.props.route.params.jobInfo.time,
+      this.props.route.params.jobInfo.hires
+    ];
     if (jobInfo.vacancies > 1) { iconArr[4] = 'users'; }
-    console.log('props in Profile component: ', this.props)
     return(
       <View style={styles.container}>
         <Image
@@ -55,7 +60,7 @@ class Profile extends React.Component {
           <BackButton navigator={this.props.navigator}/>
           {/* job title here */}
           <Text style={styles.topTitle}>
-            {jobInfo.title || ''}
+            {this.props.route.params.jobInfo.title}
           </Text>
 
           {/* banner : job type pay rate location time range vacancies */}
@@ -72,11 +77,11 @@ class Profile extends React.Component {
               {'The Job'}
             </Text>
             <Text>
-              {jobInfo.description}
+              {this.props.route.params.jobInfo.description}
             </Text>
           </View>
           {/* owner profile card here */}
-          <ProfileCard jobOwner={jobInfo} picStyles={styles.contactPic} />
+          <ProfileCard jobOwner={this.props.route.params.jobInfo} picStyles={styles.contactPic} />
         </Image>
       </View>
     )
