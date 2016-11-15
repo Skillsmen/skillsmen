@@ -35,7 +35,7 @@ const ModularBanner = ({ iconArr, propertyArr, iconSize, styles, iconStyles }) =
     ),
   );
   return (
-    <View style={styles || { flexDirection: 'row' } && { backgroundColor: 'transparent' }}>
+    <View style={styles || { flexDirection: 'row' }}>
       { banner }
     </View>
   );

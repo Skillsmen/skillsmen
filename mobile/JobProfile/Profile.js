@@ -33,13 +33,17 @@ const jobInfo = {
   ownerImage: profPic,
 };
 
-
 const Profile = () => {
+const goBack = () => {
+  this.props.navigator.pop();
+
+}
   const payrate = ('$').concat(jobInfo.pay.toString().concat('/hr'));
   const propertyArr = [payrate, jobInfo.expertise, jobInfo.location, jobInfo.time, jobInfo.hires];
   if (jobInfo.vacancies > 1) { iconArr[4] = 'users'; }
   return (
     <View style={styles.container}>
+
       <Image
         style={styles.backgroundImage, styles.container}
         source={bgImg}

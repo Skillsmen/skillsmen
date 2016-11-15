@@ -6,7 +6,7 @@ import {
 
 const ModularBannerIcon = ({ text, Icon, iconSize, renderIcon, iconStyles }) =>
   (
-    <View style={iconStyles || { justifyContent: 'space-around'}}>
+    <View style={iconStyles}>
       <Text style={{ backgroundColor: 'transparent' }} >
         { renderIcon(Icon, iconSize) }{ ' '.concat(text) }
       </Text>

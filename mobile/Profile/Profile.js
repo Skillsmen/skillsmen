@@ -30,6 +30,12 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     alignItems: 'center',
   },
+  banner: {
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    margin: 20,
+    marginBottom: 10,
+  },
 });
 
 class Profile extends React.Component {
@@ -64,12 +70,13 @@ class Profile extends React.Component {
       <View style={styles.container}>
         <Header clickOnEdit={this.clickOnEdit} editMode={this.state.editMode} />
         <ScrollView contentContainerStyle={styles.contentContainer} alwaysBounceVertical>
-          <View style={styles.info}>
-            {/* TODO- make below banner editable on edit icon click */}
             <ModularBanner
               iconArr={this.icons}
               propertyArr={this.descriptions}
+              styles={styles.banner}
             />
+          <View style={styles.info}>
+            {/* TODO- make below banner editable on edit icon click */}
             {this.state.editMode &&
               <EditInfo />
             }
