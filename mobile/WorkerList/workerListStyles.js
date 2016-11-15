@@ -5,10 +5,16 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 0.5,
     borderColor: '#d6d7da',
-    height: 75,
+    height: 150,
   },
   leftRow: {
     flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  rowUserPic: {
+    justifyContent: 'center',
+    alignItems: 'center',
     flex: 1,
   },
   rightRow: {
@@ -16,7 +22,7 @@ const styles = StyleSheet.create({
     flex: 4,
   },
   banner: {
-    flex: 1,
+    flex: 3,
     flexDirection: 'column',
     justifyContent: 'space-around',
   },

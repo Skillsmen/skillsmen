@@ -62,7 +62,7 @@ export default class RootNavigation extends React.Component {
         >
           <StackNavigation
             id="messages"
-            initialRoute={Router.getRoute('messages')}
+            initialRoute={Router.getRoute('jobProfile')}
           />
         </TabNavigationItem>
       </TabNavigation>

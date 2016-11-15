@@ -20,6 +20,7 @@ const ModularBanner = ({ iconArr, propertyArr, iconSize, styles, iconStyles }) =
   const banner = iconArr.map((icon, i) =>
     (
       <ModularBannerIcon
+        key={i}
         Icon={icon}
         text={propertyArr[i]}
         renderIcon={renderIcon}
@@ -34,7 +35,7 @@ const ModularBanner = ({ iconArr, propertyArr, iconSize, styles, iconStyles }) =
     ),
   );
   return (
-    <View style={styles || { flexDirection: 'row' }}>
+    <View style={styles || { flexDirection: 'row' } && { backgroundColor: 'transparent' }}>
       { banner }
     </View>
   );

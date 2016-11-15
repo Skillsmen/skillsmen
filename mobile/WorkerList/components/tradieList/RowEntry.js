@@ -21,7 +21,7 @@ const TradieRow = ({ name, expertise, location, reviews }) =>
   (
     <View className="tradieRow" style={styles.row}>
     <View style={styles.rightRow}>
-      <View style={{margin: 15, marginRight: 3}}>
+      <View style={styles.rowUserPic}>
         {renderIcon('user-circle', 45)}
       </View>
       <TradieBanner 

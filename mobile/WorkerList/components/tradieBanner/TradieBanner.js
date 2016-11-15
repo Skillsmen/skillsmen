@@ -10,7 +10,7 @@ import styles from '../../workerListStyles';
 
 const TradieBanner = ({ expertise, location, reviews, Icon, name }) =>
   (
-    <View className="tradieBanner" style={styles.banner}> 
+    <View style={styles.banner}> 
       <Text style={styles.name}>{name}</Text>
       <View className="tripleBanner" style={styles.tripleBanner}>
       <TradiesExpertiseBanner 
