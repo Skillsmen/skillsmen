@@ -9,6 +9,8 @@ import {
   StyleSheet,
   AsyncStorage,
   Navigator,
+  Image,
+  Dimensions,
 } from 'react-native';
 import {
   NavigationProvider,
@@ -18,11 +20,26 @@ import Entry from './Onboarding/Entry';
 import SignUp from './Onboarding/SignUp';
 import Router from './Router';
 
+const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
+  },
+
+  header: {
+    height: height * 0.05,
+    width,
+  },
+
+  background: {
+    height: height * 0.95,
+    width,
   },
 });
+
+const blueBg = require('./assets/bluePatternBackground.png');
+const whiteBg = require('./assets/whiteTexturedBackground.png');
 
 // expects an array of objects and produces a listview of of rows using
 // the information on each tradie in the objects i.e. name, expertise, location
@@ -100,10 +117,19 @@ class App extends React.Component {
     }
     return (
       <View style={styles.container}>
-        <Navigator
-          initialRoute={{ name: 'Entry' }}
-          renderScene={this.renderScene}
+        <Image
+          style={styles.header}
+          source={blueBg}
         />
+        <Image
+          style={styles.background}
+          source={whiteBg}
+        >
+          <Navigator
+            initialRoute={{ name: 'Entry' }}
+            renderScene={this.renderScene}
+          />
+        </Image>
       </View>
     );
   }

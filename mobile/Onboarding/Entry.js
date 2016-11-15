@@ -20,9 +20,10 @@ const styles = StyleSheet.create({
   },
 
   boot: {
-    width: width * 0.70 * 1.26,
-    height: width * 0.70,
+    width: width * 0.65 * 1.26,
+    height: width * 0.65,
     resizeMode: 'stretch',
+    margin: 5,
   },
 
   buttonBox: {
