@@ -9,6 +9,8 @@ import {
   Dimensions,
 } from 'react-native';
 
+import colors from '../constants/Colors';
+
 const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
@@ -17,17 +19,37 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  input: {
-    borderWidth: 1,
+  bttn: {
+    width: width * 0.33,
+    height: 30,
+    margin: width * 0.015,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    borderWidth: 0.5,
+    borderColor: colors.primary,
+    borderRadius: width * 0.33 * 0.02,
+  },
+
+  inputBox: {
+    borderBottomWidth: 1,
     marginBottom: width * 0.01,
     marginTop: height * 0.01,
-    borderColor: 'gray',
+    borderColor: colors.secondary,
+  },
+
+  input: {
+    textAlign: 'center',
     height: 30,
     width: width * 0.7,
   },
 });
 
 class SignUp extends React.Component {
+  static userInput(which) {
+
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -122,8 +144,7 @@ class SignUp extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> {this.props.which} </Text>
-        <View>
+        <View style={styles.inputBox}>
           <TextInput
             style={styles.input}
             autoFocus
@@ -131,9 +152,11 @@ class SignUp extends React.Component {
             onChangeText={text => this.setState({ input: text })}
           />
         </View>
-        <TouchableOpacity onPress={this.nextScene}>
-          <Text> Next </Text>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity style={styles.bttn} onPress={this.nextScene}>
+            <Text> NEXT </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }

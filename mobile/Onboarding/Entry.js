@@ -7,30 +7,56 @@ import {
   TextInput,
   Dimensions,
   StyleSheet,
+  Image,
 } from 'react-native';
+
+import colors from '../constants/Colors';
 
 const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 1,
     alignItems: 'center',
   },
 
   boot: {
+    width: width * 0.70 * 1.26,
+    height: width * 0.70,
+    resizeMode: 'stretch',
+  },
 
+  buttonBox: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+
+  bttn: {
+    width: width * 0.33,
+    height: 30,
+    margin: width * 0.015,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    borderWidth: 0.5,
+    borderColor: colors.primary,
+    borderRadius: width * 0.33 * 0.02,
+  },
+
+  inputBox: {
+    borderBottomWidth: 1,
+    marginBottom: width * 0.01,
+    marginTop: height * 0.01,
+    borderColor: colors.secondary,
   },
 
   input: {
-    borderWidth: 1,
-    marginBottom: width * 0.01,
-    marginTop: height * 0.01,
-    borderColor: 'gray',
+    textAlign: 'center',
     height: 30,
     width: width * 0.7,
   },
 });
 
+const boot = require('../assets/theBoot.png');
 
 class Entry extends React.Component {
   constructor(props) {
@@ -68,28 +94,38 @@ class Entry extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.boot}> Image goes here! </Text>
-        <View >
+        <Image
+          style={styles.boot}
+          source={boot}
+        />
+        <View style={styles.inputBox}>
           <TextInput
             style={styles.input}
             maxLength={16}
-            placeholder="Enter your username here"
+            autoFocus
+            placeholder="ENTER YOUR USERNAME"
             onChangeText={text => this.setState({ user: text })}
           />
+        </View>
+        <View style={styles.inputBox}>
           <TextInput
             style={styles.input}
             maxLength={16}
             secureTextEntry
-            placeholder="Enter your password here"
+            placeholder="ENTER YOUR PASSWORD"
             onChangeText={text => this.setState({ pass: text })}
           />
         </View>
-        <TouchableOpacity onPress={this.signin}>
-          <Text> Signin </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.signup}>
-          <Text> Signup </Text>
-        </TouchableOpacity>
+
+        <View style={styles.buttonBox}>
+          <TouchableOpacity style={styles.bttn} onPress={this.signin}>
+            <Text style={{ color: colors.primary }}> SIGNIN </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.bttn} onPress={this.signup}>
+            <Text style={{ color: colors.primary }}> SIGNUP </Text>
+          </TouchableOpacity>
+        </View>
+
       </View>
     );
   }
