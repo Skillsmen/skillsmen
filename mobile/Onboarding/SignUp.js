@@ -7,9 +7,16 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  Picker,
 } from 'react-native';
 
 import colors from '../constants/Colors';
+import questionSet from './Questions';
+import professionSet from './Professions';
+
+
+const blueBg = require('../assets/bluePatternBackground.png');
+const whiteBg = require('../assets/white textured background.png');
 
 const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -45,22 +52,54 @@ const styles = StyleSheet.create({
   },
 });
 
-class SignUp extends React.Component {
-  static userInput(which) {
+const occupationSet = set =>
+  set.map((occupation, index) => (
+    <Picker.Item key={index}label={occupation} value={occupation} />
+  ));
 
-  }
+
+class SignUp extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      input: '',
+      input: props.which === 'profession' ? 'PROFESSION' : '',
     };
 
     this.nextScene = this.nextScene.bind(this);
+    this.userInput = this.userInput.bind(this);
+  }
+
+  userInput() {
+    const which = this.props.which;
+    if (which === 'profession') {
+      return (
+        <Picker
+          style={{ width }}
+          selectedValue={this.state.input}
+          onValueChange={item => this.setState({ input: item })}
+        >
+          {occupationSet(professionSet)}
+        </Picker>
+      );
+    }
+
+    return (
+      <View style={styles.inputBox}>
+        <TextInput
+          style={styles.input}
+          autoFocus
+          placeholder={questionSet[which]}
+          onChangeText={text => this.setState({ input: text })}
+        />
+      </View>
+    );
   }
 
   nextScene() {
-    if (this.props.which === 'nameText') {
+    const which = this.props.which;
+    if (which === 'nameText') {
       this.props.navigator.push({
         name: 'SignUp',
         passProps: {
@@ -71,7 +110,7 @@ class SignUp extends React.Component {
         },
       });
     }
-    if (this.props.which === 'profession') {
+    if (which === 'profession') {
       this.props.navigator.push({
         name: 'SignUp',
         passProps: {
@@ -83,7 +122,7 @@ class SignUp extends React.Component {
         },
       });
     }
-    if (this.props.which === 'years') {
+    if (which === 'years') {
       this.props.navigator.push({
         name: 'SignUp',
         passProps: {
@@ -96,7 +135,7 @@ class SignUp extends React.Component {
         },
       });
     }
-    if (this.props.which === 'location') {
+    if (which === 'location') {
       this.props.navigator.push({
         name: 'SignUp',
         passProps: {
@@ -110,7 +149,7 @@ class SignUp extends React.Component {
         },
       });
     }
-    if (this.props.which === 'contact') {
+    if (which === 'contact') {
       this.props.navigator.push({
         name: 'SignUp',
         passProps: {
@@ -125,7 +164,7 @@ class SignUp extends React.Component {
         },
       });
     }
-    if (this.props.which === 'experienceText') {
+    if (which === 'experienceText') {
       const userId = 'Sometihng we get from the database';
       const profile = {
         username: this.props.username,
@@ -144,17 +183,10 @@ class SignUp extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.inputBox}>
-          <TextInput
-            style={styles.input}
-            autoFocus
-            placeholder="some placeholder text"
-            onChangeText={text => this.setState({ input: text })}
-          />
-        </View>
+        {this.userInput(this.props.which)}
         <View>
           <TouchableOpacity style={styles.bttn} onPress={this.nextScene}>
-            <Text> NEXT </Text>
+            <Text style={{ color: colors.primary }}> NEXT </Text>
           </TouchableOpacity>
         </View>
       </View>
