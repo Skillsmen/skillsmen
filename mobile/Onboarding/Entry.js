@@ -103,6 +103,7 @@ class Entry extends React.Component {
             style={styles.input}
             maxLength={16}
             autoFocus
+            autoCapitalize="none"
             placeholder="ENTER YOUR USERNAME"
             onChangeText={text => this.setState({ user: text })}
           />
@@ -112,6 +113,7 @@ class Entry extends React.Component {
             style={styles.input}
             maxLength={16}
             secureTextEntry
+            autoCapitalize="none"
             placeholder="ENTER YOUR PASSWORD"
             onChangeText={text => this.setState({ pass: text })}
           />

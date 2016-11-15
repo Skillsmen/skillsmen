@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
     marginRight: 5,
     alignSelf: 'flex-end',
   },
-})
+});
 
 
 const bgImg = require('../assets/bluePatternBackground.png');
-//Link from profPic will eventually need to be passed in as a prop...
+// Link from profPic will eventually need to be passed in as a prop...
 const profPic = require('./timallen.jpg');
 
 const Header = ({ clickOnEdit, editMode }) => (
@@ -62,6 +62,11 @@ const Header = ({ clickOnEdit, editMode }) => (
       </TouchableHighlight>
     </View>
   </Image>
-)
+);
+
+Header.propTypes = {
+  clickOnEdit: React.PropTypes.func,
+  editMode: React.PropTypes.bool,
+};
 
 export default Header;

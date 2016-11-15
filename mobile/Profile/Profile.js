@@ -17,13 +17,10 @@ import {
 import Header from './Header';
 import MainInfo from './MainInfo';
 import EditInfo from './EditMode';
-import RecommendationList from './RecommendationList'
+import RecommendationList from './RecommendationList';
 import ModularBanner from '../reusableComponents/Banner/ModularBanner';
 
 const { height, width } = Dimensions.get('window');
-const bgImg = require('../assets/bluePatternBackground.png');
-const profPic = require('./timallen.jpg');
-
 const styles = StyleSheet.create({
   container: {
     alignItems: 'stretch',
@@ -51,7 +48,7 @@ class Profile extends React.Component {
     this.clickOnEdit = this.clickOnEdit.bind(this);
 
     // Populate arrays to send into 'ModularBanner' component which creates icons next to descriptions
-    this.icons = ['wrench','globe','clock-o'];
+    this.icons = ['wrench', 'globe', 'clock-o'];
     this.descriptions = ['handyman', 'Earth', '385 years'];
   }
 
@@ -77,13 +74,13 @@ class Profile extends React.Component {
               <EditInfo />
             }
             {!this.state.editMode &&
-              <MainInfo 
+              <MainInfo
                 name={this.state.nameText}
                 experience={this.state.experienceText}
                 contactInfo={this.state.contactInfo}
               />
             }
-            <RecommendationList width={width}/>
+            <RecommendationList width={width} />
           </View>
         </ScrollView>
       </View>
