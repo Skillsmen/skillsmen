@@ -22,6 +22,11 @@ export default class RootNavigation extends React.Component {
     );
   }
 
+  constructor(props) {
+    super(props);
+    console.log(props.profile);
+  }
+
   render() {
     return (
       <TabNavigation
@@ -35,11 +40,11 @@ export default class RootNavigation extends React.Component {
           <StackNavigation
             id="profile"
             navigatorUID="profile"
-            initialRoute={Router.getRoute('profile')}
+            initialRoute={Router.getRoute('profile', this.props.profile)}
           />
         </TabNavigationItem>
         <TabNavigationItem
-          id="JobList"
+          id="jobList"
           renderIcon={isSelected => RootNavigation.renderIcon('wrench', isSelected)}
         >
           <StackNavigation
@@ -69,3 +74,8 @@ export default class RootNavigation extends React.Component {
     );
   }
 }
+
+RootNavigation.propTypes = {
+  profile: React.PropTypes.object,
+};
+

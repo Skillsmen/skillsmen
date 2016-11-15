@@ -13,7 +13,6 @@ const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -105,16 +104,18 @@ class SignUp extends React.Component {
       });
     }
     if (this.props.which === 'experienceText') {
-      const username = this.props.username;
-      const password = this.props.password;
-      const nameText = this.props.nameText;
-      const profession = this.props.profession;
-      const years = this.props.years;
-      const location = this.props.location;
-      const contact = this.props.contact;
-      const experienceText = this.state.input;
-      console.log(username, password, nameText, profession, years, location, contact, experienceText);
-      this.props.grantAccess(username, 'blah');
+      const userId = 'Sometihng we get from the database';
+      const profile = {
+        username: this.props.username,
+        password: this.props.password,
+        nameText: this.props.nameText,
+        profession: this.props.profession,
+        years: this.props.years,
+        location: this.props.location,
+        contact: this.props.contact,
+        experienceText: this.state.input,
+      };
+      this.props.grantAccess(userId, 'blah', profile);
     }
   }
 

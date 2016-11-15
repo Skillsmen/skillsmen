@@ -34,6 +34,7 @@ class App extends React.Component {
     this.state = {
       token: null,
       username: null,
+      profile: null,
     };
 
     this.grantAccess = this.grantAccess.bind(this);
@@ -63,7 +64,7 @@ class App extends React.Component {
     // Persistant login via express sessions? (yet to be investigated)
   }
 
-  grantAccess(username, token) {
+  grantAccess(username, token, profile) {
     AsyncStorage.multiSet([
       ['token', token],
       ['username', username],
@@ -72,6 +73,7 @@ class App extends React.Component {
     this.setState({
       token,
       username,
+      profile,
     });
   }
 
@@ -91,7 +93,7 @@ class App extends React.Component {
       return (
         <View style={styles.container}>
           <NavigationProvider router={Router}>
-            <NavigationBar />
+            <NavigationBar profile={this.state.profile} />
           </NavigationProvider>
         </View>
       );
