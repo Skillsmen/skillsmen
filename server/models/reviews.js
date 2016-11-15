@@ -1,16 +1,17 @@
-module.exports = (sequelize, DataTypes) => {
-  const Reviews = sequelize.define('Reviews', {
-    user_id: DataTypes.INTEGER,
-    rating: DataTypes.SMALLINT,
-    comments: DataTypes.TEXT,
-    date: DataTypes.DATE,
+'use strict';
+module.exports = function(sequelize, DataTypes) {
+  var Reviews = sequelize.define('Reviews', {
+    comment: DataTypes.TEXT,
+    rating: DataTypes.INTEGER,
+    ratingUser: DataTypes.INTEGER,
+    ratedUser: DataTypes.INTEGER
   }, {
     classMethods: {
-      associate: (models) => {
+      associate: function(models) {
         // associations can be defined here
         Reviews.belongsTo(models.Users);
-      },
-    },
+      }
+    }
   });
   return Reviews;
 };

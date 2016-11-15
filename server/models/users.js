@@ -1,17 +1,18 @@
-module.exports = (sequelize, DataTypes) => {
-  const Users = sequelize.define('Users', {
+'use strict';
+module.exports = function(sequelize, DataTypes) {
+  var Users = sequelize.define('Users', {
     name: DataTypes.STRING,
     profession: DataTypes.STRING,
     description: DataTypes.TEXT,
-    location: DataTypes.STRING,
-    experience: DataTypes.SMALLINT,
+    experience: DataTypes.INTEGER,
+    location: DataTypes.STRING
   }, {
     classMethods: {
-      associate: (models) => {
+      associate: function(models) {
         // associations can be defined here
         Users.hasMany(models.Reviews);
-      },
-    },
+      }
+    }
   });
   return Users;
 };

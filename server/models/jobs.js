@@ -1,17 +1,18 @@
-module.exports = (sequelize, DataTypes) => {
-  const Jobs = sequelize.define('Jobs', {
-    user_id: DataTypes.INTEGER,
+'use strict';
+module.exports = function(sequelize, DataTypes) {
+  var Jobs = sequelize.define('Jobs', {
+    owner: DataTypes.INTEGER,
     description: DataTypes.TEXT,
     location: DataTypes.STRING,
-    time_frame: DataTypes.STRING,
-    vacancies: DataTypes.SMALLINT,
+    timeFrame: DataTypes.STRING,
+    vacancies: DataTypes.INTEGER
   }, {
     classMethods: {
-      associate: (models) => {
+      associate: function(models) {
         // associations can be defined here
         Jobs.belongsTo(models.Users);
-      },
-    },
+      }
+    }
   });
   return Jobs;
 };

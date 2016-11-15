@@ -1,4 +1,5 @@
 const express = require('express');
+var models = require('./models/index.js');
 
 const app = express();
 
