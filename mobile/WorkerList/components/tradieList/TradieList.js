@@ -6,7 +6,7 @@ import {
 import RowEntry from './RowEntry';
 import styles from '../../workerListStyles';
 
-const RowList = ({ setOfTradies }) => {
+const RowList = ({ setOfTradies, navigator }) => {
   const listGen = () =>
     setOfTradies.map((tradie, i) =>
       (
@@ -16,6 +16,7 @@ const RowList = ({ setOfTradies }) => {
           expertise={tradie.expertise}
           location={tradie.location}
           reviews={tradie.reviews}
+          navigator={navigator}
         />
       ),
     );

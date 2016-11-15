@@ -32,7 +32,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: null,
+      token: true,
       username: null,
       profile: null,
     };
