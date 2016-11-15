@@ -3,7 +3,6 @@ var router = express.Router();
 var models = require('../models/index');
 
 router.post('/users', function(req, res) {
-  console.log('im up in this post...', req.body);
   models.Users.create({
     name: req.body.name,
     profession: req.body.profession,
@@ -15,4 +14,11 @@ router.post('/users', function(req, res) {
   });
 });
 
+router.get('/users', function(req, res) {
+  models.Users.findAll({}).then(function(users) {
+    res.json(users);
+  });
+});
+
 module.exports = router;
+
