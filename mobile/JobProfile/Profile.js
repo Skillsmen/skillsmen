@@ -11,6 +11,7 @@ import {
 
 import Banner from '../reusableComponents/Banner/ModularBanner';
 import ProfileCard from './components/ProfileCard';
+import BackButton from '../reusableComponents/BackButton.js'
 
 const bgImg = require('../assets/whiteTexturedBackground.png');
 const profPic = require('../Profile/timallen.jpg');
@@ -33,48 +34,54 @@ const jobInfo = {
   ownerImage: profPic,
 };
 
-const Profile = () => {
-  const goBack = () => {
-    this.props.navigator.pop();
-  };
-  const payrate = ('$').concat(jobInfo.pay.toString().concat('/hr'));
-  const propertyArr = [payrate, jobInfo.expertise, jobInfo.location, jobInfo.time, jobInfo.hires];
-  if (jobInfo.vacancies > 1) { iconArr[4] = 'users'; }
-  return (
-    <View style={styles.container}>
 
-      <Image
-        style={[styles.backgroundImage, styles.container]}
-        source={bgImg}
-      >
-        {/* job title here */}
-        <Text style={styles.topTitle}>
-          {jobInfo.title || ''}
-        </Text>
+class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+  render() {
+    const payrate = ('$').concat(jobInfo.pay.toString().concat('/hr'));
+    const propertyArr = [payrate, jobInfo.expertise, jobInfo.location, jobInfo.time, jobInfo.hires];
+    if (jobInfo.vacancies > 1) { iconArr[4] = 'users'; }
+    console.log('props in Profile component: ', this.props)
+    return(
+      <View style={styles.container}>
+        <Image
+          style={styles.backgroundImage, styles.container}
+          source={bgImg}
+        >
+          <BackButton navigator={this.props.navigator}/>
+          {/* job title here */}
+          <Text style={styles.topTitle}>
+            {jobInfo.title || ''}
+          </Text>
 
-        {/* banner : job type pay rate location time range vacancies */}
-        <Banner
-          iconArr={iconArr}
-          propertyArr={propertyArr}
-          iconSize={25}
-          styles={styles.banner}
-          iconStyles={{ flex: 1 }}
-        />
-        {/* job description here */}
-        <View style={styles.description}>
-          <Text style={styles.title}>
-            {'The Job'}
-          </Text>
-          <Text>
-            {jobInfo.description}
-          </Text>
-        </View>
-        {/* owner profile card here */}
-        <ProfileCard jobOwner={jobInfo} picStyles={styles.contactPic} />
-      </Image>
-    </View>
-  );
-};
+          {/* banner : job type pay rate location time range vacancies */}
+          <Banner
+            iconArr={iconArr}
+            propertyArr={propertyArr}
+            iconSize={25}
+            styles={styles.banner}
+            iconStyles={{ flex: 1 }}
+          />
+          {/* job description here */}
+          <View style={styles.description}>
+            <Text style={styles.title}>
+              {'The Job'}
+            </Text>
+            <Text>
+              {jobInfo.description}
+            </Text>
+          </View>
+          {/* owner profile card here */}
+          <ProfileCard jobOwner={jobInfo} picStyles={styles.contactPic} />
+        </Image>
+      </View>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
