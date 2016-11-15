@@ -141,8 +141,8 @@ Thanks for contributing!
 ### Guidelines
 
 1. Uphold the current code standard:
-    - Keep your code [DRY][].
-    - Apply the [boy scout rule][].
+    - Keep your code [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
+    - Apply the [boy scout rule](http://programmer.97things.oreilly.com/wiki/index.php/The_Boy_Scout_Rule).
     - Follow [STYLE-GUIDE.md](STYLE-GUIDE.md)
 1. Run the [tests][] before submitting a pull request.
 1. Tests are very, very important. Submit tests if your pull request contains
@@ -156,12 +156,12 @@ This is just to help you organize your process
 - [ ] Did I cut my work branch off of master (don't cut new branches from existing feature brances)?
 - [ ] Did I follow the correct naming convention for my branch?
 - [ ] Is my branch focused on a single main change?
- - [ ] Do all of my changes directly relate to this change?
+- [ ] Do all of my changes directly relate to this change?
 - [ ] Did I rebase the upstream master branch after I finished all my
   work?
 - [ ] Did I write a clear pull request message detailing what changes I made?
 - [ ] Did I get a code review?
- - [ ] Did I make any requested changes from that code review?
+- [ ] Did I make any requested changes from that code review?
 
 If you follow all of these guidelines and make good changes, you should have
 no problem getting your changes merged in.
