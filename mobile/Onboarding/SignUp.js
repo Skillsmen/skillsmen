@@ -15,8 +15,8 @@ import questionSet from './Questions';
 import professionSet from './Professions';
 
 
-const blueBg = require('../assets/bluePatternBackground.png');
-const whiteBg = require('../assets/white textured background.png');
+// const blueBg = require('../assets/bluePatternBackground.png');
+// const whiteBg = require('../assets/white textured background.png');
 
 const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
