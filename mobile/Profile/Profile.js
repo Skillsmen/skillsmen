@@ -43,7 +43,7 @@ class Profile extends React.Component {
     super(props);
     // The state is populated with profile information. It will change on edit.
     // Eventually there may need to be a submit button to trigger a PUT request to DB
-    console.log(props.route.params);
+    console.log('[FILE] Profile/Profile.js:', props.route.params);
 
     this.state = {
       editMode: false,
