@@ -3,26 +3,14 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models/index');
 var userController = require('../controllers/user');
-
+var reviewController = require('../controllers/review');
 // Create a new user
 router.post('/user', userController.createUser);
-
-// Create a new review
-router.post('/review', function(req, res) {
-  models.User.findById(req.body.UserId)
-    .then(function(user) {
-      models.Review.create({
-        comment: req.body.comment,
-        rating: req.body.rating,
-        UserId: user.dataValues.id
-      }).then(function(review) {
-        res.json(review);
-      });
-    });
-});
-
 // Retrieve all users
 router.get('/user', userController.findAllUsers);
+
+// Create a new review
+router.post('/review', reviewController.createReview);
 
 // Creates route that finds all users and their associated reviews
 // (Not super useful, but created for testing/ practice purposes)
