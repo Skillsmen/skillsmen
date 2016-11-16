@@ -8,10 +8,9 @@ import {
   StyleSheet,
   Navigator,
 } from 'react-native';
-
+import BackButton from '../reusableComponents/BackButton.js';
 import Banner from '../reusableComponents/Banner/ModularBanner';
-import ProfileCard from './components/ProfileCard';
-import BackButton from '../reusableComponents/BackButton.js'
+import ProfileCard from './components/ProfileCard/ProfileCard';
 
 const bgImg = require('../assets/whiteTexturedBackground.png');
 const profPic = require('../Profile/timallen.jpg');
@@ -51,7 +50,7 @@ class Profile extends React.Component {
       this.props.route.params.jobInfo.hires
     ];
     if (jobInfo.vacancies > 1) { iconArr[4] = 'users'; }
-    return(
+    return (
       <View style={styles.container}>
         <Image
           style={styles.backgroundImage, styles.container}
@@ -62,7 +61,6 @@ class Profile extends React.Component {
           <Text style={styles.topTitle}>
             {this.props.route.params.jobInfo.title}
           </Text>
-
           {/* banner : job type pay rate location time range vacancies */}
           <Banner
             iconArr={iconArr}
@@ -84,7 +82,7 @@ class Profile extends React.Component {
           <ProfileCard jobOwner={this.props.route.params.jobInfo} picStyles={styles.contactPic} />
         </Image>
       </View>
-    )
+    );
   }
 }
 
