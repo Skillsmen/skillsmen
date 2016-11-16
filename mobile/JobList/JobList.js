@@ -1,5 +1,5 @@
 import React from 'react';
-import fakeJobData from './fakeJobData.js';
+import fakeJobData from './fakeJobData';
 import {
   View,
   Text,

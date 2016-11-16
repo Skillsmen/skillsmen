@@ -11,6 +11,9 @@ module.exports = {
       },
       "sourceType": "module"
   },
+  "rules": {
+      "react/jsx-filename-extension": "off",
+  },
   "plugins": [
       "react",
       "react-native"

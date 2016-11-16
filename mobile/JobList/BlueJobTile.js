@@ -7,83 +7,84 @@ import {
   Text,
   StyleSheet,
   Image,
-  TextInput,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
-import Router from '../Router.js';
+import Router from '../Router';
 
-const Dimensions = React.Dimensions || require('Dimensions')
-const {width, height} = Dimensions.get('window');
-const vh = height/100;
-const vw = width/100;
+const Dimensions = React.Dimensions || require('Dimensions');
+
+const { width, height } = Dimensions.get('window');
+const vh = height / 100;
+const vw = width / 100;
+
+const blueImg = require('../assets/bluePatternBackground.png');
 
 const blueTile = StyleSheet.create({
   bluePanel: {
-    height: 30*vh,
-    width: 100*vw
+    height: 30 * vh,
+    width: 100 * vw,
   },
   bluePanelHeading: {
-    marginTop: 5*vh,
+    marginTop: 5 * vh,
     color: 'white',
-    fontWeight:"200",
+    fontWeight: '200',
     textAlign: 'center',
     fontSize: 19,
-    backgroundColor: 'rgba(0,0,0,0)'
+    backgroundColor: 'rgba(0,0,0,0)',
   },
   leftIcon: {
-    marginLeft:20*vw,
-    width: 20*vw,
+    marginLeft: 20 * vw,
+    width: 20 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
   },
   middleIcon: {
-    width: 25*vw,
+    width: 25 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
-    paddingLeft:2*vw
+    paddingLeft: 2 * vw,
   },
   rightIcon: {
-    width: 35*vw,
+    width: 35 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
   },
   iconSection: {
-    flexWrap: 'wrap', 
+    flexWrap: 'wrap',
     alignItems: 'flex-start',
-    flexDirection:'row',
-    marginTop:3*vh,
-    width: 100*vw
+    flexDirection: 'row',
+    marginTop: 3 * vh,
+    width: 100 * vw,
   },
   iconText: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 12
+    fontSize: 12,
   },
   posterImageIcon: {
-    width: 8*vh,
-    height: 8*vh,
-    marginLeft:27*vw,
-    marginRight: 2*vw,
-    borderRadius: 4*vh,
+    width: 8 * vh,
+    height: 8 * vh,
+    marginLeft: 27 * vw,
+    marginRight: 2 * vw,
+    borderRadius: 4 * vh,
     borderColor: 'white',
-    borderWidth: 1.5
+    borderWidth: 1.5,
   },
   posterNameText: {
     color: 'white',
     fontWeight: '200',
-    marginTop:2.5*vh
+    marginTop: 2.5 * vh,
   },
   jobPoster: {
     backgroundColor: 'rgba(0,0,0,0)',
-    flexWrap: 'wrap', 
+    flexWrap: 'wrap',
     alignItems: 'flex-start',
-    flexDirection:'row',
-    width: 100*vh,
-    marginTop: 4*vh
+    flexDirection: 'row',
+    width: 100 * vh,
+    marginTop: 4 * vh,
   },
   middleText: {
     textAlign: 'center',
     color: 'white',
-    textAlign: 'center',
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
 });
 
 export default class BlueJobTile extends React.Component {
@@ -91,18 +92,19 @@ export default class BlueJobTile extends React.Component {
     super(props);
     this.state = {
     };
+    this.pressJob = this.pressJob.bind(this);
   }
 
-  pressJob = () => {
-    this.props.navigator.push(Router.getRoute('jobProfile', {jobInfo: this.props.job}));
+  pressJob() {
+    this.props.navigator.push(Router.getRoute('jobProfile', { jobInfo: this.props.job }));
   }
 
   render() {
-    return(
+    return (
       <TouchableOpacity onPress={this.pressJob}>
         <Image
           style={blueTile.bluePanel}
-          source={require('../assets/bluePatternBackground.png')}
+          source={blueImg}
         >
           <Text style={blueTile.bluePanelHeading}>
             {this.props.job.title}
@@ -111,29 +113,34 @@ export default class BlueJobTile extends React.Component {
           <View style={blueTile.iconSection}>
             <View style={blueTile.leftIcon}>
               <FontAwesome name={'users'} size={15} style={blueTile.iconFormat} color={'white'}>
-                <Text style={blueTile.iconText}>  {this.props.job.hires} hires</Text>
+                <Text style={blueTile.iconText}> {this.props.job.hires} hires</Text>
               </FontAwesome>
             </View>
             <View style={blueTile.middleIcon}>
               <FontAwesome name={'map-marker'} size={15} style={blueTile.iconFormat} color={'white'}>
-                <Text style={blueTile.middleText}>  {this.props.job.location}</Text>
+                <Text style={blueTile.middleText}> {this.props.job.location}</Text>
               </FontAwesome>
             </View>
             <View style={blueTile.rightIcon}>
               <FontAwesome name={'money'} size={15} style={blueTile.iconFormat} color={'white'}>
-                <Text style={blueTile.iconText}>   {this.props.job.pay}</Text>
+                <Text style={blueTile.iconText}> {this.props.job.pay}</Text>
               </FontAwesome>
             </View>
           </View>
           <View style={blueTile.jobPoster}>
-              <Image
-                style={blueTile.posterImageIcon}
-                source={{uri: this.props.job.ownerImage}}
-              />
-              <Text style={blueTile.posterNameText}> {this.props.job.ownerName} </Text>
+            <Image
+              style={blueTile.posterImageIcon}
+              source={{ uri: this.props.job.ownerImage }}
+            />
+            <Text style={blueTile.posterNameText}> {this.props.job.ownerName} </Text>
           </View>
         </Image>
       </TouchableOpacity>
-    )
+    );
   }
 }
+
+BlueJobTile.propTypes = {
+  job: React.PropTypes.object,
+  navigator: React.PropTypes.object,
+};

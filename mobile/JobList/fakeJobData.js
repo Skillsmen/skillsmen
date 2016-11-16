@@ -10,7 +10,7 @@ const fakeJobData = [
     description: 'This is a description of the job. It should be about this long. Hopefully it is informative but short.',
     expertise: 'plumber',
     time: 'Mar 23 - Mar 29',
-    mobile: '0432211241'
+    mobile: '0432211241',
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const fakeJobData = [
     description: 'This is a description of the job. It should be about this long. Hopefully it is informative but short.',
     expertise: 'plumber',
     time: 'Mar 23 - Mar 29',
-    mobile: '0432211241'
+    mobile: '0432211241',
   },
   {
     id: 3,
@@ -36,8 +36,8 @@ const fakeJobData = [
     description: 'This is a description of the job. It should be about this long. Hopefully it is informative but short.',
     expertise: 'plumber',
     time: 'Mar 23 - Mar 29',
-    mobile: '0432211241'
-  }
+    mobile: '0432211241',
+  },
 ];
 
 export default fakeJobData;
