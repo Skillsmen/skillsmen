@@ -2,7 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../models/index');
-var userController = require('../models/user');
+var userController = require('../controllers/user');
 
 // Create a new user
 router.post('/user', function(req, res) {
@@ -27,11 +27,7 @@ router.post('/review', function(req, res) {
 });
 
 // Retrieve all users
-router.get('/user', function(req, res) {
-  models.User.findAll({}).then(function(users) {
-    res.json(users);
-  });
-});
+router.get('/user', userController.findAllUsers);
 
 // Creates route that finds all users and their associated reviews
 // (Not super useful, but created for testing/ practice purposes)
