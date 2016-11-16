@@ -5,12 +5,7 @@ var models = require('../models/index');
 var userController = require('../controllers/user');
 
 // Create a new user
-router.post('/user', function(req, res) {
-  models.User.create(req.body)
-    .then(function(user) {
-      res.json(user);
-    });
-});
+router.post('/user', userController.createUser);
 
 // Create a new review
 router.post('/review', function(req, res) {
