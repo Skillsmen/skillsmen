@@ -13,9 +13,9 @@ import Router from '../Router';
 
 const Dimensions = React.Dimensions || require('Dimensions');
 
-const {width, height} = Dimensions.get('window');
-const vh = height/100;
-const vw = width/100;
+const { width, height } = Dimensions.get('window');
+const vh = height / 100;
+const vw = width / 100;
 const whiteImg = require('../assets/whiteTexturedBackground.png');
 
 const whiteTile = StyleSheet.create({
@@ -128,15 +128,15 @@ class WhiteJobTile extends React.Component {
           </View>
 
           <View style={whiteTile.jobPoster}>
-              <Image
-                style={whiteTile.posterImageIcon}
-                source={{uri: this.props.job.ownerImage}}
-              />
-              <Text style={whiteTile.posterNameText}> {this.props.job.ownerName} </Text>
+            <Image
+              style={whiteTile.posterImageIcon}
+              source={{ uri: this.props.job.ownerImage }}
+            />
+            <Text style={whiteTile.posterNameText}> {this.props.job.ownerName} </Text>
           </View>
         </Image>
       </TouchableOpacity>
-    )
+    );
   }
 }
 
@@ -145,4 +145,4 @@ WhiteJobTile.propTypes = {
   navigator: React.PropTypes.object,
 };
 
-export default WhiteJobTile
+export default WhiteJobTile;

@@ -6,53 +6,52 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
-  TextInput
 } from 'react-native';
 
-const Dimensions = React.Dimensions || require('Dimensions')
-const {width, height} = Dimensions.get('window');
-const vh = height/100;
-const vw = width/100;
+const Dimensions = React.Dimensions || require('Dimensions');
+
+const { width, height } = Dimensions.get('window');
+const vh = height / 100;
+const vw = width / 100;
 
 const filterJobStyles = StyleSheet.create({
   outerBox: {
-    height: 10*vh,
-    width: 100*vw,
+    height: 10 * vh,
+    width: 100 * vw,
     backgroundColor: '#ffffff',
-    flexWrap: 'wrap', 
+    flexWrap: 'wrap',
     alignItems: 'flex-start',
-    flexDirection:'row',
+    flexDirection: 'row',
   },
   listToggle: {
-    height: 10*vh,
-    width: 49.8*vw,
-    marginRight:0.2*vw,
+    height: 10 * vh,
+    width: 49.8 * vw,
+    marginRight: 0.2 * vw,
     backgroundColor: '#e9e9e9',
   },
   mapToggle: {
-    height: 10*vh,
-    width: 49.8*vw,
-    marginLeft:0.2*vw,
+    height: 10 * vh,
+    width: 49.8 * vw,
+    marginLeft: 0.2 * vw,
     backgroundColor: '#e9e9e9',
   },
   buttonText: {
     textAlign: 'center',
-    marginTop:4*vh
+    marginTop: 4 * vh,
   },
   buttonTextWords: {
     textAlign: 'center',
-    marginTop:4*vh,
-    paddingLeft: 10*vw,
-    marginLeft: 10*vw,
+    marginTop: 4 * vh,
+    paddingLeft: 10 * vw,
+    marginLeft: 10 * vw,
   },
   buttonTextWordsBold: {
     textAlign: 'center',
-    marginTop:4*vh,
-    paddingLeft: 10*vw,
-    marginLeft: 10*vw,
-    fontWeight: '600'
-  }
+    marginTop: 4 * vh,
+    paddingLeft: 10 * vw,
+    marginLeft: 10 * vw,
+    fontWeight: '600',
+  },
 });
 
 export default class MapListToggle extends React.Component {
@@ -62,21 +61,21 @@ export default class MapListToggle extends React.Component {
     };
   }
   render() {
-    return(
+    return (
       <View style={filterJobStyles.outerBox}>
         <View style={filterJobStyles.listToggle}>
           <Text style={filterJobStyles.buttonText}>
-            <FontAwesome name={'list'} size={15} style={filterJobStyles.buttonTextWords} color={'black'}></FontAwesome>
+            <FontAwesome name={'list'} size={15} style={filterJobStyles.buttonTextWords} color={'black'} />
             <Text style={filterJobStyles.buttonTextWordsBold}>  LIST</Text>
           </Text>
         </View>
         <View style={filterJobStyles.mapToggle}>
-          <Text style={filterJobStyles.buttonText}>  
-            <FontAwesome name={'map-marker'} size={15} style={filterJobStyles.buttonTextWords} color={'gray'}></FontAwesome>
+          <Text style={filterJobStyles.buttonText}>
+            <FontAwesome name={'map-marker'} size={15} style={filterJobStyles.buttonTextWords} color={'gray'} />
             <Text style={filterJobStyles.buttonTextWords}> MAP</Text>
           </Text>
         </View>
       </View>
-    )
+    );
   }
 }

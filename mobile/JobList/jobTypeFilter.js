@@ -6,54 +6,55 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
-  TextInput
 } from 'react-native';
 
-const Dimensions = React.Dimensions || require('Dimensions')
-const {width, height} = Dimensions.get('window');
-const vh = height/100;
-const vw = width/100;
+const Dimensions = React.Dimensions || require('Dimensions');
+
+const { width, height } = Dimensions.get('window');
+const vh = height / 100;
+const vw = width / 100;
 
 const filterJobStyles = StyleSheet.create({
   jobTypeBar: {
-    height: 3*vh,
+    height: 3 * vh,
     backgroundColor: 'white',
-    width: 100*vw,
-    marginTop:1.4*vh,
-    marginBottom:1.0*vh
+    width: 100 * vw,
+    marginTop: 1.4 * vh,
+    marginBottom: 1.0 * vh,
   },
   jobTypeText: {
     textAlign: 'center',
     color: 'gray',
     fontSize: 13,
-    fontWeight: '600'
+    fontWeight: '600',
   },
   chevron: {
-    paddingRight: 10*vw,
-    fontSize:14
+    paddingRight: 10 * vw,
+    fontSize: 14,
   },
   filterJobStylesText: {
-    fontWeight: '600'
-  }
+    fontWeight: '600',
+  },
 });
 
 class JobTypeFilter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      toggle: 'list'
+      toggle: 'list',
     };
   }
   render() {
-    return(
-        <View style={filterJobStyles.jobTypeBar}>
-          <Text style={filterJobStyles.jobTypeText}> 
-            <FontAwesome name={'chevron-down'} left={20} style={filterJobStyles.chevron} color={'gray'}></FontAwesome>
-              <Text style={filterJobStyles.filterJobStylesText}> Plumbing Jobs</Text>
+    return (
+      <View style={filterJobStyles.jobTypeBar}>
+        <Text style={filterJobStyles.jobTypeText}>
+          <FontAwesome name={'chevron-down'} left={20} style={filterJobStyles.chevron} color={'gray'} />
+          <Text style={filterJobStyles.filterJobStylesText}>
+            Plumbing Jobs
           </Text>
-        </View>
-    )
+        </Text>
+      </View>
+    );
   }
 }
 
