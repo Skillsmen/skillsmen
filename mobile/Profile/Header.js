@@ -39,19 +39,9 @@ const bgImg = require('../assets/bluePatternBackground.png');
 // Link from profPic will eventually need to be passed in as a prop...
 const profPic = require('./timallen.jpg');
 
-const Header = ({ clickOnEdit, editMode }) => (
-  <Image
-    style={styles.backgroundImage}
-    source={bgImg}
-  >
-    <View style={{ flex: 1 }} />
-    <View style={{ flex: 1 }}>
-      <Image
-        style={styles.profPic}
-        source={profPic}
-      />
-    </View>
-    <View style={{ flex: 1 }}>
+const showEdit = (noEdit, clickOnEdit, editMode) => {
+  if (!noEdit) {
+    return (
       <TouchableHighlight onPress={clickOnEdit}>
         <FontAwesome
           style={styles.editIcon}
@@ -60,6 +50,25 @@ const Header = ({ clickOnEdit, editMode }) => (
           color={editMode ? '#7dc4ff' : '#DCDCDC'}
         />
       </TouchableHighlight>
+    );
+  }
+  return null;
+};
+
+const Header = ({ userPic, noEdit, clickOnEdit, editMode }) => (
+  <Image
+    style={styles.backgroundImage}
+    source={bgImg}
+  >
+    <View style={{ flex: 1 }} />
+    <View style={{ flex: 1 }}>
+      <Image
+        style={styles.profPic}
+        source={userPic || profPic}
+      />
+    </View>
+    <View style={{ flex: 1 }}>
+    { showEdit(noEdit, clickOnEdit, editMode) }
     </View>
   </Image>
 );
@@ -67,6 +76,8 @@ const Header = ({ clickOnEdit, editMode }) => (
 Header.propTypes = {
   clickOnEdit: React.PropTypes.func,
   editMode: React.PropTypes.bool,
+  noEdit: React.PropTypes.bool,
+  userPic: React.PropTypes.string,
 };
 
 export default Header;

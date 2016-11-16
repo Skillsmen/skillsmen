@@ -16,4 +16,5 @@ export default createRouter(() => ({
   workerList: () => WorkerListScreen,
   messages: () => Messages,
   navigationBar: () => NavigationBar,
+  peerProfile: () => ProfileScreen,
 }));

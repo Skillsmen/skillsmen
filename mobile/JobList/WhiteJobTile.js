@@ -94,6 +94,7 @@ export default class WhiteJobTile extends React.Component {
   }
 
   pressJob = () => {
+    console.log('pressjob', this.props.job)
     this.props.navigator.push(Router.getRoute('jobProfile', {jobInfo: this.props.job}));
   }
 

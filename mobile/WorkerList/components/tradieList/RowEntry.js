@@ -8,7 +8,6 @@ import TradieBanner from '../tradieBanner/TradieBanner';
 import {
   FontAwesome,
 } from '@exponent/vector-icons';
-import { withNavigation } from '@exponent/ex-navigation';
 import Router from '../../../Router.js';
 
 const renderIcon = (name, size = 15, isSelected) =>
@@ -21,9 +20,9 @@ const renderIcon = (name, size = 15, isSelected) =>
   );
 
 
-const TradieRow = ({ navigator, name, expertise, location, reviews }) => {
-  const pressUser = (props) => {
-    navigator.push(Router.getRoute('profile', { props: 'propsplaceholder' }));
+const TradieRow = ({ navigator, userInfo }) => {
+  const pressUser = () => {
+    navigator.push(Router.getRoute('peerProfile', { peerProfile: true, user: userInfo }));
   };
   return (
     <TouchableOpacity onPress={pressUser}>
@@ -34,12 +33,12 @@ const TradieRow = ({ navigator, name, expertise, location, reviews }) => {
           {renderIcon('user-circle', 45)}
         </View>
         <TradieBanner 
-          expertise={expertise}
-          location={location}
-          reviews={reviews}
+          expertise={userInfo.expertise}
+          location={userInfo.location}
+          reviews={userInfo.reviews}
           styles={styles}
           Icon={renderIcon}
-          name={name}
+          name={userInfo.first_name.concat(' ').concat(userInfo.last_name)}
         />
       </View>
       </View>

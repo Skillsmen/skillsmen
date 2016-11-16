@@ -16,7 +16,7 @@ const WorkerList = ({ navigator }) => {
   return (
     <View>
       <Image
-        style={[styles.backgroundImage, {width, height: 25 * 2.75}]}
+        style={[styles.backgroundImage, { width, height: 25 * 2.75 }]}
         source={bgImg}
       />
       <RowList

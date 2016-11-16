@@ -43,8 +43,6 @@ class Profile extends React.Component {
     super(props);
     // The state is populated with profile information. It will change on edit.
     // Eventually there may need to be a submit button to trigger a PUT request to DB
-    console.log('[FILE] Profile/Profile.js:', props.route.params);
-
     this.state = {
       editMode: false,
       nameText: 'Tim da Toolman',
@@ -64,15 +62,22 @@ class Profile extends React.Component {
       editMode: !this.state.editMode,
     });
   }
+  renderHeader() {
+    if (!this.props.route.params.peerProfile) {
+      return (<Header noEdit={false} clickOnEdit={this.clickOnEdit} editMode={this.state.editMode} />);
+    }
+    return (<Header noEdit={true} />);
+  }
 
   render() {
+    const userInfo = this.props.route.params.user;
     return (
       <View style={styles.container}>
-        <Header clickOnEdit={this.clickOnEdit} editMode={this.state.editMode} />
+        { this.renderHeader() }
         <ScrollView contentContainerStyle={styles.contentContainer} alwaysBounceVertical>
             <ModularBanner
               iconArr={this.icons}
-              propertyArr={this.descriptions}
+              propertyArr={[userInfo.expertise, userInfo.location, userInfo.experience_years]}
               styles={styles.banner}
             />
           <View style={styles.info}>
@@ -82,9 +87,9 @@ class Profile extends React.Component {
             }
             {!this.state.editMode &&
               <MainInfo
-                name={this.state.nameText}
-                experience={this.state.experienceText}
-                contactInfo={this.state.contactInfo}
+                name={userInfo.first_name.concat(' '.concat(userInfo.last_name))}
+                experience={userInfo.description}
+                contactInfo={userInfo.mobile}
               />
             }
             <RecommendationList width={width} />
