@@ -17,5 +17,18 @@ module.exports = {
           res.json(review);
         });
       });
+  },
+//Find all reviews associated with a given UserId
+  findUsersReviews(req, res) {
+    Review.findAll({
+      where: {
+        UserId: req.params.id
+      }
+    }).then(function (reviews) {
+      res.status(200).json(reviews);
+    }).catch(function (error) {
+      res.status(500).json(error);
+    });
   }
+  
 };
