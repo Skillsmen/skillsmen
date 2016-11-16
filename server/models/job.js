@@ -1,6 +1,7 @@
+/* eslint-disable */
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var Jobs = sequelize.define('Jobs', {
+  var Job = sequelize.define('Job', {
     owner: DataTypes.INTEGER,
     description: DataTypes.TEXT,
     location: DataTypes.STRING,
@@ -10,9 +11,12 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        Jobs.belongsTo(models.Users);
+        // Job.belongsTo(models.User);
       }
-    }
+    },
+    freezeTableName: true
   });
-  return Jobs;
+
+  return Job;
 };
+

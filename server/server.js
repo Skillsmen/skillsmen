@@ -1,3 +1,4 @@
+/* eslint-disable */
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -13,5 +14,8 @@ app.use('/', routes);
 // app.use('/users', require('./routes/users'));
 // app.use('/jobs', require('./routes/jobs'));
 
-app.listen(3000);
-console.log('Listening on 3000');
+app.set('port', process.env.PORT || 3000);
+app.listen(app.get('port'), function() {
+  console.log('listening on port', app.get('port'));
+});
+

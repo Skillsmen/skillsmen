@@ -1,24 +1,27 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Reviews', {
+    return queryInterface.createTable('User', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      comment: {
+      name: {
+        type: Sequelize.STRING
+      },
+      profession: {
+        type: Sequelize.STRING
+      },
+      description: {
         type: Sequelize.TEXT
       },
-      rating: {
+      experience: {
         type: Sequelize.INTEGER
       },
-      ratingUser: {
-        type: Sequelize.INTEGER
-      },
-      ratedUser: {
-        type: Sequelize.INTEGER
+      location: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +34,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Reviews');
+    return queryInterface.dropTable('User');
   }
 };

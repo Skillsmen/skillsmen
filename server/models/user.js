@@ -1,6 +1,7 @@
+/* eslint-disable */
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var Users = sequelize.define('Users', {
+  var User = sequelize.define('User', {
     name: DataTypes.STRING,
     profession: DataTypes.STRING,
     description: DataTypes.TEXT,
@@ -10,9 +11,13 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        Users.hasMany(models.Reviews);
+        User.hasMany(models.Job);
+        User.hasMany(models.Review);
       }
-    }
+    },
+    freezeTableName: true
   });
-  return Users;
+
+  return User;
 };
+
