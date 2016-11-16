@@ -26,7 +26,7 @@ router.post('/review', function(req, res) {
     });
 });
 
-//Retrieve all users
+// Retrieve all users
 router.get('/user', function(req, res) {
   models.User.findAll({}).then(function(users) {
     res.json(users);
@@ -36,9 +36,8 @@ router.get('/user', function(req, res) {
 // Creates route that finds all users and their associated reviews
 // (Not super useful, but created for testing/ practice purposes)
 router.get('/userReview', function(req, res) {
-    console.log('inside userReview');
     models.User.findAll({
-      //Return all reviews that have a matching userId for each User
+      //Return all reviews that have a matching UserId for each User
       include: models.Review
     }).then(function (users) {
       res.status(200).json(users);
@@ -46,6 +45,21 @@ router.get('/userReview', function(req, res) {
       res.status(500).json(error);
     });
 })
+
+// Find all reviews associated with a given UserId
+router.get('/review/:id', function(req, res) {
+  console.log('req.params', req.params);
+  models.Review.findAll({
+    where: {
+      UserId: req.params.id
+    }
+  }).then(function (reviews) {
+    console.log('reviews after join', reviews);
+    res.status(200).json(reviews);
+  }).catch(function (error) {
+    res.status(500).json(error);
+  });
+});
 
 module.exports = router;
 
