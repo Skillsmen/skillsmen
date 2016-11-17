@@ -7,10 +7,10 @@ import {
   Text,
   StyleSheet,
   Image,
-  TextInput
+  TextInput,
+  Dimensions,
 } from 'react-native';
 
-const Dimensions = React.Dimensions || require('Dimensions')
 const {width, height} = Dimensions.get('window');
 const vh = height/100;
 const vw = width/100;
@@ -25,7 +25,6 @@ const searchStyles = StyleSheet.create({
     fontWeight: "100",
     height: 4*vh,
     fontSize: 15,
-    marginRight: 10*vw,
     marginLeft: 10*vw,
     marginTop: 4*vh,
     width: 80*vw,
@@ -67,7 +66,7 @@ export default class searchBar extends React.Component {
   render() {
     return(
       <Image
-        style={searchStyles.bluePattern}
+        style={[searchStyles.bluePattern, {flexDirection: 'row', width, height: 25 * 2.75 }]}
         source={require('../assets/bluePatternBackground.png')}
       >
         <TextInput 
@@ -77,8 +76,9 @@ export default class searchBar extends React.Component {
           onChangeText={(text) => this.hideSearchIcon(text)}
           value={this.state.searchText}
         >
-          {this.state.searchText.length > 0 ? null : <FontAwesome name={'search'} size={18} style={searchStyles.searchIcon} color={'#ffffff'}></FontAwesome>}
+        {this.state.searchText.length > 0 ? null : <FontAwesome name={'search'} size={18} style={searchStyles.searchIcon} color={'#ffffff'}></FontAwesome>}
         </TextInput>
+        {this.props.leftButton()}
       </Image>
     )
   }
