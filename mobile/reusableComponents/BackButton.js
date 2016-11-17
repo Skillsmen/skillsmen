@@ -31,6 +31,8 @@ export default class BackButton extends React.Component {
     console.log('goBack function is running! props: ', this.props)
     if (this.props.navigator.getCurrentIndex() > 0) {
       this.props.navigator.pop();
+    } else {
+      this.props.navigator.push(Router.getRoute('profile'));
     }
   }
 
