@@ -2,7 +2,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Job = sequelize.define('Job', {
-    owner: DataTypes.INTEGER,
     description: DataTypes.TEXT,
     location: DataTypes.STRING,
     timeFrame: DataTypes.STRING,
@@ -11,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        // Job.belongsTo(models.User);
+         Job.belongsTo(models.User);
       }
     },
     freezeTableName: true

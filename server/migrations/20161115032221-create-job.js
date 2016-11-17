@@ -8,9 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      owner: {
-        type: Sequelize.INTEGER
-      },
       description: {
         type: Sequelize.TEXT
       },

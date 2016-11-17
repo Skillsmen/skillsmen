@@ -10,14 +10,13 @@ module.exports = {
     User.findById(req.body.UserId)
       .then(function(user) {
         Job.create({
-          owner: req.body.owner,
           description: req.body.description,
           location: req.body.location,
           timeFrame: req.body.timeFrame,
           vacancies: req.body.vacancies,
           UserId: user.dataValues.id
-        }).then(function(review) {
-          res.json(review);
+        }).then(function(job) {
+          res.json(job);
         });
       }).catch(function (error) {
         res.status(500).json(error);
@@ -35,8 +34,8 @@ module.exports = {
 // Find a specific job by id
   findSpecificJob(req, res) {
     Job.findById(req.params.id)  
-      .then(function (reviews) {
-        res.status(200).json(reviews);
+      .then(function (job) {
+        res.status(200).json(job);
       }).catch(function (error) {
         res.status(500).json(error);
       });
