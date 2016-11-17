@@ -60,11 +60,12 @@ export default class searchBar extends React.Component {
 
   hideSearchIcon(text) {
     var context = this;
-    this.setState({searchText: text}, function() {
+    this.setState({ searchText: text }, function () {
     });
   }
   render() {
-    return(
+    const leftButton = this.props.leftButton || function () { return null };
+    return (
       <Image
         style={[searchStyles.bluePattern, {flexDirection: 'row', width, height: 25 * 2.75 }]}
         source={require('../assets/bluePatternBackground.png')}
@@ -78,7 +79,7 @@ export default class searchBar extends React.Component {
         >
         {this.state.searchText.length > 0 ? null : <FontAwesome name={'search'} size={18} style={searchStyles.searchIcon} color={'#ffffff'}></FontAwesome>}
         </TextInput>
-        {this.props.leftButton()}
+        {leftButton()}
       </Image>
     )
   }
