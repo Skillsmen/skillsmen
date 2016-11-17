@@ -33,6 +33,8 @@ Object.keys(db).forEach(function(modelName) {
   }
 });
 
+sequelize.sync({force: true});     //Maybe remove this later. Drops tables if exist/change
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

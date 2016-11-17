@@ -7,24 +7,17 @@ module.exports = {
 // Create new review
 // (first finds user by id to associate with foreign key)
   createReview(req, res) {
-    User.findById(req.body.UserId)
-      .then(function(user) {
-        Review.create({
-          comment: req.body.comment,
-          rating: req.body.rating,
-          UserId: user.dataValues.id
-        }).then(function(review) {
-          res.json(review);
-        }).catch(function (error) {
-          res.status(500).json(error);
-        });
-      });
+    Review.create(req.body).then(function(review) {
+      res.json(review);
+    }).catch(function (error) {
+      res.status(500).json(error);
+    });
   },
-//Find all reviews associated with a given UserId
+//Find all reviews that are for a specific user(designated by ReviewFor)
   findUsersReviews(req, res) {
     Review.findAll({
       where: {
-        UserId: req.params.id
+        ReviewFor: req.params.id
       }
     }).then(function (reviews) {
       res.status(200).json(reviews);

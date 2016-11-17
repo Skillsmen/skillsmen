@@ -14,7 +14,10 @@ module.exports = {
       rating: {
         type: Sequelize.INTEGER
       },
-      UserId: {
+      ReviewFrom: {
+        type: Sequelize.INTEGER
+      },
+      ReviewFor: {
         type: Sequelize.INTEGER
       },
       createdAt: {

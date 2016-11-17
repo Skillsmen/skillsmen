@@ -6,21 +6,25 @@ var userController = require('../controllers/user');
 var reviewController = require('../controllers/review');
 var jobController = require('../controllers/job');
 
+// USERS
 // Create a new user
 router.post('/user', userController.createUser);
 // Retrieve all users
 router.get('/user', userController.findAllUsers);
 
+// REVIEWS
 // Create a new review
 router.post('/review', reviewController.createReview);
 // Find all reviews associated with a given UserId
 router.get('/review/:id', reviewController.findUsersReviews);
 
+// JOBS
 // Create a new job
 router.post('/job', jobController.createJob);
 // Retrieve all jobs
 router.get('/job', jobController.findJobs);
 // Retrieve job by id
 router.get('/job/:id', jobController.findSpecificJob);
+
 module.exports = router;
 

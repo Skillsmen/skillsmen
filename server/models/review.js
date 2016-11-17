@@ -4,6 +4,8 @@ module.exports = function(sequelize, DataTypes) {
   var Review = sequelize.define('Review', {
     comment: DataTypes.TEXT,
     rating: DataTypes.INTEGER,
+    ReviewFrom: DataTypes.INTEGER,
+    ReviewFor: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
@@ -12,6 +14,8 @@ module.exports = function(sequelize, DataTypes) {
         //   as: 'reviewFor',
         //   constraints: false
         // });
+        Review.belongsTo(models.User, {foreignKey: 'ReviewFrom'});
+        Review.belongsTo(models.User, {foreignKey: 'ReviewFor'});
         // Review.belongsTo(models.User, {
         //   as: 'reviewFrom',
         //   constraints: false
