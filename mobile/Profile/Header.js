@@ -9,6 +9,7 @@ import {
 import {
   FontAwesome,
 } from '@exponent/vector-icons';
+import BackButton from '../reusableComponents/BackButton';
 
 const { width, height } = Dimensions.get('window');
 
@@ -39,8 +40,8 @@ const bgImg = require('../assets/bluePatternBackground.png');
 // Link from profPic will eventually need to be passed in as a prop...
 const profPic = require('./timallen.jpg');
 
-const showEdit = (noEdit, clickOnEdit, editMode) => {
-  if (!noEdit) {
+const showEdit = (navigator, peer, clickOnEdit, editMode) => {
+  if (!peer) {
     return (
       <TouchableHighlight onPress={clickOnEdit}>
         <FontAwesome
@@ -52,15 +53,23 @@ const showEdit = (noEdit, clickOnEdit, editMode) => {
       </TouchableHighlight>
     );
   }
+};
+
+const showBackButton = (navigator, peer) => {
+  if (peer) {
+    return (<BackButton navigator={navigator} />);
+  }
   return null;
 };
 
-const Header = ({ userPic, noEdit, clickOnEdit, editMode }) => (
+const Header = ({ navigator, userPic, peer, clickOnEdit, editMode }) => (
   <Image
     style={styles.backgroundImage}
     source={bgImg}
   >
-    <View style={{ flex: 1 }} />
+    <View style={{ flex: 1 }} >
+    {showBackButton(navigator, peer)}
+    </View>
     <View style={{ flex: 1 }}>
       <Image
         style={styles.profPic}
@@ -68,7 +77,7 @@ const Header = ({ userPic, noEdit, clickOnEdit, editMode }) => (
       />
     </View>
     <View style={{ flex: 1 }}>
-    { showEdit(noEdit, clickOnEdit, editMode) }
+    { showEdit(navigator, peer, clickOnEdit, editMode) }
     </View>
   </Image>
 );
@@ -76,7 +85,7 @@ const Header = ({ userPic, noEdit, clickOnEdit, editMode }) => (
 Header.propTypes = {
   clickOnEdit: React.PropTypes.func,
   editMode: React.PropTypes.bool,
-  noEdit: React.PropTypes.bool,
+  peer: React.PropTypes.bool,
   userPic: React.PropTypes.string,
 };
 
