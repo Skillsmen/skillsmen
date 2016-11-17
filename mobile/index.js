@@ -63,31 +63,9 @@ const whiteBg = require('./assets/whiteTexturedBackground.png');
 // [Wallace: What's this? ^]
 
 class App extends React.Component {
-  constructor(props, somethingelse) {
+  constructor(props) {
     super(props);
-    // this.state = {
-    //   token: null,
-    //   username: null,
-    //   profile: null,
-    // };
-
-    console.log('Other', somethingelse);
-    console.log('Props', props);
-    console.log('Context', this.context);
-    // this.grantAccess = this.grantAccess.bind(this);
     this.renderScene = this.renderScene.bind(this);
-  }
-
-  componentDidMount() {
-    const { store } = this.context;
-    this.unsubscribe = store.subscribe(() => {
-      // console.log('Rerendering entire app');
-      this.forceUpdate();
-    });
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
   }
 
   componentWillMount() {
@@ -100,37 +78,36 @@ class App extends React.Component {
     // console.log(Exponent.Constants.deviceId);
 
     // Persistant login via tokens?
-    // AsyncStorage.multiGet(['token', 'username'])
-    // .then((data) => {
-    //   if (data[0][1] !== null && data[1][1] !== null) {
-    //     this.setState({
-    //       token: data[0][1],
-    //       username: data[1][1],
-    //     });
-    //   }
-    // });
+    const { store } = this.context;
+    AsyncStorage.multiGet(['token', 'username'])
+    .then((data) => {
+      if (data[0][1] !== null && data[1][1] !== null) {
+        store.dispatch({
+          type: 'GRANT_ACCESS',
+          token: data[0][1],
+          username: data[1][1],
+        });
+      }
+    });
 
     // Persistant login via express sessions? (yet to be investigated)
   }
 
-  // grantAccess(username, token, profile) {
-  //   AsyncStorage.multiSet([
-  //     ['token', token],
-  //     ['username', username],
-  //   ]);
+  componentDidMount() {
+    const { store } = this.context;
+    this.unsubscribe = store.subscribe(() => {
+      console.log('Calling forceUpdate on the entire app');
+      this.forceUpdate();
+    });
+  }
 
-  //   this.setState({
-  //     token,
-  //     username,
-  //     profile,
-  //   });
-  // }
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
 
   // Scene routing specifically for Onboarding only
   renderScene(route, navigator) {
-     // store.dispatch(grantAccess(username, token profile));
     const action = (username, token, profile) => {
-      // console.log('creating action!');
       return {
         type: 'GRANT_ACCESS',
         username,
@@ -138,15 +115,21 @@ class App extends React.Component {
         profile,
       };
     };
-    // const { store } = this.context;
-    // console.log('A sentence is here');
-    console.log('This', this);
+
     const { store } = this.context;
+    const grantAccess = (username, token, profile) => {
+      AsyncStorage.multiSet([
+        ['token', token],
+        ['username', username],
+      ]);
+      store.dispatch(action(username, token, profile));
+    };
+
     if (route.name === 'Entry') {
-      return (<Entry grantAccess={(username, token, profile) => store.dispatch(action(username, token, profile))} navigator={navigator} />);
+      return (<Entry grantAccess={grantAccess} navigator={navigator} />);
     }
     if (route.name === 'SignUp') {
-      return (<SignUp grantAccess={(username, token, profile) => store.dispatch(action(username, token, profile))} navigator={navigator} {...route.passProps} />);
+      return (<SignUp grantAccess={grantAccess} navigator={navigator} {...route.passProps} />);
     }
     return (<Text> BAD ROUTE </Text>);
   }
@@ -154,8 +137,8 @@ class App extends React.Component {
   render() {
     const { store } = this.context;
     const state = store.getState().app;
-    console.log('State:', state);
     if (state.token) {
+      // Render the main application
       return (
         <View style={styles.container}>
           <NavigationProvider router={Router}>
@@ -164,6 +147,8 @@ class App extends React.Component {
         </View>
       );
     }
+
+    // Render the onboarding page
     return (
       <View style={styles.container}>
         <Image
