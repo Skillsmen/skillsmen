@@ -29,6 +29,8 @@ router.post('/job', jobController.createJob);
 router.get('/job', jobController.findJobs);
 // Retrieve job by id
 router.get('/job/:id', jobController.findSpecificJob);
+// Update job
+router.put('/job/:id', jobController.updateJob);
 
 module.exports = router;
 

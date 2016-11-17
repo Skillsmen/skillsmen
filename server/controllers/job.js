@@ -30,6 +30,19 @@ module.exports = {
       }).catch(function (error) {
         res.status(500).json(error);
       });
+  },
+// Update job's information
+  updateJob(req, res) {
+    Job.update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    }).then(function (updatedJob) {
+      res.status(200).json(updatedJob);
+    }).catch(function (error){
+      res.status(500).json(error);
+    });
   }
+  
 };
 

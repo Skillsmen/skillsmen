@@ -37,11 +37,9 @@ module.exports = {
       where: {
         id: req.params.id
       }
-    })
-    .then(function (updatedUser) {
+    }).then(function (updatedUser) {
       res.status(200).json(updatedUser);
-    })
-    .catch(function (error){
+    }).catch(function (error){
       res.status(500).json(error);
     });
   }
