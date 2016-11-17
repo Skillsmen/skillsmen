@@ -32,8 +32,9 @@ Object.keys(db).forEach(function(modelName) {
     db[modelName].associate(db);
   }
 });
-
-sequelize.sync({force: true});     //Maybe remove this later. Drops tables if exist/change
+// Remove {force:true} later. Drops tables if exist/change
+// Good for dev env but will need to get rid of it when want to persist changes
+sequelize.sync({force: true});     
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

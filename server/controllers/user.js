@@ -13,6 +13,15 @@ module.exports = {
         res.status(500).json(error);
       }); 
   },
+// Retrieve one user by id
+  findOneUser(req, res) {
+    User.findById(req.params.id)
+      .then(function(user) {
+        res.json(user);
+      }).catch(function (error) {
+        res.status(500).json(error);
+      });
+  },
 // Create a new user
   createUser(req, res) {
     User.create(req.body)

@@ -11,6 +11,8 @@ var jobController = require('../controllers/job');
 router.post('/user', userController.createUser);
 // Retrieve all users
 router.get('/user', userController.findAllUsers);
+// Retrieve one user by id
+router.get('/user/:id', userController.findOneUser);
 
 // REVIEWS
 // Create a new review
