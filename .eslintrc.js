@@ -18,5 +18,8 @@ module.exports = {
   "plugins": [
       "react",
       "react-native"
-  ]
+  ],
+  "rules": {
+    "arrow-body-style": "off"
+  }
 };
