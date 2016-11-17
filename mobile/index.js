@@ -78,17 +78,17 @@ class App extends React.Component {
     // console.log(Exponent.Constants.deviceId);
 
     // Persistant login via tokens?
-    const { store } = this.context;
-    AsyncStorage.multiGet(['token', 'username'])
-    .then((data) => {
-      if (data[0][1] !== null && data[1][1] !== null) {
-        store.dispatch({
-          type: 'GRANT_ACCESS',
-          token: data[0][1],
-          username: data[1][1],
-        });
-      }
-    });
+    // const { store } = this.context;
+    // AsyncStorage.multiGet(['token', 'username'])
+    // .then((data) => {
+    //   if (data[0][1] !== null && data[1][1] !== null) {
+    //     store.dispatch({
+    //       type: 'GRANT_ACCESS',
+    //       token: data[0][1],
+    //       username: data[1][1],
+    //     });
+    //   }
+    // });
 
     // Persistant login via express sessions? (yet to be investigated)
   }
@@ -137,6 +137,9 @@ class App extends React.Component {
   render() {
     const { store } = this.context;
     const state = store.getState().app;
+
+    // Crappy render? Could remove the state by always going to
+    // the entry page and rerouting from there. See growler.
     if (state.token) {
       // Render the main application
       return (
