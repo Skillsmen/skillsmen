@@ -13,6 +13,8 @@ router.post('/user', userController.createUser);
 router.get('/user', userController.findAllUsers);
 // Retrieve one user by id
 router.get('/user/:id', userController.findOneUser);
+// Update users infromation
+router.put('/user/:id', userController.updateUser);
 
 // REVIEWS
 // Create a new review

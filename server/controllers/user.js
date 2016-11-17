@@ -30,6 +30,20 @@ module.exports = {
       }).catch(function (error) {
         res.status(500).json(error);
       });
+  },
+// Update users information
+  updateUser(req, res) {
+    User.update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(function (updatedUser) {
+      res.status(200).json(updatedUser);
+    })
+    .catch(function (error){
+      res.status(500).json(error);
+    });
   }
 };
 
