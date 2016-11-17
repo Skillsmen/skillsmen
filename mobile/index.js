@@ -3,6 +3,10 @@
 
 import Exponent from 'exponent';
 import React from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers';
+
 import {
   View,
   Text,
@@ -19,6 +23,19 @@ import NavigationBar from './NavigationBar';
 import Entry from './Onboarding/Entry';
 import SignUp from './Onboarding/SignUp';
 import Router from './Router';
+
+const mainStore = createStore(reducer);
+
+class AppContainer extends React.Component {
+  render() {
+    return (
+      <Provider store={mainStore}>
+        <App />
+      </Provider>
+    );
+  }
+}
+
 
 const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -46,16 +63,31 @@ const whiteBg = require('./assets/whiteTexturedBackground.png');
 // [Wallace: What's this? ^]
 
 class App extends React.Component {
-  constructor(props) {
+  constructor(props, somethingelse) {
     super(props);
-    this.state = {
-      token: true,
-      username: null,
-      profile: null,
-    };
+    // this.state = {
+    //   token: null,
+    //   username: null,
+    //   profile: null,
+    // };
 
-    this.grantAccess = this.grantAccess.bind(this);
+    console.log('Other', somethingelse);
+    console.log('Props', props);
+    console.log('Context', this.context);
+    // this.grantAccess = this.grantAccess.bind(this);
     this.renderScene = this.renderScene.bind(this);
+  }
+
+  componentDidMount() {
+    const { store } = this.context;
+    this.unsubscribe = store.subscribe(() => {
+      // console.log('Rerendering entire app');
+      this.forceUpdate();
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
   componentWillMount() {
@@ -81,36 +113,53 @@ class App extends React.Component {
     // Persistant login via express sessions? (yet to be investigated)
   }
 
-  grantAccess(username, token, profile) {
-    AsyncStorage.multiSet([
-      ['token', token],
-      ['username', username],
-    ]);
+  // grantAccess(username, token, profile) {
+  //   AsyncStorage.multiSet([
+  //     ['token', token],
+  //     ['username', username],
+  //   ]);
 
-    this.setState({
-      token,
-      username,
-      profile,
-    });
-  }
+  //   this.setState({
+  //     token,
+  //     username,
+  //     profile,
+  //   });
+  // }
 
   // Scene routing specifically for Onboarding only
   renderScene(route, navigator) {
+     // store.dispatch(grantAccess(username, token profile));
+    const action = (username, token, profile) => {
+      // console.log('creating action!');
+      return {
+        type: 'GRANT_ACCESS',
+        username,
+        token,
+        profile,
+      };
+    };
+    // const { store } = this.context;
+    // console.log('A sentence is here');
+    console.log('This', this);
+    const { store } = this.context;
     if (route.name === 'Entry') {
-      return (<Entry grantAccess={this.grantAccess} navigator={navigator} />);
+      return (<Entry grantAccess={(username, token, profile) => store.dispatch(action(username, token, profile))} navigator={navigator} />);
     }
     if (route.name === 'SignUp') {
-      return (<SignUp grantAccess={this.grantAccess} navigator={navigator} {...route.passProps} />);
+      return (<SignUp grantAccess={(username, token, profile) => store.dispatch(action(username, token, profile))} navigator={navigator} {...route.passProps} />);
     }
     return (<Text> BAD ROUTE </Text>);
   }
 
   render() {
-    if (this.state.token) {
+    const { store } = this.context;
+    const state = store.getState().app;
+    console.log('State:', state);
+    if (state.token) {
       return (
         <View style={styles.container}>
           <NavigationProvider router={Router}>
-            <NavigationBar profile={this.state.profile} />
+            <NavigationBar profile={state.profile} />
           </NavigationProvider>
         </View>
       );
@@ -135,6 +184,11 @@ class App extends React.Component {
   }
 }
 
-export default App;
-Exponent.registerRootComponent(App);
+
+App.contextTypes = {
+  store: React.PropTypes.object,
+};
+
+export default AppContainer;
+Exponent.registerRootComponent(AppContainer);
 
