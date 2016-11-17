@@ -22,7 +22,7 @@ const renderIcon = (name, size = 15, isSelected) =>
 
 const TradieRow = ({ navigator, userInfo }) => {
   const pressUser = () => {
-    navigator.push(Router.getRoute('peerProfile', { peerProfile: true, user: userInfo }));
+    navigator.push(Router.getRoute('profile', { peerProfile: true, user: userInfo }));
   };
   return (
     <TouchableOpacity onPress={pressUser}>
