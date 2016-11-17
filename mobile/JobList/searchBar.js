@@ -77,7 +77,6 @@ export default class searchBar extends React.Component {
         >
         {this.state.searchText.length > 0 ? null : <FontAwesome name={'search'} size={18} style={searchStyles.searchIcon} color={'#ffffff'} />}
         </TextInput>
-        {leftButton()}
       </Image>
     );
   }
