@@ -12,6 +12,8 @@ import {
 import {
   NavigationProvider,
 } from '@exponent/ex-navigation';
+import { connect } from 'react-redux';
+
 import NavigationBar from './NavigationBar';
 import Entry from './Onboarding/Entry';
 import SignUp from './Onboarding/SignUp';
@@ -38,12 +40,9 @@ const styles = StyleSheet.create({
 const blueBg = require('./assets/bluePatternBackground.png');
 const whiteBg = require('./assets/whiteTexturedBackground.png');
 
-// expects an array of objects and produces a listview of of rows using
-// the information on each tradie in the objects i.e. name, expertise, location
-// [Wallace: What's this? ^]
-
 class App extends React.Component {
   constructor(props) {
+    console.log('I\'m inside App');
     super(props);
     this.renderScene = this.renderScene.bind(this);
   }
@@ -73,18 +72,6 @@ class App extends React.Component {
     // Persistant login via express sessions? (yet to be investigated)
   }
 
-  componentDidMount() {
-    const { store } = this.context;
-    this.unsubscribe = store.subscribe(() => {
-      console.log('Calling forceUpdate on the entire app');
-      this.forceUpdate();
-    });
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
   // Scene routing specifically for Onboarding only
   renderScene(route, navigator) {
     const action = (username, token, profile) => {
@@ -96,13 +83,13 @@ class App extends React.Component {
       };
     };
 
-    const { store } = this.context;
+    const { dispatch } = this.props;
     const grantAccess = (username, token, profile) => {
       AsyncStorage.multiSet([
         ['token', token],
         ['username', username],
       ]);
-      store.dispatch(action(username, token, profile));
+      dispatch(action(username, token, profile));
     };
 
     if (route.name === 'Entry') {
@@ -115,17 +102,17 @@ class App extends React.Component {
   }
 
   render() {
-    const { store } = this.context;
-    const state = store.getState().app;
+    const { token, profile } = this.props;
+    console.log('Props', this.props);
 
     // Crappy render? Could remove the state by always going to
     // the entry page and rerouting from there. See growler.
-    if (state.token) {
+    if (token) {
       // Render the main application
       return (
         <View style={styles.container}>
           <NavigationProvider router={Router}>
-            <NavigationBar profile={state.profile} />
+            <NavigationBar profile={profile} />
           </NavigationProvider>
         </View>
       );
@@ -152,8 +139,20 @@ class App extends React.Component {
   }
 }
 
-App.contextTypes = {
-  store: React.PropTypes.object,
+const mapStateToProps = (state) => {
+  const obj = {
+    username: state.app.username,
+    token: state.app.token,
+    profile: state.app.profile,
+  };
+  console.log('state obj: ', obj);
+  return obj
 };
 
-export default App;
+
+const AppConnected = connect(
+  mapStateToProps,
+)(App);
+
+
+export default AppConnected;
