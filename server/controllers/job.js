@@ -21,17 +21,14 @@ module.exports = {
         });
       });
   },
-//Find all reviews associated with a given UserId
-  findUsersReviews(req, res) {
-    Review.findAll({
-      where: {
-        UserId: req.params.id
-      }
-    }).then(function (reviews) {
-      res.status(200).json(reviews);
-    }).catch(function (error) {
-      res.status(500).json(error);
-    });
+//Find all jobs 
+  findJobs(req, res) {
+    Job.findAll({})
+      .then(function (jobs) {
+        res.status(200).json(jobs);
+      }).catch(function (error) {
+        res.status(500).json(error);
+      });
   }
   
 };

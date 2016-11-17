@@ -18,6 +18,8 @@ router.get('/review/:id', reviewController.findUsersReviews);
 
 // Create a new job
 router.post('/job', jobController.createJob);
-
+// Retrieve all jobs
+router.get('/job', jobController.findJobs);
+//
 module.exports = router;
 
