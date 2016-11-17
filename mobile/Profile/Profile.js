@@ -64,9 +64,9 @@ class Profile extends React.Component {
   }
   renderHeader() {
     if (!this.props.route.params.peerProfile) {
-      return (<Header noEdit={false} clickOnEdit={this.clickOnEdit} editMode={this.state.editMode} />);
+      return (<Header peer={false} clickOnEdit={this.clickOnEdit} editMode={this.state.editMode} />);
     }
-    return (<Header noEdit={true} />);
+    return (<Header navigator={this.props.navigator} peer={true} />);
   }
 
   render() {
