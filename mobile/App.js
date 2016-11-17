@@ -102,7 +102,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { token, profile } = this.props;
+    const { token, profile, loggedIn } = this.props;
     console.log('Props', this.props);
 
     // Crappy render? Could remove the state by always going to
@@ -144,9 +144,9 @@ const mapStateToProps = (state) => {
     username: state.app.username,
     token: state.app.token,
     profile: state.app.profile,
+    loggedIn: state.app.loggedIn,
   };
-  console.log('state obj: ', obj);
-  return obj
+  return obj;
 };
 
 
