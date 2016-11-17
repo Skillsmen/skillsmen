@@ -29,7 +29,15 @@ module.exports = {
       }).catch(function (error) {
         res.status(500).json(error);
       });
+  },
+// Find a specific job by id
+  findSpecificJob(req, res) {
+    Job.findById(req.params.id)  
+      .then(function (reviews) {
+        res.status(200).json(reviews);
+      }).catch(function (error) {
+        res.status(500).json(error);
+      });
   }
-  
 };
 

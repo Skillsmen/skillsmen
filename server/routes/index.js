@@ -20,6 +20,7 @@ router.get('/review/:id', reviewController.findUsersReviews);
 router.post('/job', jobController.createJob);
 // Retrieve all jobs
 router.get('/job', jobController.findJobs);
-//
+// Retrieve job by id
+router.get('/job/:id', jobController.findSpecificJob);
 module.exports = router;
 
