@@ -7,20 +7,11 @@ module.exports = {
 // Create new job
 // (first finds user by id to associate with foreign key)
   createJob(req, res) {
-    User.findById(req.body.UserId)
-      .then(function(user) {
-        Job.create({
-          description: req.body.description,
-          location: req.body.location,
-          timeFrame: req.body.timeFrame,
-          vacancies: req.body.vacancies,
-          UserId: user.dataValues.id
-        }).then(function(job) {
-          res.json(job);
+        Job.create(req.body).then(function(job) {
+          res.status(201).json(job);
+        }).catch(function (error) {
+          res.status(500).json(error);
         });
-      }).catch(function (error) {
-        res.status(500).json(error);
-      });
   },
 //Find all jobs 
   findJobs(req, res) {
