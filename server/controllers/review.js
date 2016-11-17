@@ -15,6 +15,8 @@ module.exports = {
           UserId: user.dataValues.id
         }).then(function(review) {
           res.json(review);
+        }).catch(function (error) {
+          res.status(500).json(error);
         });
       });
   },

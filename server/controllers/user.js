@@ -9,6 +9,8 @@ module.exports = {
     User.findAll({})
       .then(function(users) {
         res.json(users);
+      }).catch(function (error) {
+        res.status(500).json(error);
       }); 
   },
 // Create a new user
@@ -16,6 +18,8 @@ module.exports = {
     User.create(req.body)
       .then(function(user) {
         res.json(user);
+      }).catch(function (error) {
+        res.status(500).json(error);
       });
   }
 };

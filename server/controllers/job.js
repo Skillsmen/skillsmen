@@ -19,6 +19,8 @@ module.exports = {
         }).then(function(review) {
           res.json(review);
         });
+      }).catch(function (error) {
+        res.status(500).json(error);
       });
   },
 //Find all jobs 
