@@ -3,28 +3,30 @@ import React from 'react';
 import {
   View,
   Image,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import RowList from './components/tradieList/TradieList';
 import styles from './workerListStyles';
-import mock from '../MOCK_USER_DATA.js';
+import mock from '../MOCK_USER_DATA';
+import SearchBar from '../JobList/searchBar';
+import JobTypeFilter from '../JobList/jobTypeFilter';
 
 const bgImg = require('../assets/bluePatternBackground.png');
+
 const { width } = Dimensions.get('window');
 
-const WorkerList = ({ navigator }) => {
-  return (
+const WorkerList = ({ navigator }) =>
+  (
     <View>
-      <Image
-        style={[styles.backgroundImage, { width, height: 25 * 2.75 }]}
-        source={bgImg}
-      />
+      <View>
+        <SearchBar />
+        <JobTypeFilter />
+      </View>
       <RowList
         setOfTradies={mock}
         navigator={navigator}
       />
     </View>
   );
-}
 
 export default WorkerList;
