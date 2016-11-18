@@ -1,7 +1,7 @@
 /* eslint-disable */
 var express = require('express');
 var router = express.Router();
-var models = require('../models/index');
+// var models = require('../models/index');
 var userController = require('../controllers/user');
 var reviewController = require('../controllers/review');
 var jobController = require('../controllers/job');

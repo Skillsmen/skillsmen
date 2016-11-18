@@ -10,7 +10,7 @@
     "url": "git+https://github.com/PuffyShirts/senior-thesis.git"
   },
   "scripts": {
-    "test": "grunt lint && jest"
+    "test": "mocha server/test/serverTest.js"
   },
   "jest": {
     "preset": "jest-exponent"
@@ -32,6 +32,9 @@
     "ejs": "2.x",
     "exponent": "~11.0.2",
     "express": "4.x",
+    "chai": "^3.5.0",
+    "express": "^4.14.0",
+    "mocha": "^3.1.2",
     "nodemon": "^1.11.0",
     "pg": "^6.1.0",
     "pg-hstore": "^2.3.2",
@@ -43,6 +46,7 @@
     "s3-uploader": "^2.0.2",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.1.0",
+    "request": "^2.78.0",
     "sequelize": "^3.25.0",
     "sequelize-cli": "^2.4.0"
   },
