@@ -36,7 +36,7 @@ aws.config.update({
 
 
 var client = new Upload('puffyshirts', {
-  awsBucketRegion: 'us-east-1',
+  awsBucketRegion: 'us-west-2',
   awsBucketPath: '/images/',
   awsBucketAcl: 'public-read',
   aws: {
