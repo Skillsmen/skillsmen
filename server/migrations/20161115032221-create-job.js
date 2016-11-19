@@ -17,12 +17,21 @@ module.exports = {
       timeFrame: {
         type: Sequelize.STRING
       },
+      title: {
+        type: Sequelize.STRING
+      },
+      pay: {
+        type: Sequelize.STRING
+      },
       vacancies: {
         type: Sequelize.INTEGER
       },
       UserId: {
         type: Sequelize.INTEGER
       },
+      expertise: {
+        type: Sequelize.STRING
+      }
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

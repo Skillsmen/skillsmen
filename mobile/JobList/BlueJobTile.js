@@ -113,7 +113,7 @@ export default class BlueJobTile extends React.Component {
           <View style={blueTile.iconSection}>
             <View style={blueTile.leftIcon}>
               <FontAwesome name={'users'} size={15} style={blueTile.iconFormat} color={'white'}>
-                <Text style={blueTile.iconText}> {this.props.job.hires} hires</Text>
+                <Text style={blueTile.iconText}> {this.props.job.vacancies} hires</Text>
               </FontAwesome>
             </View>
             <View style={blueTile.middleIcon}>
@@ -130,9 +130,9 @@ export default class BlueJobTile extends React.Component {
           <View style={blueTile.jobPoster}>
             <Image
               style={blueTile.posterImageIcon}
-              source={{uri: this.props.job.ownerImage}}
+              source={{ uri: this.props.job.User.profilePicUrl }}
             />
-            <Text style={blueTile.posterNameText}> {this.props.job.ownerName} </Text>
+            <Text style={blueTile.posterNameText}> {this.props.job.User.name} </Text>
           </View>
         </Image>
       </TouchableOpacity>

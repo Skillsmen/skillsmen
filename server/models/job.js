@@ -5,7 +5,10 @@ module.exports = function(sequelize, DataTypes) {
     description: DataTypes.TEXT,
     location: DataTypes.STRING,
     timeFrame: DataTypes.STRING,
-    vacancies: DataTypes.INTEGER
+    vacancies: DataTypes.INTEGER,
+    title: DataTypes.STRING,
+    pay: DataTypes.STRING,
+    expertise: DataTypes.STRING,
   }, {
     classMethods: {
       associate: function(models) {

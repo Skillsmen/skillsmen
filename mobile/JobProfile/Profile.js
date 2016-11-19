@@ -46,8 +46,8 @@ class Profile extends React.Component {
       payrate, 
       this.props.route.params.jobInfo.expertise,
       this.props.route.params.jobInfo.location,
-      this.props.route.params.jobInfo.time,
-      this.props.route.params.jobInfo.hires,
+      this.props.route.params.jobInfo.timeFrame,
+      this.props.route.params.jobInfo.vacancies,
     ];
     if (jobInfo.vacancies > 1) { iconArr[4] = 'users'; }
     return (
@@ -79,7 +79,7 @@ class Profile extends React.Component {
             </Text>
           </View>
           {/* owner profile card here */}
-          <ProfileCard jobOwner={this.props.route.params.jobInfo} picStyles={styles.contactPic} />
+          <ProfileCard jobOwner={this.props.route.params.jobInfo.User} picStyles={styles.contactPic} />
         </Image>
       </View>
     );

@@ -34,6 +34,9 @@ module.exports = {
       profilePicUrl: {
         type: Sequelize.STRING
       },
+      mobile: {
+        type: Sequelize.STRING
+      },
     });
   },
   down: function(queryInterface, Sequelize) {

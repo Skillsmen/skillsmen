@@ -112,7 +112,7 @@ class WhiteJobTile extends React.Component {
           <View style={whiteTile.iconSection}>
             <View style={whiteTile.leftIcon}>
               <FontAwesome name={'users'} size={15} style={whiteTile.iconFormat} color={'gray'}>
-                <Text style={whiteTile.iconText}> {this.props.job.hires} hires </Text>
+                <Text style={whiteTile.iconText}> {this.props.job.vacancies} hires </Text>
               </FontAwesome>
             </View>
             <View style={whiteTile.middleIcon}>
@@ -130,9 +130,9 @@ class WhiteJobTile extends React.Component {
           <View style={whiteTile.jobPoster}>
             <Image
               style={whiteTile.posterImageIcon}
-              source={{ uri: this.props.job.ownerImage }}
+              source={{ uri: this.props.job.User.profilePicUrl }}
             />
-            <Text style={whiteTile.posterNameText}> {this.props.job.ownerName} </Text>
+            <Text style={whiteTile.posterNameText}> {this.props.job.User.name} </Text>
           </View>
         </Image>
       </TouchableOpacity>
