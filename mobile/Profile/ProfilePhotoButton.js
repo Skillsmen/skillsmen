@@ -12,14 +12,23 @@ import {
 
 import getPicture from '../utils/getPicture';
 import s3Uploader from '../utils/s3Uploader';
-const AddPhoto = () => {
-  return (
+const AddPhoto = ({ updateProfileURL }) =>
+  (
     <TouchableOpacity 
     style={{backgroundColor: 'rgba(0,0,0,0)'}}
     onPress={
-      getPicture((content)=>
+      getPicture(content =>
         s3Uploader(content.uri.slice(6))
-          .then((result) => { console.log('result from s3 ', result.data.image0, result.data.image2, result.data.image1) })
+          .then(result => 
+            result.data
+          )
+          .then((imageUrl) => {
+            updateProfileURL({
+              orig: imageUrl.image0,
+              small: imageUrl.image1,
+              thumb: imageUrl.image2,
+            });
+          })
           .catch((err) => { console.error(err) })
       )
     }
@@ -31,7 +40,6 @@ const AddPhoto = () => {
 
       />
     </TouchableOpacity>
-  )
-}
+  );
 
 export default AddPhoto;

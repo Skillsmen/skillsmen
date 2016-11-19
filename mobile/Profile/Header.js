@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 
 const bgImg = require('../assets/bluePatternBackground.png');
 // Link from profPic will eventually need to be passed in as a prop...
-const profPic = require('./timallen.jpg');
+const defaultPic = require('./timallen.jpg');
 
 const showEdit = (navigator, peer, clickOnEdit, editMode) => {
   // if youre looking at your own profile, show edit button
@@ -65,6 +65,7 @@ const showEdit = (navigator, peer, clickOnEdit, editMode) => {
       </TouchableHighlight>
     );
   }
+  return null;
 };
 
 
@@ -97,7 +98,7 @@ const Header = ({ navigator, userPic, peer, clickOnEdit, editMode }) => (
       <View style={{ flex: 1 }}>
         <Image
           style={styles.profPic}
-          source={userPic || profPic}
+          source={userPic || defaultPic}
         />
       </View>
     }
