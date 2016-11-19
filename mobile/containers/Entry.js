@@ -9,11 +9,16 @@ import {
   StyleSheet,
   Image,
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import colors from '../constants/Colors';
+import background from '../constants/Background';
 import Router from '../navigation/Router';
+import Actions from '../actions/index';
 
 const { height, width } = Dimensions.get('window');
+
+const backgroundStyle = background.makeStyle(height, width);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -25,16 +30,6 @@ const styles = StyleSheet.create({
     height: width * 0.65,
     resizeMode: 'stretch',
     margin: 5,
-  },
-
-  header: {
-    height: height * 0.05,
-    width,
-  },
-
-  background: {
-    height: height * 0.95,
-    width,
   },
 
   buttonBox: {
@@ -69,8 +64,6 @@ const styles = StyleSheet.create({
 });
 
 const boot = require('../assets/theBoot.png');
-const blueBg = require('../assets/bluePatternBackground.png');
-const whiteBg = require('../assets/whiteTexturedBackground.png');
 
 class Entry extends React.Component {
   constructor(props) {
@@ -86,7 +79,9 @@ class Entry extends React.Component {
       if (username !== '' && password !== '') {
         // TODO: Validate the user info by querying the server
         // Update the global store with info from the server
-        this.props.navigator.push(Router.getRoute('navigationBar'));
+        const { dispatch } = this.props;
+        dispatch(Actions.updateProfile({ userInfo: 'generated from server' }));
+        dispatch(Actions.grantAccess('token string generated from server'));
       }
     };
 
@@ -97,16 +92,9 @@ class Entry extends React.Component {
   signup() {
     const username = this.state.user;
     const password = this.state.pass;
-    // Make a request to server to see if
-    if (username) {
-      this.props.navigator.push({
-        name: 'SignUp',
-        passProps: {
-          username,
-          password,
-          which: 'nameText',
-        },
-      });
+    // TODO: Make a request to server to see if username already exists
+    if (username !== '' && password !== '') {
+      this.props.navigator.push(Router.getRoute('signup', { questionIndex: 0 }));
     }
   }
 
@@ -114,18 +102,18 @@ class Entry extends React.Component {
     return (
       <View>
         <Image
-          style={styles.header}
-          source={blueBg}
+          style={backgroundStyle.header}
+          source={background.blueBg}
         />
         <Image
-          style={styles.background}
-          source={whiteBg}
+          style={backgroundStyle.body}
+          source={background.whiteBg}
         >
-          <Image
-            style={styles.boot}
-            source={boot}
-          />
           <View style={styles.container}>
+            <Image
+              style={styles.boot}
+              source={boot}
+            />
             <View style={styles.inputBox}>
               <TextInput
                 style={styles.input}
@@ -164,6 +152,8 @@ class Entry extends React.Component {
 
 Entry.propTypes = {
   navigator: React.PropTypes.object,
+  dispatch: React.PropTypes.func.isRequired,
 };
 
-export default Entry;
+const EntryConnected = connect()(Entry);
+export default EntryConnected;

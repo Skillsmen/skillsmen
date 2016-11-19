@@ -35,6 +35,7 @@ class App extends React.Component {
       // Get user info from AsyncStorage
       const { dispatch } = this.props;
       // dispatch(Actions.grantAccess('token string generated from server'));
+      // dispatch(Actions.updateProfile({}))
       this.setState({
         dataReady: true,
       });
@@ -53,7 +54,6 @@ class App extends React.Component {
     await this.fetchAssets();
   }
 
-
   componentDidUpdate(prevProps, prevState) {
     if (!this.state.assetsReady || !this.state.dataReady) {
       return;
@@ -66,13 +66,19 @@ class App extends React.Component {
     const currentlySignedIn = !!this.props.token;
 
     // If not previously signed in, and just got the token, move to main app
+    // Case: Signing In -  you clicked the signin button on the Entry screen - which
+    // triggers a dispatch to change the state store values token.
+    // Since this component is mapped to that part of the state, it will
+    // trigger a rerender event.
     if (!previouslySignedIn && currentlySignedIn) {
       rootNavigator.replace('navigationBar');
-    // If somehow you were looking at main app content and lost your token, move to entry
+
+    // If somehow you were looking at main app content
+    // Case: Signin Out
     } else if (previouslySignedIn && !currentlySignedIn) {
       rootNavigator.replace('entry');
     }
-    // Otherwise you're changing the between views in the main app, do nothing
+    // Do nothing here.
   }
 
   render() {
@@ -98,11 +104,10 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const obj = {
+  const props = {
     token: state.app.token,
-    profile: state.app.profile,
   };
-  return obj;
+  return props;
 };
 
 const AppConnected = connect(
