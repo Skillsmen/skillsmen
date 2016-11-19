@@ -15,7 +15,7 @@ module.exports = {
   },
 //Find all jobs 
   findJobs(req, res) {
-    Job.findAll({})
+    Job.findAll({include: User})
       .then(function (jobs) {
         res.status(200).json(jobs);
       }).catch(function (error) {
@@ -24,7 +24,7 @@ module.exports = {
   },
 // Find a specific job by id
   findSpecificJob(req, res) {
-    Job.findById(req.params.id)  
+    Job.findById(req.params.id, {include: User})  
       .then(function (job) {
         res.status(200).json(job);
       }).catch(function (error) {

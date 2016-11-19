@@ -25,9 +25,9 @@ router.get('/review/:id', reviewController.findUsersReviews);
 // JOBS
 // Create a new job
 router.post('/job', jobController.createJob);
-// Retrieve all jobs
+// Retrieve all jobs (& associated user)
 router.get('/job', jobController.findJobs);
-// Retrieve job by id
+// Retrieve job by id (& associated user)
 router.get('/job/:id', jobController.findSpecificJob);
 // Update job
 router.put('/job/:id', jobController.updateJob);
