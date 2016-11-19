@@ -130,7 +130,7 @@ export default class BlueJobTile extends React.Component {
           <View style={blueTile.jobPoster}>
             <Image
               style={blueTile.posterImageIcon}
-              source={{ uri: this.props.job.ownerImage }}
+              source={{uri: this.props.job.ownerImage}}
             />
             <Text style={blueTile.posterNameText}> {this.props.job.ownerName} </Text>
           </View>

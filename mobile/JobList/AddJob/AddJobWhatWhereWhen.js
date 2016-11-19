@@ -9,7 +9,6 @@ import colors from '../../constants/Colors';
 import BackButton from '../../reusableComponents/BackButton';
 
 const AddJobWhatWhereWhen = ({ styles, methods }) => {
-  console.log('AddJobWhatWhereWhen', methods);
   const userInput = (type, placeHolder) =>
     (
       <View style={styles.inputBox}>

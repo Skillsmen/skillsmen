@@ -73,7 +73,6 @@ class Entry extends React.Component {
   signin() {
     const username = this.state.user;
     const password = this.state.pass;
-    console.log('This binding in entry file', this, this.state);
     // TODO: Validate the user
     if (username !== '' && password !== '') {
       // TODO: Make request to server

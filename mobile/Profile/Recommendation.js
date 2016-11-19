@@ -24,6 +24,8 @@ const styles = StyleSheet.create({
     width: width * 0.2,
     height: width * 0.2,
     borderRadius: width * 0.2 * 0.5,
+    borderColor: '#DCDCDC',
+    borderWidth: 1,
   },
   cardRight: {
     flexDirection: 'column',
@@ -38,23 +40,21 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => (
+export default ({ comment, reating, ReviewFor, ReviewFrom, createdAt, key, ReviewerName, ReviewerImage }) => (
   <View style={styles.card}>
     <View style={styles.cardLeft}>
       <Image
         style={styles.profPic}
-        source={profPic}
+        source={{uri: ReviewerImage}}
       />
     </View>
     <View style={styles.cardRight}>
       <View>
         <Text style={styles.name}>
-          Plumbmaster3000
+          { ReviewerName }
         </Text>
         <Text style={styles.recText}>
-          This dude is the best. Like seriously, man, the best.
-          You should totally hire him for all of the jobs. ALL OF THEM!!
-          NOW!! Why are you still waiting? Do it!
+          { comment }
         </Text>
       </View>
     </View>

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Dimensions,
   TouchableHighlight,
+  Text,
 } from 'react-native';
 import {
   FontAwesome,
@@ -18,7 +19,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     resizeMode: 'cover',
     justifyContent: 'space-between',
-    width,
   },
   profPic: {
     borderRadius: width * 0.4 * 0.5,
@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
     marginRight: 5,
     alignSelf: 'flex-end',
   },
+  addReviewIcon: {
+    marginTop: 10,
+  }
 });
 
 
@@ -41,6 +44,7 @@ const bgImg = require('../assets/bluePatternBackground.png');
 const profPic = require('./timallen.jpg');
 
 const showEdit = (navigator, peer, clickOnEdit, editMode) => {
+  // if youre looking at your own profile, show edit button
   if (!peer) {
     return (
       <TouchableHighlight onPress={clickOnEdit}>
@@ -54,6 +58,7 @@ const showEdit = (navigator, peer, clickOnEdit, editMode) => {
     );
   }
 };
+
 
 const showBackButton = (navigator, peer) => {
   if (peer) {
@@ -87,6 +92,7 @@ Header.propTypes = {
   editMode: React.PropTypes.bool,
   peer: React.PropTypes.bool,
   userPic: React.PropTypes.string,
+  navigator: React.PropTypes.object,
 };
 
 export default Header;

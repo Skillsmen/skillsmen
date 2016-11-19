@@ -3,7 +3,6 @@ import React from 'react';
 import {
   View,
   Text,
-  Image,
   Dimensions,
   StyleSheet,
   ScrollView,
@@ -52,7 +51,7 @@ class Profile extends React.Component {
     this.clickOnEdit = this.clickOnEdit.bind(this);
     this.isPeer = this.isPeer.bind(this);
 
-    // Populate arrays to send into 'ModularBanner' component which creates icons next to descriptions
+   // Populate arrays to send into 'ModularBanner' component which creates icons next to descriptions
     this.icons = ['wrench', 'globe', 'clock-o'];
     this.descriptions = ['handyman', 'Earth', '385 years'];
   }
@@ -67,20 +66,22 @@ class Profile extends React.Component {
     return this.props.route.params.peerProfile;
   }
   renderHeader() {
+    // if you are looking at your own page, show edit icon
     if (!this.isPeer()) {
       return (<Header
         peer={this.isPeer()}
         clickOnEdit={this.clickOnEdit}
-        editMode={this.state.editMode} 
+        editMode={this.state.editMode}
       />);
     }
+    // if you are looking at someone elses profile page, don't show edit icon
     return ( <Header 
       navigator={this.props.navigator}
       peer={this.isPeer()} />);
   }
 
   render() {
-    console.log('[FILE] Profile/Profile.js: Rendering!');
+    console.log('this.props.route.params: ', this.props.route.params )
     const userInfo = this.props.route.params.user;
     return (
       <View style={styles.container}>
@@ -103,7 +104,12 @@ class Profile extends React.Component {
                 contactInfo={userInfo.mobile}
               />
             }
-            <RecommendationList isPeer={this.isPeer} width={width} />
+            <RecommendationList 
+              userInfo={userInfo}
+              isPeer={this.isPeer()} 
+              navigator={this.props.navigator}
+              name={userInfo.first_name.concat(' '.concat(userInfo.last_name))}
+             />
           </View>
         </ScrollView>
       </View>

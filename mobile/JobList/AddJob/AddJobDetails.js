@@ -9,7 +9,6 @@ import colors from '../../constants/Colors';
 import BackButton from '../../reusableComponents/BackButton';
 
 const AddJobWhatWhereWhen = ({ route }) => {
-  console.log('styles,methods: ', route.params);
   const styles = route.params.styles;
   const methods = route.params.methods;
   const userInput = (type, placeHolder, multiline, style) =>
