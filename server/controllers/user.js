@@ -7,7 +7,7 @@ module.exports = {
 // Retrieve all users
   findAllUsers(req, res) {
     console.log('trying to find users');
-    User.findAll({})
+    User.findAll({include: Review})
       .then(function(users) {
         res.json(users);
       }).catch(function (error) {

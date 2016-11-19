@@ -104,6 +104,7 @@ class SignUp extends React.Component {
       const diff = {};
       diff[key] = value;
       if (questionIndex === 5) {
+        // THIS IS WHERE ONBOARDING FINISHES AND GETS PASSED TO PROFILE
         dispatch(Actions.updateProfile(diff, true));
         dispatch(Actions.grantAccess('some token from the server'));
       } else {

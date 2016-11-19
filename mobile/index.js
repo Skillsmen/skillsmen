@@ -16,22 +16,21 @@ import reducer from './reducers';
 // CURRENTLY USING NAVIGATION & APP FOR REDUX VERSION
 // ==================================================
 // TO SWITCH TO VANILLA UNCOMMENT BELOW:
-import router from './Router';
-import App from './App';
+// import router from './Router';
+// import App from './App';
 
-console.log('Running vanilla');
+// console.log('Running vanilla');
 
 // ==============================
 // COMMENT OUT WHEN USING VANILLA
 // ==============================
-// import router from './navigation/Router';
-// import App from './containers/App';
+import router from './navigation/Router';
+import App from './containers/App';
 
-// console.log('Running redux version');
+console.log('Running redux version');
 // ==============================
 
 
-const store = createStore(reducer);
 console.disableYellowBox = true;
 
 const logger = store => next => action => {
