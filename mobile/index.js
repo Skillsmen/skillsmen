@@ -2,8 +2,9 @@
 
 import Exponent from 'exponent';
 import React from 'react';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import {
   NavigationProvider,
@@ -29,9 +30,18 @@ import App from './containers/App';
 console.log('Running redux version');
 // ==============================
 
+
 const store = createStore(reducer);
 console.disableYellowBox = true;
 
+const logger = store => next => action => {
+  console.log('dispatching', action);
+  let result = next(action);
+  console.log('next state', store.getState());
+  return result;
+};
+
+const store = createStore(reducer, applyMiddleware(thunk, logger));
 const AppContainer = () => (
   <Provider store={store}>
     <NavigationProvider router={router}>
