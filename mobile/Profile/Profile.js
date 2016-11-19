@@ -98,7 +98,7 @@ class Profile extends React.Component {
             }
             {!this.state.editMode &&
               <MainInfo
-                name={userInfo.first_name.concat(' '.concat(userInfo.last_name))}
+                name={userInfo.name}
                 experience={userInfo.description}
                 contactInfo={userInfo.mobile}
               />

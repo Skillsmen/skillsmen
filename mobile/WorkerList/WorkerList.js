@@ -16,23 +16,18 @@ class WorkerList extends React.Component {
     this.state = {
       response: false,
     };
-    // this.getUsers.bind(this);
   }
 
   componentWillMount() {
     this.getUsers();
   }
 
-  // Current problem is that request goes through and gets logged but there is still something
-  // that is tripping an error. The state is not getting reset
-  // and the component won't get rerendered...
-
   getUsers() {
     const context = this;
     axios.get('http://127.0.0.1:3000/user/')
       .then((response) => {
         context.setState({
-          response,
+          response: response.data,
         });
       })
       .catch((error) => {
@@ -54,7 +49,7 @@ class WorkerList extends React.Component {
           <JobTypeFilter />
         </View>
         <RowList
-          setOfTradies={mock}
+          setOfTradies={this.state.response}
           navigator={this.props.navigator}
         />
       </View>

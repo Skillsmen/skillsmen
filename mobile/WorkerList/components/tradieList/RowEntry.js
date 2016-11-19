@@ -32,13 +32,13 @@ const TradieRow = ({ navigator, userInfo }) => {
         <View style={styles.rowUserPic}>
           {renderIcon('user-circle', 45)}
         </View>
-        <TradieBanner 
-          expertise={userInfo.expertise}
+        <TradieBanner
+          expertise={userInfo.profession}
           location={userInfo.location}
           reviews={userInfo.reviews}
           styles={styles}
           Icon={renderIcon}
-          name={userInfo.first_name.concat(' ').concat(userInfo.last_name)}
+          name={userInfo.name}
         />
       </View>
       </View>
