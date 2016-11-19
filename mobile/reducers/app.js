@@ -1,7 +1,5 @@
 const initialState = {
-  loggedIn: true,
-  profile: {},
-  username: '',
+  token: '',
 };
 
 const appReducer = (state = initialState, action) => {
@@ -9,7 +7,6 @@ const appReducer = (state = initialState, action) => {
     case 'GRANT_ACCESS':
       return {
         token: action.token,
-        profile: state.profile,
       };
     default: return state;
   }
