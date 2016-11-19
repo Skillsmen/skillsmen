@@ -2,16 +2,10 @@ import React from 'react';
 
 import {
   View,
-  Text,
   Dimensions,
   StyleSheet,
   ScrollView,
-  TouchableHighlight,
-  TextInput,
 } from 'react-native';
-import {
-  FontAwesome,
-} from '@exponent/vector-icons';
 
 import Header from './Header';
 import MainInfo from './MainInfo';
@@ -19,7 +13,6 @@ import EditInfo from './EditMode';
 import RecommendationList from './RecommendationList';
 import ModularBanner from '../reusableComponents/Banner/ModularBanner';
 
-const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     alignItems: 'stretch',
@@ -51,7 +44,8 @@ class Profile extends React.Component {
     this.clickOnEdit = this.clickOnEdit.bind(this);
     this.isPeer = this.isPeer.bind(this);
 
-   // Populate arrays to send into 'ModularBanner' component which creates icons next to descriptions
+   // Populate arrays to send into 'ModularBanner' component
+   // which creates icons next to descriptions
     this.icons = ['wrench', 'globe', 'clock-o'];
     this.descriptions = ['handyman', 'Earth', '385 years'];
   }
@@ -75,7 +69,7 @@ class Profile extends React.Component {
       />);
     }
     // if you are looking at someone elses profile page, don't show edit icon
-    return ( <Header 
+    return (<Header
       navigator={this.props.navigator}
       peer={this.isPeer()} />);
   }
@@ -86,11 +80,11 @@ class Profile extends React.Component {
       <View style={styles.container}>
         { this.renderHeader() }
         <ScrollView contentContainerStyle={styles.contentContainer} alwaysBounceVertical>
-            <ModularBanner
-              iconArr={this.icons}
-              propertyArr={[userInfo.expertise, userInfo.location, userInfo.experience_years]}
-              styles={styles.banner}
-            />
+          <ModularBanner
+            iconArr={this.icons}
+            propertyArr={[userInfo.profession, userInfo.location, `${userInfo.experience} years`]}
+            styles={styles.banner}
+          />
           <View style={styles.info}>
             {/* TODO- make below banner editable on edit icon click */}
             {this.state.editMode &&
@@ -103,12 +97,12 @@ class Profile extends React.Component {
                 contactInfo={userInfo.mobile}
               />
             }
-            <RecommendationList 
+            <RecommendationList
               userInfo={userInfo}
-              isPeer={this.isPeer()} 
+              isPeer={this.isPeer()}
               navigator={this.props.navigator}
-              name={userInfo.first_name.concat(' '.concat(userInfo.last_name))}
-             />
+              name={userInfo.name}
+            />
           </View>
         </ScrollView>
       </View>

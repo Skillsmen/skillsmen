@@ -8,8 +8,6 @@ import styles from '../../workerListStyles';
 
 const RowList = ({ setOfTradies, navigator, userData }) => {
   const listGen = () =>
-    // console.log('userData1', userData);
-    // console.log('setOfTradies1', setOfTradies[0]);
     setOfTradies.map((user, i) =>
       (
         <RowEntry

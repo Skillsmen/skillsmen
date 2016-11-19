@@ -3,12 +3,12 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import styles from '../../workerListStyles';
-import TradieBanner from '../tradieBanner/TradieBanner';
 import {
   FontAwesome,
 } from '@exponent/vector-icons';
-import Router from '../../../Router.js';
+import styles from '../../workerListStyles';
+import TradieBanner from '../tradieBanner/TradieBanner';
+import Router from '../../../Router';
 
 const renderIcon = (name, size = 15, isSelected) =>
   (
