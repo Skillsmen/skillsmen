@@ -11,8 +11,8 @@ import {
 } from 'react-native';
 
 import colors from '../constants/Colors';
-import questionSet from './Questions';
-import professionSet from './Professions';
+import questionSet from '../constants/Questions';
+import professionSet from '../constants/Professions';
 
 const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({
