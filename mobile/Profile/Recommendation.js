@@ -40,18 +40,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ comment, reating, ReviewFor, ReviewFrom, createdAt, key, ReviewerName, ReviewerImage }) => (
+export default ({ comment, reating, ReviewFor, ReviewFrom, createdAt, key, reviewerName, reviewerImage }) => (
   <View style={styles.card}>
     <View style={styles.cardLeft}>
       <Image
         style={styles.profPic}
-        source={{uri: ReviewerImage}}
+        source={{uri: reviewerImage}}
       />
     </View>
     <View style={styles.cardRight}>
       <View>
         <Text style={styles.name}>
-          { ReviewerName }
+          { reviewerName }
         </Text>
         <Text style={styles.recText}>
           { comment }

@@ -7,6 +7,7 @@ module.exports = {
 // Create new review
 // (first finds user by id to associate with foreign key)
   createReview(req, res) {
+    console.log('about to create review: ', req.body)
     Review.create(req.body).then(function(review) {
       res.json(review);
     }).catch(function (error) {

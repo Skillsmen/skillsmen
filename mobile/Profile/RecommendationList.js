@@ -47,8 +47,8 @@ const RecommendationList = ({isPeer, navigator, name, userInfo}) => {
           ReviewFor={review.ReviewFor}
           ReviewFrom={review.ReviewFrom}
           createdAt={review.createdAt}
-          ReviewerName={review.ReviewerName}
-          ReviewerImage={review.ReviewerImage}
+          reviewerName={review.reviewerName}
+          reviewerImage={review.reviewerImage}
           key={i}/> 
       )}
     </View>

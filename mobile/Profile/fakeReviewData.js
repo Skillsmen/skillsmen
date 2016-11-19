@@ -7,8 +7,8 @@ var fakeReviewData = [
     "ReviewFor": 2,
     "createdAt": "2016-11-18T23:37:13.533Z",
     "updatedAt": "2016-11-18T23:37:13.533Z",
-    "ReviewerName": "Sarah Harris",
-    "ReviewerImage": "http://robertrosenthal.typepad.com/photos/uncategorized/ist_2.jpg",
+    "reviewerName": "Sarah Harris",
+    "reviewerImage": "http://robertrosenthal.typepad.com/photos/uncategorized/ist_2.jpg",
   },
   {
     "id": 2,
@@ -18,8 +18,8 @@ var fakeReviewData = [
     "ReviewFor": 2,
     "createdAt": "2016-11-18T23:37:15.241Z",
     "updatedAt": "2016-11-18T23:37:15.241Z",
-    "ReviewerName": "Mary Dickens",
-    "ReviewerImage": "https://s-media-cache-ak0.pinimg.com/originals/94/e1/3d/94e13da37c0ff69bc85481418516b5fd.jpg",
+    "reviewerName": "Mary Dickens",
+    "reviewerImage": "https://s-media-cache-ak0.pinimg.com/originals/94/e1/3d/94e13da37c0ff69bc85481418516b5fd.jpg",
   },
   {
     "id": 3,
@@ -29,8 +29,8 @@ var fakeReviewData = [
     "ReviewFor": 2,
     "createdAt": "2016-11-18T23:37:26.032Z",
     "updatedAt": "2016-11-18T23:37:26.032Z",
-    "ReviewerName": "Carlos Millidge",
-    "ReviewerImage": "http://speakingaboutpresenting.com/wp-content/uploads/2009/01/istock_businessman.jpg",
+    "reviewerName": "Carlos Millidge",
+    "reviewerImage": "http://speakingaboutpresenting.com/wp-content/uploads/2009/01/istock_businessman.jpg",
   },
   {
     "id": 5,
@@ -40,8 +40,8 @@ var fakeReviewData = [
     "ReviewFor": 2,
     "createdAt": "2016-11-18T23:37:50.044Z",
     "updatedAt": "2016-11-18T23:37:50.044Z",
-    "ReviewerName": "Boyd Mcgee",
-    "ReviewerImage": "http://speakingaboutpresenting.com/wp-content/uploads/2009/01/younger-business-woman.jpg",
+    "reviewerName": "Boyd Mcgee",
+    "reviewerImage": "http://speakingaboutpresenting.com/wp-content/uploads/2009/01/younger-business-woman.jpg",
   },
   {
     "id": 6,
@@ -51,8 +51,8 @@ var fakeReviewData = [
     "ReviewFor": 2,
     "createdAt": "2016-11-18T23:37:53.578Z",
     "updatedAt": "2016-11-18T23:37:53.578Z",
-    "ReviewerName": "Guy Linton",
-    "ReviewerImage": "https://www.alvinailey.org/sites/default/files/styles/slideshow_image/public/melanie-person.jpg?itok=ocw3xkx_",
+    "reviewerName": "Guy Linton",
+    "reviewerImage": "https://www.alvinailey.org/sites/default/files/styles/slideshow_image/public/melanie-person.jpg?itok=ocw3xkx_",
   }
 ]
 

@@ -5,7 +5,9 @@ module.exports = function(sequelize, DataTypes) {
     comment: DataTypes.TEXT,
     rating: DataTypes.INTEGER,
     ReviewFrom: DataTypes.INTEGER,
-    ReviewFor: DataTypes.INTEGER
+    ReviewFor: DataTypes.INTEGER,
+    reviewerName: DataTypes.STRING,
+    reviewerImage: DataTypes.STRING,
   }, {
     classMethods: {
       associate: function(models) {

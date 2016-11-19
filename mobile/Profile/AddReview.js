@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
   View,
   Text,
@@ -13,6 +14,7 @@ import {
 import BackButton from '../reusableComponents/BackButton.js'
 import fakeReviewData from './fakeReviewData.js'
 import Router from '../Router.js'
+
 
 const Dimensions = React.Dimensions || require('Dimensions');
 
@@ -150,20 +152,20 @@ class AddReview extends React.Component {
   handleSubmit(text, navigator, userInfo) {
     if (text) {
       const newId = fakeReviewData[fakeReviewData.length - 1].id + 1;
-      const ReviewerName = "Sam Henderson"
-      const ReviewerImage = "http://res.cloudinary.com/small-change/image/upload/v1456717442/Sam_mplysz.jpg"
-      const newReview = {
-        "id": newId,
-        "comment": this.state.text,
-        "rating": "5",
-        "ReviewerName": ReviewerName,
-        "ReviewerImage": ReviewerImage,
-        "ReviewFrom": "1",
-        "ReviewFor": "2",
-        "createdAt": Date.now().toString(),
-        "updatedAt": Date.now().toString(),
-      }
+      const reviewerName = "Sam Henderson"
+      const reviewerImage = "http://res.cloudinary.com/small-change/image/upload/v1456717442/Sam_mplysz.jpg"
+      const newReview = { rating: 4, ReviewFrom: 3, reviewerName: 'Ricky Bobby', ReviewFor: 2, comment: text, reviewerImage: reviewerImage}
+
       fakeReviewData.push(newReview)
+
+      axios.post('http://localhost:3000/review', newReview)
+      .then(function (response) {
+        console.log('response after posting new review: ', response);
+      })
+      .catch(function (error) {
+        console.log('error after posting new review: ', error);
+      });
+
       navigator.push(Router.getRoute('profile', { peerProfile: true, user: userInfo}))
     }
   }

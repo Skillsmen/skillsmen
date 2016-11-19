@@ -20,6 +20,12 @@ module.exports = {
       ReviewFor: {
         type: Sequelize.INTEGER
       },
+      reviewerName: {
+        type: Sequelize.STRING
+      },
+      reviewerImage: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
