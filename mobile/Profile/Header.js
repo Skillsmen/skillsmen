@@ -11,6 +11,7 @@ import {
   FontAwesome,
 } from '@exponent/vector-icons';
 import BackButton from '../reusableComponents/BackButton';
+import AddPhoto from './ProfilePhotoButton';
 
 const { width, height } = Dimensions.get('window');
 
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     resizeMode: 'cover',
     justifyContent: 'space-between',
+    width,
   },
   profPic: {
     borderRadius: width * 0.4 * 0.5,
@@ -35,7 +37,14 @@ const styles = StyleSheet.create({
   },
   addReviewIcon: {
     marginTop: 10,
-  }
+  },
+  overlay: {
+    flex: 1,
+    opacity: 0.5,
+    backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+  } 
 });
 
 
@@ -67,7 +76,7 @@ const showBackButton = (navigator, peer) => {
   return null;
 };
 
-const Header = ({ navigator, userPic, peer, clickOnEdit, editMode }) => (
+const Header = ({navigator, userPic, peer, clickOnEdit, editMode }) => (
   <Image
     style={styles.backgroundImage}
     source={bgImg}
@@ -75,12 +84,24 @@ const Header = ({ navigator, userPic, peer, clickOnEdit, editMode }) => (
     <View style={{ flex: 1 }} >
       { showBackButton(navigator, peer) }
     </View>
-    <View style={{ flex: 1 }}>
+    {editMode &&
+    <View style={{flex: 1}}>
       <Image
-        style={styles.profPic}
+        style={[styles.profPic, styles.overlay]}
         source={userPic || profPic}
-      />
+      >
+        <AddPhoto />
+      </Image>
     </View>
+    }
+    {!editMode &&
+      <View style={{ flex: 1 }}>
+        <Image
+          style={styles.profPic}
+          source={userPic || profPic}
+        />
+      </View>
+    }
     <View style={{ flex: 1 }}>
       { showEdit(navigator, peer, clickOnEdit, editMode) }
     </View>

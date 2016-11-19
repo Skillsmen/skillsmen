@@ -24,91 +24,103 @@ app.listen(app.get('port'), function() {
 /*
  * Load the S3 information from the environment constiables.
  */
-// require('dotenv').config()
-// const S3_BUCKET = process.env.S3_BUCKET;
-// const S3_KEY = process.env.S3_KEY;
-// const S3_SECRET =process.env.S3_SECRET
+require('dotenv').config()
+const S3_BUCKET = process.env.S3_BUCKET;
+const S3_KEY = process.env.S3_KEY;
+const S3_SECRET =process.env.S3_SECRET
 
-// aws.config.update({
-//     accessKeyId: S3_KEY,
-//     secretAccessKey: S3_SECRET,
-// });
-
-// var client = new Upload(S3_BUCKET, {
-//   awsBucketRegion: 'us-east-1',
-//   awsBucketPath: 'images/',
-//   awsBucketAcl: 'public-read',
-
-//   versions: [{
-//     original: true
-//   },{
-//     suffix: '-large',
-//     quality: 80,
-//     maxHeight: 1040,
-//     maxWidth: 1040,
-//   },{
-//     suffix: '-medium',
-//     maxHeight: 780,
-//     maxWidth: 780
-//   },{
-//     suffix: '-small',
-//     maxHeight: 320,
-//     maxWidth: 320
-//   },{
-//     suffix: '-thumb',
-//     maxWidth: 64,
-//     maxHeight: 64,
-//     crop: {
-//       x: 20,
-//       y: 35,
-//       width: 100,
-//       height: 100
-//     }
-//   }]
-// });
+aws.config.update({
+    accessKeyId: S3_KEY,
+    secretAccessKey: S3_SECRET,
+});
 
 
-// /*
-//  * Respond to GET requests to /sign-s3.
-//  * Upon request, return JSON containing the temporarily-signed S3 request and
-//  * the anticipated URL of the image.
-//  */
-// app.get('/sign-s3', (req, res) => {
-//   const s3 = new aws.S3();
+var client = new Upload('puffyshirts', {
+  awsBucketRegion: 'us-east-1',
+  awsBucketPath: '/images/',
+  awsBucketAcl: 'public-read',
+  aws: {
+     path: 'images/',
+     region: 'us-east-1',
+     acl: 'public-read'
+   },
+  
+   cleanup: {
+     versions: true,
+     original: false
+   },
+  
+   original: {
+     awsImageAcl: 'public-read'
+   },
+  versions: [{
+    original: true
+  },
+  {
+    suffix: '-small',
+    maxHeight: 320,
+    maxWidth: 320
+  },
+  {
+    suffix: '-thumb',
+    maxWidth: 64,
+    maxHeight: 64,
+    crop: {
+      x: 20,
+      y: 35,
+      width: 100,
+      height: 100
+    }
+  }
+  ]
+});
 
-//   const fileName = req.query.fileName;
-//   const fileType = req.query.fileType;
-//   const s3Params = {
-//     Bucket: S3_BUCKET,
-//     Key: fileName,
-//     Expires: 31536000,
-//     ContentType: fileType,
-//     ACL: 'public-read'
-//   };
-//   s3.getSignedUrl('putObject', s3Params, (err, data) => {
-//     if(err){
-//       console.error(err);
-//       return res.end();
-//     }
-//     const returnData = {
-//       signedRequest: data,
-//       url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
-//     };
-//     res.send(JSON.stringify(returnData));
-//     res.end();
-//   });
-// });
 
-// app.get('/s3-uploader', (req, res) => {
-//   const picSrc = req.query.picSrc;
+/*
+ * Respond to GET requests to /sign-s3.
+ * Upon request, return JSON containing the temporarily-signed S3 request and
+ * the anticipated URL of the image.
+ */
+app.get('/sign-s3', (req, res) => {
+  const s3 = new aws.S3();
+  const fileName = req.query.fileName;
+  const fileType = req.query.fileType;
+  const s3Params = {
+    Bucket: S3_BUCKET,
+    Key: fileName,
+    Expires: 31536000,
+    ContentType: fileType,
+    ACL: 'public-read'
+  };
+  s3.getSignedUrl('putObject', s3Params, (err, data) => {
+    if(err){
+      console.error(err);
+      return res.end();
+    }
+    const returnData = {
+      signedRequest: data,
+      url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+    };
+    res.send(JSON.stringify(returnData));
+    res.end();
+  });
+});
 
-//   client.upload(picSrc, {}, function(err, images, meta) {
-//     if (err) {
-//       console.error(err);
-//     } else {
-//       for (var i = 0; i < images.length; i++) {
-//         console.log('Thumbnail with width %i, height %i, at %s', images[i].width, images[i].height, images[i].url);
-//       }
-//     }
-//   });
-// })
+app.get('/s3-uploader', (req, res) => {
+  const picSrc = req.query.picSrc;
+  const result = {};
+  client.upload(picSrc, {}, function(err, images, meta) {
+    if (err) {
+      console.error('ERROR IN S3UPLOADER ',err);
+    } else {
+      console.log('past error s3 uploader', images, meta)
+      for (var i = 0; i < images.length; i++) {
+        result['image'.concat(i)] = images[i].width
+        result['image'.concat(i)] = images[i].height
+        result['image'.concat(i)] = images[i].url
+      }
+      res.send(JSON.stringify(result));
+      res.end();
+    }
+  });
+})
