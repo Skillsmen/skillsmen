@@ -18,8 +18,8 @@ import reducer from './reducers';
 // TO SWITCH TO VANILLA UNCOMMENT BELOW:
 import router from './Router';
 import App from './App';
-//
-// console.log('Running vanilla');
+
+console.log('Running vanilla');
 
 // ==============================
 // COMMENT OUT WHEN USING VANILLA
@@ -27,7 +27,7 @@ import App from './App';
 // import router from './navigation/Router';
 // import App from './containers/App';
 
-console.log('Running redux version');
+// console.log('Running redux version');
 // ==============================
 
 

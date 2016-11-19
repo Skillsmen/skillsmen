@@ -10,7 +10,7 @@ import {
 } from '@exponent/vector-icons';
 
 import Router from './Router';
-// placeholder for get request 
+// placeholder for get request
 const userInfo = {
   "id":2,
   "mobile": "(555)555-5555",

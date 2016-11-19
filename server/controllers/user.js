@@ -6,6 +6,7 @@ var Job = require('../models/').Job;
 module.exports = {
 // Retrieve all users
   findAllUsers(req, res) {
+    console.log('trying to find users');
     User.findAll({})
       .then(function(users) {
         res.json(users);
@@ -13,9 +14,11 @@ module.exports = {
         res.status(500).json(error);
       }); 
   },
-// Retrieve one user by id
+// Retrieve one user by id (include their associated reviews)
   findOneUser(req, res) {
-    User.findById(req.params.id)
+    User.findById(req.params.id, {
+      include: Review
+    })
       .then(function(user) {
         res.json(user);
       }).catch(function (error) {
