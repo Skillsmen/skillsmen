@@ -103,11 +103,10 @@ class App extends React.Component {
 
   render() {
     const { token, profile, loggedIn } = this.props;
-    console.log('Props', this.props);
 
     // Crappy render? Could remove the state by always going to
     // the entry page and rerouting from there. See growler.
-    if (token) {
+    if (!token) {
       // Render the main application
       return (
         <View style={styles.container}>

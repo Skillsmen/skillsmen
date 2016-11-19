@@ -10,6 +10,8 @@ import {
   FontAwesome,
 } from '@exponent/vector-icons';
 import Recommendation from './Recommendation';
+import AddReviewIcon from './AddReviewIcon'
+import fakeReviewData from './fakeReviewData'
 
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -24,25 +26,33 @@ const styles = StyleSheet.create({
 
 // Eventually will get recommendations passed in through props and map
 // over the info to create each individual recommendation
-const RecommendationList = () => (
-  <View style={styles.recommendations}>
-    <Text style={styles.recTitle}>
-      Recommendations
-      <View style={{width: 25, height: 25, justifyContent: 'flex-end'}} >
-        <TouchableHighlight>
-          <FontAwesome
-            name="pencil-square-o"
-            size={40}
-            color={'#DCDCDC'}
-          />
-        </TouchableHighlight>
-      </View>
-    </Text>
-    <Recommendation />
-    <Recommendation />
-    <Recommendation />
-    <Recommendation />
-  </View>
-)
+const RecommendationList = ({isPeer, navigator, name, userInfo}) => {
+  return (
+    <View style={styles.recommendations}>
+      <Text style={styles.recTitle}>
+        Recommendations
+        <View style={{width: 25, height: 25, justifyContent: 'flex-end'}} >
+        </View>
+        <AddReviewIcon 
+          isPeer={isPeer} 
+          navigator={navigator} 
+          name={name}
+          userInfo={userInfo}
+        />
+      </Text>
+      {fakeReviewData.reverse().map((review, i) => 
+        <Recommendation 
+          comment={review.comment} 
+          rating={review.rating}
+          ReviewFor={review.ReviewFor}
+          ReviewFrom={review.ReviewFrom}
+          createdAt={review.createdAt}
+          ReviewerName={review.ReviewerName}
+          ReviewerImage={review.ReviewerImage}
+          key={i}/> 
+      )}
+    </View>
+  )
+}
 
 export default RecommendationList;

@@ -8,6 +8,12 @@ import {
   FontAwesome,
 } from '@exponent/vector-icons';
 
+const Dimensions = React.Dimensions || require('Dimensions');
+
+const { width, height } = Dimensions.get('window');
+const vh = height / 100;
+const vw = width / 100;
+
 const styles = StyleSheet.create({
   name: {
     fontSize: 34,
@@ -26,7 +32,8 @@ const styles = StyleSheet.create({
 
 const MainInfo = ({name, experience, contactInfo}) => (
   <View>
-    <Text style={styles.name}> {name} </Text>
+
+    <Text style={styles.name}> {name}</Text>
     <Text style={styles.experience}>
       {experience}
     </Text>

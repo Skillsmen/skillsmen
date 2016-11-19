@@ -47,7 +47,7 @@ class Profile extends React.Component {
       this.props.route.params.jobInfo.expertise,
       this.props.route.params.jobInfo.location,
       this.props.route.params.jobInfo.time,
-      this.props.route.params.jobInfo.hires
+      this.props.route.params.jobInfo.hires,
     ];
     if (jobInfo.vacancies > 1) { iconArr[4] = 'users'; }
     return (

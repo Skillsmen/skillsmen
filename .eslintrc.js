@@ -11,15 +11,13 @@ module.exports = {
       },
       "sourceType": "module"
   },
-  "rules": {
-      "react/jsx-filename-extension": "off",
-      "react/forbid-prop-types": "off"
-  },
   "plugins": [
       "react",
       "react-native"
   ],
   "rules": {
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "react/forbid-prop-types": "off"
+    "react/jsx-filename-extension": "off"
   }
 };

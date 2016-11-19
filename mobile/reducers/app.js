@@ -1,6 +1,7 @@
 const initialState = {
-  token: '',
-  profile: null,
+  loggedIn: true,
+  profile: {},
+  username: '',
 };
 
 const appReducer = (state = initialState, action) => {
