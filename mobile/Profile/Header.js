@@ -88,7 +88,7 @@ const Header = ({ navigator, userPic, peer, clickOnEdit, editMode }) => (
     <View style={{ flex: 1 }}>
       <Image
         style={[styles.profPic, styles.overlay]}
-        source={userPic || profPic}
+        source={userPic || defaultPic}
       >
         <AddPhoto />
       </Image>

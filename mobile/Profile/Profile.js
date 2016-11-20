@@ -44,24 +44,32 @@ class Profile extends React.Component {
     // Eventually there may need to be a submit button to trigger a PUT request to DB
     this.state = {
       editMode: false,
+      userInfo: {},
     };
     this.clickOnEdit = this.clickOnEdit.bind(this);
     this.isPeer = this.isPeer.bind(this);
-
+    this.setUserInfo = this.setUserInfo.bind(this);
    // Populate arrays to send into 'ModularBanner' component which creates icons next to descriptions
     this.icons = ['wrench', 'globe', 'clock-o'];
     this.descriptions = ['handyman', 'Earth', '385 years'];
   }
 
   // Toggles edit mode for rendering text boxes or regular info
+
+  setUserInfo(userInfoProperty, userInfoInput) {
+    const userInfo = this.state.userInfo;
+    userInfo[userInfoProperty] = userInfoInput;
+    this.setState({
+      userInfo,
+    });
+  }
+  isPeer() {
+    return this.props.route.params.peerProfile;
+  }
   clickOnEdit() {
     this.setState({
       editMode: !this.state.editMode,
     });
-  }
-
-  isPeer() {
-    return this.props.route.params.peerProfile;
   }
 
   render() {
@@ -77,13 +85,13 @@ class Profile extends React.Component {
         <ScrollView contentContainerStyle={styles.contentContainer} alwaysBounceVertical>
             <ModularBanner
               iconArr={this.icons}
-              propertyArr={[userInfo.expertise, userInfo.location, userInfo.experience_years]}
+              propertyArr={[userInfo.profession, userInfo.location, `${userInfo.experience} years`]}
               styles={styles.banner}
             />
           <View style={styles.info}>
             {/* TODO- make below banner editable on edit icon click */}
             {this.state.editMode &&
-              <EditInfo />
+              <EditInfo setUserInfo={this.setUserInfo}/>
             }
             {!this.state.editMode &&
               <MainInfo
