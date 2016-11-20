@@ -12,7 +12,6 @@ import {
 import {
   FontAwesome,
 } from '@exponent/vector-icons';
-
 import Header from './Header';
 import MainInfo from './MainInfo';
 import EditInfo from './EditMode';
@@ -65,28 +64,16 @@ class Profile extends React.Component {
     return this.props.route.params.peerProfile;
   }
 
-  renderHeader() {
-    // if you are looking at your own page, show edit icon
-    if (!this.isPeer()) {
-      return (<Header
-        peer={this.isPeer()}
-        clickOnEdit={this.clickOnEdit}
-        editMode={this.state.editMode}
-      />);
-    }
-    // if you are looking at someone elses profile page, don't show edit icon
-    return (
-      <Header
-        navigator={this.props.navigator}
-        peer={this.isPeer()}
-      />);
-  }
-
   render() {
     const userInfo = this.props.route.params.user || this.props.profile;
     return (
       <View style={styles.container}>
-        { this.renderHeader() }
+        <Header
+          peer={this.isPeer()}
+          clickOnEdit={this.clickOnEdit}
+          editMode={this.state.editMode}
+          navigator={this.props.navigator}
+        />
         <ScrollView contentContainerStyle={styles.contentContainer} alwaysBounceVertical>
             <ModularBanner
               iconArr={this.icons}
@@ -100,7 +87,7 @@ class Profile extends React.Component {
             }
             {!this.state.editMode &&
               <MainInfo
-                name={userInfo.first_name.concat(' '.concat(userInfo.last_name))}
+                name={userInfo.name}
                 experience={userInfo.description}
                 contactInfo={userInfo.mobile}
               />
@@ -109,7 +96,7 @@ class Profile extends React.Component {
               userInfo={userInfo}
               isPeer={this.isPeer()} 
               navigator={this.props.navigator}
-              name={userInfo.first_name.concat(' '.concat(userInfo.last_name))}
+              name={userInfo.name}
              />
           </View>
         </ScrollView>

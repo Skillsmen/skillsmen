@@ -9,13 +9,14 @@ import {
 import {
   FontAwesome,
 } from '@exponent/vector-icons';
-
+import Actions from '../actions/index.js';
 import getPicture from '../utils/getPicture';
 import s3Uploader from '../utils/s3Uploader';
-const AddPhoto = ({ updateProfileURL }) =>
+
+const AddPhoto = () =>
   (
     <TouchableOpacity 
-    style={{backgroundColor: 'rgba(0,0,0,0)'}}
+    style={{ backgroundColor: 'rgba(0,0,0,0)' }}
     onPress={
       getPicture(content =>
         s3Uploader(content.uri.slice(6))
@@ -23,11 +24,7 @@ const AddPhoto = ({ updateProfileURL }) =>
             result.data
           )
           .then((imageUrl) => {
-            updateProfileURL({
-              orig: imageUrl.image0,
-              small: imageUrl.image1,
-              thumb: imageUrl.image2,
-            });
+
           })
           .catch((err) => { console.error(err) })
       )
@@ -43,3 +40,14 @@ const AddPhoto = ({ updateProfileURL }) =>
   );
 
 export default AddPhoto;
+
+            // dispatch(
+            //   Actions.updateProfile(
+            //     {
+            //       picUrls: {
+            //         orig: imageUrl.image0,
+            //         small: imageUrl.image1,
+            //         thumb: imageUrl.image2,
+            //       },
+            //     })
+            // );
