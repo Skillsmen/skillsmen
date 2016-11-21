@@ -44,11 +44,11 @@ class Profile extends React.Component {
     // Eventually there may need to be a submit button to trigger a PUT request to DB
     this.state = {
       editMode: false,
-      userInfo: {},
+      userInfoToUpdate: this.props.profile,
     };
     this.clickOnEdit = this.clickOnEdit.bind(this);
     this.isPeer = this.isPeer.bind(this);
-    this.setUserInfo = this.setUserInfo.bind(this);
+    this.setUserInfoToUpdate = this.setUserInfoToUpdate.bind(this);
    // Populate arrays to send into 'ModularBanner' component which creates icons next to descriptions
     this.icons = ['wrench', 'globe', 'clock-o'];
     this.descriptions = ['handyman', 'Earth', '385 years'];
@@ -56,24 +56,30 @@ class Profile extends React.Component {
 
   // Toggles edit mode for rendering text boxes or regular info
 
-  setUserInfo(userInfoProperty, userInfoInput) {
-    const userInfo = this.state.userInfo;
-    userInfo[userInfoProperty] = userInfoInput;
+  setUserInfoToUpdate(userInfoProperty, userInfoInput) {
+    const userInfoToUpdate = this.state.userInfoToUpdate;
+    userInfoToUpdate[userInfoProperty] = userInfoInput;
     this.setState({
-      userInfo,
+      userInfoToUpdate,
     });
   }
   isPeer() {
     return this.props.route.params.peerProfile;
   }
   clickOnEdit() {
+    if (this.state.editMode) {
+      // trigger post request with this.state.userInfoToUpdate
+      console.log('SHOWING TRAVVVIS', this.state.userInfoToUpdate);
+    }
     this.setState({
       editMode: !this.state.editMode,
+      userInfoToUpdate: this.state.userInfoToUpdate,
     });
   }
 
   render() {
     const userInfo = this.props.route.params.user || this.props.profile;
+    profilePicUrl = userInfo.profilePicUrl;
     return (
       <View style={styles.container}>
         <Header
@@ -81,6 +87,9 @@ class Profile extends React.Component {
           clickOnEdit={this.clickOnEdit}
           editMode={this.state.editMode}
           navigator={this.props.navigator}
+          userInfoToUpdate={this.state.userInfoToUpdate}
+          setUserInfoToUpdate={this.setUserInfoToUpdate}
+          userPic={this.state.userInfoToUpdate.profilePicUrl || profilePicUrl}
         />
         <ScrollView contentContainerStyle={styles.contentContainer} alwaysBounceVertical>
             <ModularBanner
@@ -91,7 +100,7 @@ class Profile extends React.Component {
           <View style={styles.info}>
             {/* TODO- make below banner editable on edit icon click */}
             {this.state.editMode &&
-              <EditInfo setUserInfo={this.setUserInfo}/>
+              <EditInfo setUserInfoToUpdate={this.setUserInfoToUpdate} userInfoToUpdate={this.state.userInfoToUpdate}/>
             }
             {!this.state.editMode &&
               <MainInfo

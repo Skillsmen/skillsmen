@@ -35,23 +35,24 @@ class EditInfo extends React.Component {
   }
 
   render() {
+    const { setUserInfoToUpdate, userInfoToUpdate } = this.props;
     return (
       <View style={{ width }}>
         <TextInput
           style={styles.editTextBox}
-          onChangeText={nameText => this.setState({ nameText })}
-          value={this.props.profile.name}
+          onChangeText={name => setUserInfoToUpdate('name', name)}
+          defaultValue={userInfoToUpdate.name}
         />
         <TextInput
           style={[styles.editTextBox, { height: 80 }]}
-          onChangeText={experienceText => this.setState({ experienceText })}
-          value={this.props.profile.description}
+          onChangeText={description => setUserInfoToUpdate('description', description)}
+          defaultValue={userInfoToUpdate.description}
           multiline
         />
         <TextInput
           style={styles.editTextBox}
-          onChangeText={contactInfo => this.setState({ contactInfo })}
-          value={this.props.profile.mobile}
+          onChangeText={mobile => setUserInfoToUpdate('mobile', mobile)}
+          defaultValue={userInfoToUpdate.mobile}
         />
       </View>
     );
