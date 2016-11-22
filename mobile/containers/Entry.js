@@ -10,7 +10,7 @@ import {
   Image,
 } from 'react-native';
 import { connect } from 'react-redux';
-
+import axios from 'axios';
 import colors from '../constants/Colors';
 import background from '../constants/Background';
 import Router from '../navigation/Router';
@@ -76,12 +76,21 @@ class Entry extends React.Component {
     this.signin = () => {
       const username = this.state.user;
       const password = this.state.pass;
+      const context = this;
       if (username !== '' && password !== '') {
         // TODO: Validate the user info by querying the server
-        // Update the global store with info from the server
-        const { dispatch } = this.props;
-        dispatch(Actions.updateProfile({ userInfo: 'generated from server' }));
-        dispatch(Actions.grantAccess('token string generated from server'));
+
+        axios.post('http://127.0.0.1:3000/signin/', {
+          username: username,
+          password: password,
+        })
+        .then((response) => {
+          console.log('response from sign in POST', response.data);
+          // Update the global store with info from the server
+          const { dispatch } = context.props;
+          dispatch(Actions.updateProfile(response.data[0]));
+          dispatch(Actions.grantAccess('token string generated from server'));
+        })
       }
     };
 

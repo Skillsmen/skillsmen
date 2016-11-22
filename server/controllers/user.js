@@ -6,13 +6,39 @@ var Job = require('../models/').Job;
 module.exports = {
 // Retrieve all users
   findAllUsers(req, res) {
-    console.log('trying to find users');
     User.findAll({include: Review})
       .then(function(users) {
         res.json(users);
       }).catch(function (error) {
         res.status(500).json(error);
       }); 
+  },
+
+// Attempt to return user associated with a provided username & password
+  signIn(req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    User.findAll({ 
+      where: { 
+        username: username,
+        password: password
+      },
+      attributes: [
+        'id',
+        'mobile',
+        'location',
+        'profession',
+        'description',
+        'name',
+        'experience'
+      ],
+      include: Review
+    })
+    .then(function(userRecord) {
+      res.json(userRecord);
+    }).catch(function (error) {
+      res.status(500).json(error);
+    }); 
   },
 // Retrieve one user by id (include their associated reviews)
   findOneUser(req, res) {
