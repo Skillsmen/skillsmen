@@ -30,7 +30,8 @@ module.exports = {
         'profession',
         'description',
         'name',
-        'experience'
+        'experience',
+        'profilePicUrl'
       ],
       include: Review
     })
