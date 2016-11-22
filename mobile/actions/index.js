@@ -81,7 +81,7 @@ export default class Actions {
         profession: jobDetails.profession,
         UserId: profile.id,
       };
-      // upload profile to the server after completing onboarding questions
+      
       axios.post('http://127.0.0.1:3000/job/', newJob)
       .then(() => {
         dispatch({ type: 'ADD_JOB', job: newJob });
