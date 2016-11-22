@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import axios from 'axios';
 import colors from '../constants/Colors';
-import background from '../constants/Background';
+import background from '../styles/EntryBackground';
 import Router from '../navigation/Router';
 import Actions from '../actions/index';
 
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     width: width * 0.65 * 1.26,
     height: width * 0.65,
     resizeMode: 'stretch',
-    margin: 5,
+    margin: 7,
   },
 
   buttonBox: {
@@ -76,21 +76,22 @@ class Entry extends React.Component {
     this.signin = () => {
       const username = this.state.user;
       const password = this.state.pass;
-      const context = this;
       if (username !== '' && password !== '') {
         // TODO: Validate the user info by querying the server
-
         axios.post('http://127.0.0.1:3000/signin/', {
-          username: username,
-          password: password,
+          username,
+          password,
         })
         .then((response) => {
           console.log('response from sign in POST', response.data);
           // Update the global store with info from the server
-          const { dispatch } = context.props;
+          const { dispatch } = this.props;
           dispatch(Actions.updateProfile(response.data[0]));
           dispatch(Actions.grantAccess('token string generated from server'));
         })
+        .catch((error) => {
+          console.log('[ERROR]: Bad login');
+        });
       }
     };
 

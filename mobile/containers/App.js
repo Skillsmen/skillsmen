@@ -4,7 +4,6 @@ import Exponent from 'exponent';
 import {
   View,
   StyleSheet,
-  AsyncStorage,
 } from 'react-native';
 import {
   StackNavigation,
@@ -29,11 +28,11 @@ class App extends React.Component {
       dataReady: false,
     };
 
-    this.fetchUserInfoFromServer = async () => {
-      // Get user info from AsyncStorage
+    this.fetchServerData = async () => {
       const { dispatch } = this.props;
-      // dispatch(Actions.grantAccess('token string generated from server'));
-      // dispatch(Actions.updateProfile({}))
+      dispatch(Actions.loadWorkerList());
+      dispatch(Actions.loadJobList());
+      dispatch(Actions.getToken());
       this.setState({
         dataReady: true,
       });
@@ -48,7 +47,7 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    await this.fetchUserInfoFromServer();
+    await this.fetchServerData();
     await this.fetchAssets();
   }
 

@@ -17,7 +17,7 @@ import colors from '../constants/Colors';
 import questionSet from '../constants/Questions';
 import professionSet from '../constants/Professions';
 import Actions from '../actions/index';
-import background from '../constants/Background';
+import background from '../styles/EntryBackground';
 
 const { height, width } = Dimensions.get('window');
 const backgroundStyle = background.makeStyle(height, width);
