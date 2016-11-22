@@ -73,6 +73,7 @@ export default class Actions {
       });
     }
   }
+
   // Updates the profile on the store
   static updateProfile(diff, upload) {
     return (dispatch, getState) => {
