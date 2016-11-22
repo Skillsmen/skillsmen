@@ -59,18 +59,27 @@ const dispatch = a => a;
 class AddJob extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      newJob: {},
+    }
     this.nextScene = this.nextScene.bind(this);
     this.childMethods = this.childMethods.bind(this);
+    this.addJobDetail = this.addJobDetail.bind(this);
   }
 
   nextScene(view, paramObj) {
     this.props.navigator.push(Router.getRoute(view, paramObj));
   }
+  addJobDetail(key, val) {
+    const newJob = this.state.newJob;
+    newJob.key = val;
+    this.setState({ newJob });
+  }
 
   childMethods() {
     return {
       dispatch,
-      addEntry: (text, type) => { return { text, type } },
+      addJobDetail: this.addJobDetail,
       nextScene: this.nextScene,
       navigator: this.props.navigator,
     };

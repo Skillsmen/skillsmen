@@ -97,7 +97,6 @@ class Profile extends React.Component {
   render() {
     const userInfo = this.props.route.params.user || this.props.profile;
     const profilePicUrl = userInfo.profilePicUrl;
-    console.log(profilePicUrl)
     return (
       <View style={styles.container}>
         <Header
