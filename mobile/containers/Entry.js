@@ -94,7 +94,11 @@ class Entry extends React.Component {
     const password = this.state.pass;
     // TODO: Make a request to server to see if username already exists
     if (username !== '' && password !== '') {
-      this.props.navigator.push(Router.getRoute('signup', { questionIndex: 0 }));
+      this.props.navigator.push(Router.getRoute('signup', {
+        questionIndex: 0,
+        username,
+        password,
+      }));
     }
   }
 

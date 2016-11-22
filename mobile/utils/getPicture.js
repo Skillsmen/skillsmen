@@ -10,7 +10,7 @@ const getPicture = (cb) => {
     if (imageResult.cancelled) {
       console.log('user has cancelled');
     }
-    console.log('GOT IMAGE ', imageResult.uri)
+    console.log('GOT IMAGE ', imageResult.uri);
     cb(imageResult);
   });
 };
