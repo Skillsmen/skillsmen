@@ -18,6 +18,8 @@ import reducer from './reducers';
 // TO SWITCH TO VANILLA UNCOMMENT BELOW:
 // import router from './Router';
 // import App from './App';
+
+// console.log('Running vanilla');
 // ==================================================
 
 // ==============================
@@ -37,8 +39,8 @@ console.disableYellowBox = true;
 // I NEED THIS FOR DEBUGGING - IT'S NOT TO FLOOD THE SCREEN
 const logger = store => next => action => {
   console.log('action:', action);
-  console.log('next state:', store.getState());
   const result = next(action);
+  console.log('next state:', store.getState());
   return result;
 };
 
