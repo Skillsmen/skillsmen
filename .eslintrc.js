@@ -18,6 +18,6 @@ module.exports = {
   "rules": {
     "arrow-body-style": "off",
     "react/forbid-prop-types": "off",
-    "react/jsx-filename-extension": "off",
+    "react/jsx-filename-extension": "off"
   }
 };
