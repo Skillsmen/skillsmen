@@ -20,6 +20,7 @@ import reducer from './reducers';
 // import App from './App';
 
 // console.log('Running vanilla');
+// ==================================================
 
 // ==============================
 // COMMENT OUT WHEN USING VANILLA
@@ -34,7 +35,9 @@ console.log('Running redux version');
 console.disableYellowBox = true;
 
 const logger = store => next => action => {
+  console.log('dispatching', action);
   let result = next(action);
+  console.log('next state', store.getState());
   return result;
 };
 
