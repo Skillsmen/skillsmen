@@ -24,7 +24,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-
+  failedAttempt: {
+    marginTop: 0.05 * height,
+    marginBottom: 0.01 * height,
+    width,
+  },
   boot: {
     width: width * 0.65 * 1.26,
     height: width * 0.65,
@@ -61,6 +65,10 @@ const styles = StyleSheet.create({
     height: 30,
     width: width * 0.7,
   },
+  center: {
+    textAlign: 'center',
+    color: 'red',
+  }
 });
 
 const boot = require('../assets/theBoot.png');
@@ -71,23 +79,26 @@ class Entry extends React.Component {
     this.state = {
       user: '',
       pass: '',
+      failedAttempt: false
     };
 
     this.signin = () => {
       const username = this.state.user;
       const password = this.state.pass;
       if (username !== '' && password !== '') {
-        // TODO: Validate the user info by querying the server
         axios.post('http://127.0.0.1:3000/signin/', {
           username,
           password,
         })
         .then((response) => {
-          console.log('response from sign in POST', response.data);
-          // Update the global store with info from the server
-          const { dispatch } = this.props;
-          dispatch(Actions.updateProfile(response.data[0]));
-          dispatch(Actions.grantAccess('token string generated from server'));
+          // If valid user, update the global store with profile info from the server
+          if (response.data.length > 0) {
+            const { dispatch } = context.props;
+            dispatch(Actions.updateProfile(response.data[0]));
+            dispatch(Actions.grantAccess('token string generated from server'));
+          } else {
+            context.setState({failedAttempt: true});
+          }
         })
         .catch((error) => {
           console.log('[ERROR]: Bad login');
@@ -112,6 +123,18 @@ class Entry extends React.Component {
     }
   }
 
+  failedSignInAttempt() {
+    if (this.state.failedAttempt) {
+      return(
+        <View style={styles.failedAttempt}>
+          <Text style={styles.center}>
+            Invalid username or password
+          </Text>
+        </View>
+      )
+    }
+  }
+
   render() {
     return (
       <View>
@@ -128,6 +151,7 @@ class Entry extends React.Component {
               style={styles.boot}
               source={boot}
             />
+            {this.failedSignInAttempt()}
             <View style={styles.inputBox}>
               <TextInput
                 style={styles.input}
