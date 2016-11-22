@@ -2,6 +2,7 @@
 var User = require('../models/').User;
 var Review = require('../models/').Review;
 var Job = require('../models/').Job;
+var bcrypt = require('bcrypt');
 
 module.exports = {
 // Retrieve all users
@@ -16,15 +17,14 @@ module.exports = {
 
 // Attempt to return user associated with a provided username & password
   signIn(req, res) {
-    var username = req.body.username;
-    var password = req.body.password;
+    const username = req.body.username;
     User.findAll({ 
       where: { 
         username: username,
-        password: password
       },
       attributes: [
         'id',
+        'password',
         'mobile',
         'location',
         'profession',
@@ -36,8 +36,19 @@ module.exports = {
       include: Review
     })
     .then(function(userRecord) {
-      res.json(userRecord);
+      const hashed = userRecord[0].password;
+      const plainTextPassword = req.body.password;
+      const match = bcrypt.compareSync(plainTextPassword, hashed);
+      delete userRecord[0].password
+      if (match) {
+        res.json(userRecord[0]);
+      } else {
+        res.status(400)
+      }
     }).catch(function (error) {
+      console.log('----------------------------------')
+      console.log('error: ', error)
+      console.log('----------------------------------')
       res.status(500).json(error);
     }); 
   },
@@ -54,7 +65,20 @@ module.exports = {
   },
 // Create a new user
   createUser(req, res) {
-    User.create(req.body)
+    const plainText = req.body.password;
+    const hash = bcrypt.hashSync(req.body.password, 10);
+    const newUser = { 
+      username: req.body.username,
+      password: hash,
+      name: req.body.name,
+      profession: req.body.profession,
+      description: req.body.description,
+      experience: req.body.experience,
+      location: req.body.location,
+      mobile: req.body.mobile,
+      profilePicUrl: req.body.profilePicUrl,
+    }
+    User.create(newUser)
       .then(function(user) {
         res.json(user);
       }).catch(function (error) {
