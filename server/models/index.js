@@ -13,7 +13,10 @@ var config    = require(__dirname + '/../config.json')[env];
 // Establish connection to database
 if (process.env.DATABASE_URL) {
   var sequelize = new Sequelize(process.env.DATABASE_URL, {
-    logging: true,
+    logging: false,
+    dialectOptions: {
+      ssl: true,
+    },
   });
 } else {
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
