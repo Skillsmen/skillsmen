@@ -9,10 +9,10 @@ import appReducer from './app';
 const mainReducer = combineReducers({
   app: appReducer,
   profile: profileReducer,
+  workerList: workerListReducer,
   messagesReducer,
   jobListReducer,
   jobPageReducer,
-  workerListReducer,
 });
 
 export default mainReducer;
