@@ -1,7 +1,6 @@
 
-
-
 Wallace
 =======
 Built easy scene transitions for sign up screens
-Persistant user login
+user-centric features:
+  Persistant user login
