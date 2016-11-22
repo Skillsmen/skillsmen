@@ -113,7 +113,10 @@ class Profile extends React.Component {
           <View style={styles.info}>
             {/* TODO- make below banner editable on edit icon click */}
             {this.state.editMode &&
-              <EditInfo setUserInfoToUpdate={this.setUserInfoToUpdate} userInfoToUpdate={this.state.userInfoToUpdate}/>
+              <EditInfo
+                setUserInfoToUpdate={this.setUserInfoToUpdate}
+                userInfoToUpdate={this.state.userInfoToUpdate}
+              />
             }
             {!this.state.editMode &&
               <MainInfo
@@ -122,9 +125,9 @@ class Profile extends React.Component {
                 contactInfo={userInfo.mobile}
               />
             }
-            <RecommendationList 
+            <RecommendationList
               userInfo={userInfo}
-              isPeer={this.isPeer()} 
+              isPeer={this.isPeer()}
               navigator={this.props.navigator}
               name={userInfo.name}
               reviews={userInfo.Reviews}

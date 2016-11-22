@@ -1,15 +1,3 @@
-// import React from 'react';
-// import {
-//   View,
-//   ScrollView,
-// } from 'react-native';
-// import RowEntry from './RowEntry';
-// import styles from '../../workerListStyles';
-
-// import React from 'react';
-// import {
-//   Text,
-// } from 'react-native';
 import { connect } from 'react-redux';
 import Router from '../navigation/Router';
 import TradesmanList from '../components/TradesmanList';
