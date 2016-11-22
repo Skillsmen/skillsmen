@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
+  Dimensions,
 } from 'react-native';
 import {
   FontAwesome,
@@ -11,8 +12,6 @@ import {
 import styles from '../../workerListStyles';
 import TradieBanner from '../tradieBanner/TradieBanner';
 import Router from '../../../navigation/Router';
-
-const Dimensions = React.Dimensions || require('Dimensions');
 
 const { width, height } = Dimensions.get('window');
 const vh = height / 100;

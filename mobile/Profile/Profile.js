@@ -60,9 +60,6 @@ class Profile extends React.Component {
   }
   clickOnEdit() {
     if (this.state.editMode) {
-      // trigger post request with this.state.userInfoToUpdate
-      console.log('req url', `http://127.0.0.1:3000/user/${this.props.profile.id}`);
-      console.log('userInfoLog', this.state.userInfoToUpdate);
 
       axios.put(`http://127.0.0.1:3000/user/${this.props.profile.id}`, {
         name: this.state.userInfoToUpdate.name,
@@ -73,7 +70,6 @@ class Profile extends React.Component {
       .then((results) => {
         // TODO: Inside of here, need to send a dispatch to update store w/ new profile info
         // Also, make it so location, experience, profession are editable
-        console.log('PUT success', results);
         console.log('userInfoToUpdate', this.state.userInfoToUpdate);
         const { dispatch } = this.props;
         dispatch({

@@ -9,7 +9,6 @@ module.exports = function(sequelize, DataTypes) {
     title: DataTypes.STRING,
     pay: DataTypes.STRING,
     profession: DataTypes.STRING,
-    ownerId: DataTypes.STRING,
   }, {
     classMethods: {
       associate: function(models) {

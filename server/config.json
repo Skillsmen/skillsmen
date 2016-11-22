@@ -1,13 +1,13 @@
 {
   "development": {
-    "username": "samhenderson",
+    "username": "bolki",
     "password": null,
     "database": "tradesman",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "traviswood",
+    "username": "bolki",
     "password": null,
     "database": "tradesman_test",
     "host": "127.0.0.1",

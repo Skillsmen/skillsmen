@@ -26,6 +26,7 @@
 
 - Node
 - Postgresql
+- ImageMagick
 
 ## Development
 

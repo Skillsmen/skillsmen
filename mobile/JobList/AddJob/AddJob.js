@@ -1,18 +1,13 @@
 import React from 'react';
 import {
-  FontAwesome,
-} from '@exponent/vector-icons';
-import {
   View,
-  Text,
   StyleSheet,
-  Image,
-  TextInput,
-  TouchableOpacity,
   Dimensions
 } from 'react-native';
+import { connect } from 'react-redux';
 import Router from '../../navigation/Router.js';
 import colors from '../../constants/Colors';
+import Actions from '../../actions/index';
 import AddJobWhatWhereWhen from './AddJobWhatWhereWhen';
 
 const { height, width } = Dimensions.get('window');
@@ -54,17 +49,17 @@ const styles = StyleSheet.create({
     width: width * 0.7,
   },
 });
-const dispatch = a => a;
 
 class AddJob extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       newJob: {},
-    }
+    };
     this.nextScene = this.nextScene.bind(this);
     this.childMethods = this.childMethods.bind(this);
     this.addJobDetail = this.addJobDetail.bind(this);
+    this.dispatchJobDetails = this.dispatchJobDetails.bind(this);
   }
 
   nextScene(view, paramObj) {
@@ -72,13 +67,16 @@ class AddJob extends React.Component {
   }
   addJobDetail(key, val) {
     const newJob = this.state.newJob;
-    newJob.key = val;
+    newJob[key] = val;
     this.setState({ newJob });
+  }
+  dispatchJobDetails() {
+    this.props.addJob(this.state.newJob);
   }
 
   childMethods() {
     return {
-      dispatch,
+      dispatchJobDetails: this.dispatchJobDetails,
       addJobDetail: this.addJobDetail,
       nextScene: this.nextScene,
       navigator: this.props.navigator,
@@ -106,5 +104,15 @@ AddJob.propTypes = {
   contact: React.PropTypes.string,
   // Don't have to pass around experienceText because it's the last one
 };
+// const mapStateToProps = (state) => {
+//   // return {
+//   //   ownerId: state.profile.id
+//   // }
+// }
+const mapDispatchToProps = dispatch => ({
+  addJob: jobDetails => dispatch(Actions.newJob(jobDetails)),
+});
 
-export default AddJob;
+const AddJobConnected = connect(null, mapDispatchToProps)(AddJob);
+
+export default AddJobConnected;

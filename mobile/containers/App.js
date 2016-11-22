@@ -1,5 +1,4 @@
 /* eslint-env browser*/
-
 import React from 'react';
 import Exponent from 'exponent';
 import {
@@ -12,7 +11,6 @@ import {
   withNavigation,
 } from '@exponent/ex-navigation';
 import { connect } from 'react-redux';
-
 import Router from '../navigation/Router';
 import Actions from '../actions/index';
 
