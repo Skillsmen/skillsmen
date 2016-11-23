@@ -49,7 +49,7 @@ module.exports = {
         res.json(userRecord[0]);
       } else {
         console.log('match condition NOT met')
-        res.json('No Users with that username/password');
+        res.status(400).json();
       }
     }).catch(function (error) {
       res.status(500).json(error);
