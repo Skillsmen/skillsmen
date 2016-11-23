@@ -2,7 +2,7 @@ import Exponent from 'exponent';
 import Promise from 'bluebird';
 
 const getPicture = (cb) => {
-  return () => 
+  return () =>
   new Promise((resolve) => {
     resolve(Exponent.ImagePicker.launchImageLibraryAsync());
   })

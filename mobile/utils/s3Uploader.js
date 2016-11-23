@@ -1,5 +1,6 @@
 import axios from 'axios';
+import settings from '../settings';
 
-const s3Uploader = (picSrc) => axios.get('http://127.0.0.1:3000/s3-uploader', { params: { picSrc } });
+const s3Uploader = picSrc => axios.get(`${settings.SERVER}/s3-uploader`, { params: { picSrc } });
 
 export default s3Uploader;

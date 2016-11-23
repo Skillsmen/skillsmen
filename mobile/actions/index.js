@@ -1,4 +1,6 @@
 import axios from 'axios';
+import settings from '../settings';
+
 export default class Actions {
   static grantAccess(token) {
     return {
@@ -19,9 +21,30 @@ export default class Actions {
     };
   }
 
+  static signIn(username, password) {
+    return (dispatch, getState) => {
+      if (username !== '' && password !== '') {
+        // TODO: Validate the user info by querying the server
+        axios.post(`${settings.SERVER}/signin/`, {
+          username,
+          password,
+        })
+        .then((response) => {
+          console.log('response from sign in POST', response.data);
+          // Update the global store with info from the server
+          dispatch(Actions.updateProfile(response.data[0]));
+          dispatch(Actions.grantAccess('token string generated from server'));
+        })
+        .catch((error) => {
+          console.log('[ERROR]: Bad login');
+        });
+      }
+    };
+  }
+
   static loadWorkerList() {
     return (dispatch, getState) => {
-      axios.get('http://127.0.0.1:3000/user/')
+      axios.get(`${settings.SERVER}/user/`)
       .then((response) => {
         if (response.data.length > 0) {
           dispatch({
@@ -44,7 +67,7 @@ export default class Actions {
       if (upload) {
         const profile = getState().profile;
         // upload profile to the server after completing onboarding questions
-        axios.post('http://127.0.0.1:3000/user/', {
+        axios.post(`${settings.SERVER}/user/`, {
           username: profile.username,
           password: profile.password,
           name: profile.name,
@@ -81,8 +104,8 @@ export default class Actions {
         profession: jobDetails.profession,
         UserId: profile.id,
       };
-      
-      axios.post('http://127.0.0.1:3000/job/', newJob)
+
+      axios.post(`${settings.SERVER}/job/`, newJob)
       .then(() => {
         dispatch({ type: 'ADD_JOB', job: newJob });
       })
@@ -96,7 +119,7 @@ export default class Actions {
   static updateWorkerList() {
     return (dispatch, getState) => {
       const latest = getState().workerList.latest;
-      axios.get(`http://127.0.0.1:3000/${latest}`)
+      axios.get(`${settings.SERVER}/latest/${latest}`)
       .then((response) => {
         if (response.data.length > 0) {
           dispatch({

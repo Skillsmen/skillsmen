@@ -11,6 +11,7 @@ import MainInfo from './MainInfo';
 import EditInfo from './EditMode';
 import RecommendationList from './RecommendationList';
 import ModularBanner from '../reusableComponents/Banner/ModularBanner';
+import settings from '../settings';
 
 const styles = StyleSheet.create({
   container: {
@@ -60,8 +61,7 @@ class Profile extends React.Component {
   }
   clickOnEdit() {
     if (this.state.editMode) {
-
-      axios.put(`http://127.0.0.1:3000/user/${this.props.profile.id}`, {
+      axios.put(`${settings.SERVER}/user/${this.props.profile.id}`, {
         name: this.state.userInfoToUpdate.name,
         description: this.state.userInfoToUpdate.description,
         mobile: this.state.userInfoToUpdate.mobile,
@@ -142,6 +142,7 @@ Profile.propTypes = {
   profile: React.PropTypes.object,
   navigator: React.PropTypes.object,
   route: React.PropTypes.object,
+  dispatch: React.PropTypes.func.isRequired,
 };
 
 

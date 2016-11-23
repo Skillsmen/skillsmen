@@ -24,7 +24,12 @@ app.listen(app.get('port'), function() {
 /*
  * Load the S3 information from the environment constiables.
  */
-require('dotenv').config()
+
+// if (!process.env.S3_SECRET || !process.env.S3_KEY || !process.env.S3_BUCKET) {
+//   console.log('Using dotenv!');
+//   require('dotenv').config()
+// }
+
 const S3_BUCKET = process.env.S3_BUCKET;
 const S3_KEY = process.env.S3_KEY;
 const S3_SECRET =process.env.S3_SECRET

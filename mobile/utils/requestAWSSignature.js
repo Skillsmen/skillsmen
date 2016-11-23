@@ -1,6 +1,7 @@
 
 /* eslint-env browser*/
 import axios from 'axios';
+import settings from '../settings';
 
 const uploadFile = function uploadFile(file, signedRequest, url) {
   axios.put(signedRequest, file)
@@ -13,7 +14,7 @@ const uploadFile = function uploadFile(file, signedRequest, url) {
 };
 
 const getSignedRequest = function getSignedRequest(obj) {
-  axios('http://localhost:3000/sign-s3', {
+  axios(`${settings.SERVER}/sign-s3`, {
     params: obj,
   })
   .then((res) => {
