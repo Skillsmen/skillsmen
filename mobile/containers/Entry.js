@@ -35,31 +35,26 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch',
     margin: 7,
   },
-
   buttonBox: {
     flex: 1,
     flexDirection: 'row',
   },
-
   bttn: {
     width: width * 0.33,
     height: 30,
     margin: width * 0.015,
     justifyContent: 'center',
     alignItems: 'center',
-
     borderWidth: 0.5,
     borderColor: colors.primary,
     borderRadius: width * 0.33 * 0.02,
   },
-
   inputBox: {
     borderBottomWidth: 1,
     marginBottom: width * 0.01,
     marginTop: height * 0.01,
     borderColor: colors.secondary,
   },
-
   input: {
     textAlign: 'center',
     height: 30,
@@ -92,21 +87,17 @@ class Entry extends React.Component {
           password,
         })
         .then((response) => {
-          console.log('received a response after post request: ', response.data)
           // If valid user, update the global store with profile info from the server
           if (response.status === 200) {
-            console.log("response from sign in successful 200!")
             const { dispatch } = context.props;
             dispatch(Actions.updateProfile(response.data));
             dispatch(Actions.grantAccess('token string generated from server'));
           } else {
-            console.log("response from sign in NOT FOUND 400!")
             context.setState({failedAttempt: true});
           }
         })
         .catch((error) => {
-          console.log("response from sign in error!")
-          context.setState({failedAttempt: true});
+          context.setState({ failedAttempt: true });
         })
       }
     };
@@ -127,9 +118,9 @@ class Entry extends React.Component {
     }
   }
 
-  failedSignInAttempt() {
+  failedSignInAttempt () {
     if (this.state.failedAttempt) {
-      return(
+      return (
         <View style={styles.failedAttempt}>
           <Text style={styles.center}>
             Invalid username or password
@@ -194,7 +185,6 @@ class Entry extends React.Component {
 
 Entry.propTypes = {
   navigator: React.PropTypes.object,
-  dispatch: React.PropTypes.func.isRequired,
 };
 
 const EntryConnected = connect()(Entry);
