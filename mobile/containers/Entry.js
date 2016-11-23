@@ -15,6 +15,7 @@ import colors from '../constants/Colors';
 import background from '../styles/EntryBackground';
 import Router from '../navigation/Router';
 import Actions from '../actions/index';
+import settings from '../settings';
 
 const { height, width } = Dimensions.get('window');
 
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
   center: {
     textAlign: 'center',
     color: 'red',
-  }
+  },
 });
 
 const boot = require('../assets/theBoot.png');
@@ -80,25 +81,21 @@ class Entry extends React.Component {
     this.signin = () => {
       const username = this.state.user;
       const password = this.state.pass;
-      const context = this;
       if (username !== '' && password !== '') {
-        axios.post('http://127.0.0.1:3000/signin/', {
+        axios.post(`${settings.SERVER}/signin/`, {
           username,
           password,
         })
         .then((response) => {
           // If valid user, update the global store with profile info from the server
-          if (response.status === 200) {
-            const { dispatch } = context.props;
-            dispatch(Actions.updateProfile(response.data));
-            dispatch(Actions.grantAccess('token string generated from server'));
-          } else {
-            context.setState({failedAttempt: true});
-          }
+          const { dispatch } = this.props;
+          dispatch(Actions.updateProfile(response.data));
+          dispatch(Actions.grantAccess('token string generated from server'));
         })
         .catch((error) => {
-          context.setState({ failedAttempt: true });
-        })
+          console.log('[ERROR]: Signin failed', error.message);
+          this.setState({ failedAttempt: true });
+        });
       }
     };
     this.signup = this.signup.bind(this);
@@ -118,7 +115,7 @@ class Entry extends React.Component {
     }
   }
 
-  failedSignInAttempt () {
+  failedSignInAttempt() {
     if (this.state.failedAttempt) {
       return (
         <View style={styles.failedAttempt}>
@@ -128,6 +125,7 @@ class Entry extends React.Component {
         </View>
       );
     }
+    return null;
   }
 
   render() {
@@ -185,6 +183,7 @@ class Entry extends React.Component {
 
 Entry.propTypes = {
   navigator: React.PropTypes.object,
+  dispatch: React.PropTypes.func.isRequired,
 };
 
 const EntryConnected = connect()(Entry);

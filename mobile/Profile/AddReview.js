@@ -13,6 +13,7 @@ import {
 } from '@exponent/vector-icons';
 import BackButton from '../reusableComponents/BackButton.js'
 import Router from '../navigation/Router.js'
+import settings from '../settings';
 
 
 const Dimensions = React.Dimensions || require('Dimensions');
@@ -157,7 +158,7 @@ class AddReview extends React.Component {
 
       userInfo.Reviews.push(newReview)
 
-      axios.post('http://localhost:3000/review', newReview)
+      axios.post(`${settings.SERVER}/review`, newReview)
       .then(function (response) {
       })
       .catch(function (error) {

@@ -12,6 +12,7 @@ import JobTypeFilter from './jobTypeFilter';
 import MapListToggle from './mapListToggle';
 import JobTile from './JobTile';
 import AddJobButton from './AddJob/AddJobButton';
+import settings from '../settings';
 
 const { width } = Dimensions.get('window');
 
@@ -39,7 +40,7 @@ class JobList extends React.Component {
 
   componentDidMount() {
     const context = this;
-    axios.get('http://localhost:3000/job')
+    axios.get(`${settings.SERVER}/job`)
     .then(function (response) {
       context.setState({loading: false, jobData: response.data});
     })
