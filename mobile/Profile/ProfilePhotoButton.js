@@ -24,7 +24,6 @@ const AddPhoto = ({ setUserInfoToUpdate }) =>
               result.data
             )
             .then((imageUrl) => {
-              console.log('AWS image', imageUrl.image1);
               setUserInfoToUpdate('profilePicUrl', imageUrl.image1);
             })
             .catch((err) => { console.error(err) })

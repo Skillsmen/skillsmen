@@ -7,7 +7,6 @@ import {
   Dimensions,
 } from 'react-native';
 
-const profPic = require('./plumber.png');
 
 const { width } = Dimensions.get('window');
 
@@ -43,10 +42,6 @@ const styles = StyleSheet.create({
 export default ({ comment, reating, ReviewFor, ReviewFrom, createdAt, key, reviewerName, reviewerImage }) => (
   <View style={styles.card}>
     <View style={styles.cardLeft}>
-      <Image
-        style={styles.profPic}
-        source={{uri: reviewerImage}}
-      />
     </View>
     <View style={styles.cardRight}>
       <View>

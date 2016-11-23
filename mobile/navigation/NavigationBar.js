@@ -37,7 +37,6 @@ export default class RootNavigation extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log('[FILE] NavigationBar.js:', props.profile);
   }
 
   render() {

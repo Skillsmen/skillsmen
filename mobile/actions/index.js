@@ -23,9 +23,7 @@ export default class Actions {
     return (dispatch, getState) => {
       axios.get('http://127.0.0.1:3000/user/')
       .then((response) => {
-        console.log('got all users');
         if (response.data.length > 0) {
-          console.log('wat');
           dispatch({
             type: 'UPDATE_WORKERLIST',
             workers: response.data,
@@ -45,7 +43,6 @@ export default class Actions {
       dispatch({ type: 'UPDATE_PROFILE', diff });
       if (upload) {
         const profile = getState().profile;
-        console.log('profile from onboard POST', profile);
         // upload profile to the server after completing onboarding questions
         axios.post('http://127.0.0.1:3000/user/', {
           username: profile.username,
@@ -59,7 +56,6 @@ export default class Actions {
           profilePicUrl: profile.profilePicUrl,
         })
         .then((response) => {
-          console.log('response from onboarding POST', response.data.id);
           dispatch({
             type: 'UPDATE_PROFILE',
             diff: { id: response.data.id },
@@ -100,7 +96,6 @@ export default class Actions {
   static updateWorkerList() {
     return (dispatch, getState) => {
       const latest = getState().workerList.latest;
-      console.log('the latest', latest);
       axios.get(`http://127.0.0.1:3000/${latest}`)
       .then((response) => {
         if (response.data.length > 0) {

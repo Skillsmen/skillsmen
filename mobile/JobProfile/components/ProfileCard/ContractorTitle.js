@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 
 const ContractorTitle = (jobOwner) => {
-  console.log('jobOwner: ', jobOwner)
   return (
     <View style={{ flex: 1, flexDirection: 'row' }}>
       <Text style={{ flex: 1, fontSize: 19, fontWeight: 'bold', marginLeft: 15 }}>

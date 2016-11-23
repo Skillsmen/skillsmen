@@ -11,7 +11,6 @@ import {
 } from '@exponent/vector-icons';
 import Recommendation from './Recommendation';
 import AddReviewIcon from './AddReviewIcon'
-import fakeReviewData from './fakeReviewData'
 
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({

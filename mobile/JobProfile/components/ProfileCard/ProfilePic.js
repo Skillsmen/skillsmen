@@ -9,7 +9,6 @@ import {
 
 
 const proPicLoad = (jobOwner, width, height) => {
-  console.log('jobOwner.jobOwner.profilePicUrl: ', jobOwner.jobOwner.profilePicUrl)
 
   if (!jobOwner.jobOwner.profilePicUrl) {
     return (<FontAwesome

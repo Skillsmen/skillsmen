@@ -67,8 +67,6 @@ class SignUp extends React.Component {
   }
 
   componentWillMount() {
-    console.log('inside componentWillMount')
-    console.log('this.state: ', this.state)
     this.setState({
       username: this.props.route.params.username,
       password: this.props.route.params.password,
@@ -107,7 +105,6 @@ class SignUp extends React.Component {
   };
 
   nextScene = () => {
-    console.log('going to next scene');
     const { dispatch } = this.props;
     const questionIndex = this.props.route.params.questionIndex;
     const key = questionSet[questionIndex][0];
@@ -133,7 +130,6 @@ class SignUp extends React.Component {
 
 
   render() {
-    console.log('this.state: ', this.state)
     return (
       <View>
         <Image

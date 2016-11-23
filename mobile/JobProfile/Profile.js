@@ -13,7 +13,6 @@ import Banner from '../reusableComponents/Banner/ModularBanner';
 import ProfileCard from './components/ProfileCard/ProfileCard';
 
 const bgImg = require('../assets/whiteTexturedBackground.png');
-const profPic = require('../Profile/timallen.jpg');
 
 const { height, width } = Dimensions.get('window');
 
@@ -30,7 +29,6 @@ const jobInfo = {
   description: 'This is the largest shipment of blackened shrimp we have had all year! The client is a returning customer. All hands on deck and dont let me down!',
   ownerName: 'Bill',
   mobile: '(555) 555-5555',
-  ownerImage: profPic,
 };
 
 

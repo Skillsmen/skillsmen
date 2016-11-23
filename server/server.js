@@ -113,7 +113,6 @@ app.get('/s3-uploader', (req, res) => {
     if (err) {
       console.error('ERROR IN S3UPLOADER ',err);
     } else {
-      console.log('past error s3 uploader', images, meta)
       for (var i = 0; i < images.length; i++) {
         result['image'.concat(i)] = images[i].url
       }

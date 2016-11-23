@@ -8,7 +8,6 @@ import Tradesman from './Tradesman';
 
 class TradesmanList extends React.Component {
   componentDidMount() {
-    console.log('I should only speak once');
     const { updateWorkers } = this.props;
     updateWorkers();
   }

@@ -40,7 +40,6 @@ export default class BackButton extends React.Component {
     if (this.props.text) {
       return this.props.text
     }
-    console.log('this.props: ', this.props)
     return '  Go back'
   }
 

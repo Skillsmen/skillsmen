@@ -70,7 +70,6 @@ class Profile extends React.Component {
       .then((results) => {
         // TODO: Inside of here, need to send a dispatch to update store w/ new profile info
         // Also, make it so location, experience, profession are editable
-        console.log('userInfoToUpdate', this.state.userInfoToUpdate);
         const { dispatch } = this.props;
         dispatch({
           type: 'UPDATE_PROFILE',

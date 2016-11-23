@@ -12,7 +12,6 @@ import {
   FontAwesome,
 } from '@exponent/vector-icons';
 import BackButton from '../reusableComponents/BackButton.js'
-import fakeReviewData from './fakeReviewData.js'
 import Router from '../navigation/Router.js'
 
 
@@ -151,7 +150,6 @@ class AddReview extends React.Component {
 
   handleSubmit(text, navigator, userInfo) {
     if (text) {
-      console.log('userInfo in handleSubmit: ', userInfo)
       const newId = userInfo.Reviews.length > 0 ? userInfo.Reviews[userInfo.Reviews.length - 1].id + 1 : 1
       const reviewerName = "Sam Henderson"
       const reviewerImage = "http://res.cloudinary.com/small-change/image/upload/v1456717442/Sam_mplysz.jpg"
@@ -161,10 +159,8 @@ class AddReview extends React.Component {
 
       axios.post('http://localhost:3000/review', newReview)
       .then(function (response) {
-        console.log('response after posting new review: ', response);
       })
       .catch(function (error) {
-        console.log('error after posting new review: ', error);
       });
 
       navigator.push(Router.getRoute('profile', { peerProfile: true, user: userInfo}))

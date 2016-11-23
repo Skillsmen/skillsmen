@@ -36,19 +36,22 @@ module.exports = {
       include: Review
     })
     .then(function(userRecord) {
-      const hashed = userRecord[0].password;
-      const plainTextPassword = req.body.password;
-      const match = bcrypt.compareSync(plainTextPassword, hashed);
-      delete userRecord[0].password
+
+      let match;
+      if (userRecord.length > 0) {
+        const hashed = userRecord[0].password;
+        const plainTextPassword = req.body.password;
+        match = bcrypt.compareSync(plainTextPassword, hashed);
+        delete userRecord[0].password
+      }
       if (match) {
+        console.log('match condition IS met')
         res.json(userRecord[0]);
       } else {
-        res.status(400)
+        console.log('match condition NOT met')
+        res.json('No Users with that username/password');
       }
     }).catch(function (error) {
-      console.log('----------------------------------')
-      console.log('error: ', error)
-      console.log('----------------------------------')
       res.status(500).json(error);
     }); 
   },

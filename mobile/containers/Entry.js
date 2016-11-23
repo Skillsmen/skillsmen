@@ -79,33 +79,37 @@ class Entry extends React.Component {
     this.state = {
       user: '',
       pass: '',
-      failedAttempt: false
+      failedAttempt: false,
     };
 
     this.signin = () => {
       const username = this.state.user;
       const password = this.state.pass;
+      const context = this;
       if (username !== '' && password !== '') {
         axios.post('http://127.0.0.1:3000/signin/', {
           username,
           password,
         })
         .then((response) => {
+          console.log('received a response after post request: ', response.data)
           // If valid user, update the global store with profile info from the server
-          if (response.data.length > 0) {
+          if (response.status === 200) {
+            console.log("response from sign in successful 200!")
             const { dispatch } = context.props;
-            dispatch(Actions.updateProfile(response.data[0]));
+            dispatch(Actions.updateProfile(response.data));
             dispatch(Actions.grantAccess('token string generated from server'));
           } else {
+            console.log("response from sign in NOT FOUND 400!")
             context.setState({failedAttempt: true});
           }
         })
         .catch((error) => {
-          console.log('[ERROR]: Bad login');
-        });
+          console.log("response from sign in error!")
+          context.setState({failedAttempt: true});
+        })
       }
     };
-
     this.signup = this.signup.bind(this);
   }
 
@@ -131,7 +135,7 @@ class Entry extends React.Component {
             Invalid username or password
           </Text>
         </View>
-      )
+      );
     }
   }
 

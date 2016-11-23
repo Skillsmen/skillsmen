@@ -18,8 +18,6 @@ import reducer from './reducers';
 // TO SWITCH TO VANILLA UNCOMMENT BELOW:
 // import router from './Router';
 // import App from './App';
-
-// console.log('Running vanilla');
 // ==================================================
 
 // ==============================
@@ -27,17 +25,13 @@ import reducer from './reducers';
 // ==============================
 import router from './navigation/Router';
 import App from './containers/App';
-
-console.log('Running redux version');
 // ==============================
 
 
 console.disableYellowBox = true;
 
 const logger = store => next => action => {
-  console.log('dispatching', action);
   let result = next(action);
-  console.log('next state', store.getState());
   return result;
 };
 
