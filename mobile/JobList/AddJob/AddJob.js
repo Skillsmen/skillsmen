@@ -92,17 +92,8 @@ class AddJob extends React.Component {
 }
 
 AddJob.propTypes = {
-  grantAccess: React.PropTypes.func.isRequired,
   navigator: React.PropTypes.object,
-  username: React.PropTypes.string.isRequired,
-  password: React.PropTypes.string.isRequired,
-  which: React.PropTypes.string.isRequired,
-  nameText: React.PropTypes.string,
-  profession: React.PropTypes.string,
-  years: React.PropTypes.string,
-  location: React.PropTypes.string,
-  contact: React.PropTypes.string,
-  // Don't have to pass around experienceText because it's the last one
+  addJob: React.PropTypes.object,
 };
 // const mapStateToProps = (state) => {
 //   // return {
