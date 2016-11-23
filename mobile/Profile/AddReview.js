@@ -149,12 +149,12 @@ class AddReview extends React.Component {
     }
   }
 
-  handleSubmit(text, navigator, userInfo) {
+  handleSubmit(text, navigator, userInfo, currentLoggedInUser) {
     if (text) {
       const newId = userInfo.Reviews.length > 0 ? userInfo.Reviews[userInfo.Reviews.length - 1].id + 1 : 1
-      const reviewerName = "Sam Henderson"
-      const reviewerImage = "http://res.cloudinary.com/small-change/image/upload/v1456717442/Sam_mplysz.jpg"
-      const newReview = { rating: 4, ReviewFrom: 1, reviewerName: 'Ricky Bobby', ReviewFor: userInfo.id, comment: text, reviewerImage: reviewerImage}
+      const reviewerName = currentLoggedInUser.name
+      const reviewerImage = currentLoggedInUser.profilePicUrl
+      const newReview = { rating: 4, ReviewFrom: 1, reviewerName: reviewerName, ReviewFor: userInfo.id, comment: text, reviewerImage: reviewerImage}
 
       userInfo.Reviews.push(newReview)
 
@@ -178,6 +178,7 @@ class AddReview extends React.Component {
     const context = this
     const navigator = this.props.navigator
     const userInfo = this.props.userInfo
+    const currentLoggedInUser = this.props.currentLoggedInUser
     return (
       <Image
         style={ styles.background }
@@ -203,7 +204,7 @@ class AddReview extends React.Component {
           multiline={true}
           placeholder={'Recomend ' + this.props.name + '... '}>
         </TextInput>
-        <TouchableHighlight style={this.submitButtonFormatHandler()} onPress={function() {context.handleSubmit(text, navigator, userInfo)}}>
+        <TouchableHighlight style={this.submitButtonFormatHandler()} onPress={function() {context.handleSubmit(text, navigator, userInfo, currentLoggedInUser)}}>
           <Text style={this.submitButtonFontHandler()}> SUBMIT </Text>
         </TouchableHighlight>
 

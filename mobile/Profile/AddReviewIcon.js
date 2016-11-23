@@ -19,15 +19,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const addReviewHandler = (navigator, name, userInfo) => {
-  navigator.push(Router.getRoute('addReview', { name: name, navigator: navigator, userInfo: userInfo }))
+const addReviewHandler = (navigator, name, userInfo, currentLoggedInUser) => {
+  navigator.push(Router.getRoute('addReview', { name: name, navigator: navigator, userInfo: userInfo, currentLoggedInUser: currentLoggedInUser }))
 }
 
-const AddReviewIcon = ({isPeer, navigator, name, userInfo}) => {
+const AddReviewIcon = ({isPeer, navigator, name, userInfo, currentLoggedInUser}) => {
 
   if (isPeer) {
     return (
-      <Text style={styles.addReviewIcon} onPress={function(){addReviewHandler(navigator, name, userInfo)}}>
+      <Text style={styles.addReviewIcon} onPress={function(){addReviewHandler(navigator, name, userInfo, currentLoggedInUser)}}>
         <FontAwesome
           name="plus-circle"
           size={18}
