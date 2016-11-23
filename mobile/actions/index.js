@@ -85,7 +85,7 @@ export default class Actions {
           });
         })
         .catch((error) => {
-          console.log('error posting new user in db', error);
+          console.log('error posting new user in db', error.message);
         });
       }
     };
