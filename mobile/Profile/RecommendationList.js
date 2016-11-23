@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 
 // Eventually will get recommendations passed in through props and map
 // over the info to create each individual recommendation
-const RecommendationList = ({isPeer, navigator, name, userInfo, reviews}) => {
+const RecommendationList = ({ isPeer, navigator, name, userInfo, reviews, currentLoggedInUser }) => {
   if (reviews) {
     return (
       <View style={styles.recommendations}>
@@ -38,6 +38,7 @@ const RecommendationList = ({isPeer, navigator, name, userInfo, reviews}) => {
             navigator={navigator} 
             name={name}
             userInfo={userInfo}
+            currentLoggedInUser={currentLoggedInUser}
           />
         </Text>
         {reviews.map((review, i) => 

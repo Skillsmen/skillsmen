@@ -39,19 +39,22 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ comment, reating, ReviewFor, ReviewFrom, createdAt, key, reviewerName, reviewerImage }) => (
-  <View style={styles.card}>
-    <View style={styles.cardLeft}>
-    </View>
-    <View style={styles.cardRight}>
-      <View>
-        <Text style={styles.name}>
-          { reviewerName }
-        </Text>
-        <Text style={styles.recText}>
-          { comment }
-        </Text>
+export default ({ comment, reating, ReviewFor, ReviewFrom, createdAt, key, reviewerName, reviewerImage }) => {
+  return (
+    <View style={styles.card}>
+      <View style={styles.cardLeft}>
+        <Image style={styles.profPic} source={{ uri: reviewerImage }}/>
+      </View>
+      <View style={styles.cardRight}>
+        <View>
+          <Text style={styles.name}>
+            { reviewerName }
+          </Text>
+          <Text style={styles.recText}>
+            { comment }
+          </Text>
+        </View>
       </View>
     </View>
-  </View>
-);
+  )
+};
