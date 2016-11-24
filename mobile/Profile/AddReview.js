@@ -6,15 +6,11 @@ import {
   StyleSheet,
   Image,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
 } from 'react-native';
-import {
-  FontAwesome,
-} from '@exponent/vector-icons';
-import BackButton from '../reusableComponents/BackButton.js'
-import Router from '../navigation/Router.js'
+import BackButton from '../reusableComponents/BackButton';
+import Router from '../navigation/Router';
 import settings from '../settings';
-
 
 const Dimensions = React.Dimensions || require('Dimensions');
 
@@ -31,15 +27,14 @@ const styles = StyleSheet.create({
   headerRow: {
     width: 100 * vw,
     height: 14 * vh,
-
-    flexWrap: 'wrap', 
+    flexWrap: 'wrap',
     alignItems: 'flex-start',
-    flexDirection:'row',
-  }, 
+    flexDirection: 'row',
+  },
   headerText: {
     width: 70 * vw,
     height: 10 * vh,
-  }, 
+  },
   imageIconContainter: {
     width: 30 * vw,
     height: 10 * vh,
@@ -78,7 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 7 * vh,
     marginTop: 2 * vh,
-    backgroundColor: '#155FAB'
+    backgroundColor: '#155FAB',
   },
   imageIcon: {
     height: 4 * vw,
@@ -129,24 +124,22 @@ class AddReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: ''
+      text: '',
     };
   }
 
   submitButtonFormatHandler() {
     if (this.state.text.length) {
-      return styles.submitButtonBlue
-    } else {
-      return styles.submitButtonTransparent
+      return styles.submitButtonBlue;
     }
+    return styles.submitButtonTransparent;
   }
 
   submitButtonFontHandler() {
     if (this.state.text.length) {
-      return styles.submitTextWhite
-    } else {
-      return styles.submitTextBlue
+      return styles.submitTextWhite;
     }
+    return styles.submitTextBlue;
   }
 
   handleSubmit(text, navigator, userInfo, currentLoggedInUser) {
@@ -154,46 +147,48 @@ class AddReview extends React.Component {
       const newId = userInfo.Reviews.length > 0 ? userInfo.Reviews[userInfo.Reviews.length - 1].id + 1 : 1
       const reviewerName = currentLoggedInUser.name;
       const reviewerImage = currentLoggedInUser.profilePicUrl;
-      const newReview = { 
+      const newReview = {
         rating: 4,
         ReviewFrom: 1,
-        reviewerName: reviewerName,
+        reviewerName,
         ReviewFor: userInfo.id,
         comment: text,
-        reviewerImage: reviewerImage,
-      }
-      userInfo.Reviews.push(newReview)
+        reviewerImage,
+      };
+      userInfo.Reviews.push(newReview);
       axios.post(`${settings.SERVER}/review`, newReview)
-      .then(function (response) {
+      .then((response) => {
+        console.log(response);
       })
-      .catch(function (error) {
+      .catch((error) => {
+        console.log(error);
       });
-      navigator.push(Router.getRoute('profile', { peerProfile: true, user: userInfo}))
+      navigator.push(Router.getRoute('profile', { peerProfile: true, user: userInfo }));
     }
   }
 
   updateTextState(text) {
-    const context = this;
-    this.setState({ text: text });
+    this.setState({ text });
   }
 
   render() {
-    const text = this.state.text
-    const context = this
-    const navigator = this.props.navigator
-    const userInfo = this.props.userInfo
-    const currentLoggedInUser = this.props.currentLoggedInUser
+    const text = this.state.text;
+    const context = this;
+    const navigator = this.props.navigator;
+    const userInfo = this.props.userInfo;
+    const name = this.props.name;
+    const currentLoggedInUser = this.props.currentLoggedInUser;
     return (
       <Image
-        style={ styles.background }
-        source={ whiteImg }
+        style={styles.background}
+        source={whiteImg}
       >
-        <BackButton navigator={this.props.navigator} text={"  Back to " +  this.props.name }/>
+        <BackButton navigator={navigator} text={'  Back to ' + name} />
         <View style={styles.headerRow}>
           <View style={styles.imageIconContainter}>
             <Image
-              style={ styles.posterImageIcon }
-              source={{uri: 'http://www.solotradie.com/wp-content/uploads/2015/04/tradesman_laptop.jpg' }}
+              style={styles.posterImageIcon}
+              source={{ uri: 'http://www.solotradie.com/wp-content/uploads/2015/04/tradesman_laptop.jpg' }}
             />
           </View>
           <View style={styles.headerText}>
@@ -216,6 +211,13 @@ class AddReview extends React.Component {
     );
   }
 }
+
+AddReview.propTypes = {
+  userInfo: React.PropTypes.object,
+  navigator: React.PropTypes.object,
+  name: React.PropTypes.string,
+  currentLoggedInUser: React.PropTypes.func,
+};
 
 export default AddReview;
 
