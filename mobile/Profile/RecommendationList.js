@@ -25,51 +25,48 @@ const styles = StyleSheet.create({
 
 // Eventually will get recommendations passed in through props and map
 // over the info to create each individual recommendation
-const RecommendationList = ({isPeer, navigator, name, userInfo, reviews}) => {
+const RecommendationList = ({ isPeer, navigator, name, userInfo, reviews, currentLoggedInUser }) => {
   if (reviews) {
     return (
       <View style={styles.recommendations}>
         <Text style={styles.recTitle}>
           Recommendations
-          <View style={{width: 25, height: 25, justifyContent: 'flex-end'}} >
-          </View>
-          <AddReviewIcon 
-            isPeer={isPeer} 
-            navigator={navigator} 
+          <AddReviewIcon
+            isPeer={isPeer}
+            navigator={navigator}
             name={name}
             userInfo={userInfo}
+            currentLoggedInUser={currentLoggedInUser}
           />
         </Text>
-        {reviews.map((review, i) => 
-          <Recommendation 
-            comment={review.comment} 
+        {reviews.map((review, i) =>
+          <Recommendation
+            comment={review.comment}
             rating={review.rating}
             ReviewFor={review.ReviewFor}
             ReviewFrom={review.ReviewFrom}
             createdAt={review.createdAt}
             reviewerName={review.reviewerName}
             reviewerImage={review.reviewerImage}
-            key={i}/> 
+            key={i}
+          />,
         )}
       </View>
-    )
-  } else {
-    return (
-      <View style={styles.recommendations}>
-        <Text style={styles.recTitle}>
-          Recommendations
-          <View style={{width: 25, height: 25, justifyContent: 'flex-end'}} >
-          </View>
-          <AddReviewIcon 
-            isPeer={isPeer} 
-            navigator={navigator} 
-            name={name}
-            userInfo={userInfo}
-          />
-        </Text>
-      </View>
-    )
+    );
   }
-}
+  return (
+    <View style={styles.recommendations}>
+      <Text style={styles.recTitle}>
+        Recommendations
+        <AddReviewIcon
+          isPeer={isPeer}
+          navigator={navigator}
+          name={name}
+          userInfo={userInfo}
+        />
+      </Text>
+    </View>
+  );
+};
 
 export default RecommendationList;

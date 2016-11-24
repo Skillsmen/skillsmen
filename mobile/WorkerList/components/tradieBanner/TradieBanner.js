@@ -8,10 +8,10 @@ import TradiesLocationBanner from './bannerIcons/TradiesLocationBanner';
 import TradiesReviewsBanner from './bannerIcons/TradiesReviewsBanner';
 import styles from '../../workerListStyles';
 
-const TradieBanner = ({ expertise, location, reviews = 0, Icon, name }) =>
+const TradieBanner = ({ expertise, location, reviews = 0, Icon, name, imageURL }) =>
   (
     <View style={styles.banner}> 
-      <Text style={styles.name}>{name}</Text>
+      <Text style={styles.name}>{name} imageURL: {imageURL}</Text>
       <View className="tripleBanner" style={styles.tripleBanner}>
       <TradiesExpertiseBanner 
         Icon={Icon('wrench')}

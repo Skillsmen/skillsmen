@@ -75,39 +75,41 @@ const showBackButton = (navigator, peer) => {
   return null;
 };
 
-const Header = ({setUserInfoToUpdate, userInfoToUpdate, navigator, userPic, peer, clickOnEdit, editMode }) => (
-  <Image
-    style={styles.backgroundImage}
-    source={bgImg}
-  >
-    <View style={{ flex: 1 }} >
-      { showBackButton(navigator, peer) }
-    </View>
-    {editMode &&
-    <View style={{ flex: 1 }}>
-      <Image
-        style={[styles.profPic, styles.overlay]}
-        source={{ uri: userPic }}
-      >
-        <AddPhoto 
-          setUserInfoToUpdate={setUserInfoToUpdate}
-        />
-      </Image>
-    </View>
-    }
-    {!editMode &&
+export default Header = ({ setUserInfoToUpdate, userInfoToUpdate,  navigator,  userPic,  peer,  clickOnEdit, editMode, currentLoggedInUser })  => {
+  return (
+    <Image
+      style={styles.backgroundImage}
+      source={bgImg}
+    >
+      <View style={{ flex: 1 }} >
+        { showBackButton(navigator, peer) }
+      </View>
+      {editMode &&
       <View style={{ flex: 1 }}>
         <Image
-          style={styles.profPic}
+          style={[styles.profPic, styles.overlay]}
           source={{ uri: userPic }}
-        />
+        >
+          <AddPhoto 
+            setUserInfoToUpdate={setUserInfoToUpdate}
+          />
+        </Image>
       </View>
-    }
-    <View style={{ flex: 1 }}>
-      { showEdit(navigator, peer, clickOnEdit, editMode) }
-    </View>
-  </Image>
-);
+      }
+      {!editMode &&
+        <View style={{ flex: 1 }}>
+          <Image
+            style={styles.profPic}
+            source={{ uri: userPic }}
+          />
+        </View>
+      }
+      <View style={{ flex: 1 }}>
+        { showEdit(navigator, peer, clickOnEdit, editMode) }
+      </View>
+    </Image>
+  );
+}
 
 Header.propTypes = {
   clickOnEdit: React.PropTypes.func,
@@ -116,5 +118,3 @@ Header.propTypes = {
   userPic: React.PropTypes.string,
   navigator: React.PropTypes.object,
 };
-
-export default Header;

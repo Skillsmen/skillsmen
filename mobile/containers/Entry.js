@@ -81,16 +81,22 @@ class Entry extends React.Component {
     this.signin = () => {
       const username = this.state.user;
       const password = this.state.pass;
+      const context = this;
       if (username !== '' && password !== '') {
         axios.post(`${settings.SERVER}/signin/`, {
           username,
           password,
         })
         .then((response) => {
-          // If valid user, update the global store with profile info from the server
           const { dispatch } = this.props;
-          dispatch(Actions.updateProfile(response.data));
-          dispatch(Actions.grantAccess('token string generated from server'));
+          if (response.status === 200) {
+            const { dispatch } = context.props;
+            dispatch(Actions.updateProfile(response.data));
+            dispatch(Actions.grantAccess('token string generated from server'));
+          } else {
+            console.log("response from sign in NOT FOUND 400!")
+            context.setState({failedAttempt: true});
+          }
         })
         .catch((error) => {
           console.log('[ERROR]: Signin failed', error.message);
