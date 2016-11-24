@@ -15,11 +15,11 @@ export default class JobTile extends React.Component {
     }
     if (isEven(this.props.job.id)) {
       return (
-        <BlueJobTile job={this.props.job} navigator={this.props.navigator} />
+        <BlueJobTile job={this.props.job} pressJob={this.props.pressJob} />
       );
     }
     return (
-      <WhiteJobTile job={this.props.job} navigator={this.props.navigator} />
+      <WhiteJobTile job={this.props.job} pressJob={this.props.pressJob} />
     );
   }
 }

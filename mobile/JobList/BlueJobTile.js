@@ -96,7 +96,12 @@ export default class BlueJobTile extends React.Component {
   }
 
   pressJob() {
+<<<<<<< HEAD
+    this.props.pressJob();
+=======
+    console.log('this.props.job: ', this.props.job)
     this.props.navigator.push(Router.getRoute('jobProfile', { jobInfo: this.props.job }));
+>>>>>>> data now rendering dynamically on job profile page
   }
 
   render() {
