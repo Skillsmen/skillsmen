@@ -106,16 +106,16 @@ export default class Actions {
 
   static newJob(jobDetails) {
     return (dispatch, getState) => {
-      const profile = getState().profile;
       const newJob = {
         description: jobDetails.description,
         location: jobDetails.location,
-        time: jobDetails.time,
+        from: jobDetails.from,
+        to: jobDetails.to,
         hires: jobDetails.hires,
         title: jobDetails.title,
         pay: jobDetails.pay,
         profession: jobDetails.profession,
-        UserId: profile.id,
+        UserId: getState().profile.id,
       };
 
       axios.post(`${settings.SERVER}/job/`, newJob)

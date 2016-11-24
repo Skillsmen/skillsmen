@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
   var Job = sequelize.define('Job', {
     description: DataTypes.TEXT,
     location: DataTypes.STRING,
-    time: DataTypes.STRING,
+    from: DataTypes.DATE,
+    to: DataTypes.DATE,
     hires: DataTypes.INTEGER,
     title: DataTypes.STRING,
     pay: DataTypes.STRING,

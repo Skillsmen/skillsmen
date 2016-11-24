@@ -3,14 +3,15 @@ import {
   View,
   Text,
   TextInput,
+  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 import colors from '../../constants/Colors';
 import BackButton from '../../reusableComponents/BackButton';
 
 const AddJobWhatWhereWhen = ({ styles, methods }) => {
-  const userInput = (type, placeHolder) =>
-    (
+  const userInput = (type, placeHolder) => {
+    return (
       <View style={styles.inputBox}>
         <TextInput
           id={type}
@@ -21,18 +22,19 @@ const AddJobWhatWhereWhen = ({ styles, methods }) => {
         />
       </View>
     );
+  };
+
   return (
-    <View style={styles.container}>
-    <BackButton navigator={methods.navigator} />
+    <ScrollView contentContainerStyle={[styles.contentContainer, styles.container]} >
+      <BackButton navigator={methods.navigator} />
       {userInput('title', 'What is the Project?')}
       {userInput('location', 'Where?')}
-      {userInput('time', 'When?')}
       <View>
-        <TouchableOpacity style={styles.bttn} onPress={() => methods.nextScene('addJobDetails', { styles, methods })}>
+        <TouchableOpacity style={styles.bttn} onPress={() => methods.nextScene('addTimeFrame', { styles, methods, time: 'from' })}>
           <Text style={{ color: colors.primary }}> NEXT </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
