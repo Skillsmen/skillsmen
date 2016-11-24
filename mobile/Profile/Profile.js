@@ -91,7 +91,6 @@ class Profile extends React.Component {
 
   render() {
     const userInfo = this.props.route.params.user || this.props.profile;
-    const profilePicUrl = userInfo.profilePicUrl;
     return (
       <View style={styles.container}>
         <Header
@@ -106,11 +105,11 @@ class Profile extends React.Component {
           }
         />
         <ScrollView contentContainerStyle={styles.contentContainer} alwaysBounceVertical>
-            <ModularBanner
-              iconArr={this.icons}
-              propertyArr={[userInfo.profession, userInfo.location, `${userInfo.experience} years`]}
-              styles={styles.banner}
-            />
+          <ModularBanner
+            iconArr={this.icons}
+            propertyArr={[userInfo.profession, userInfo.location, `${userInfo.experience} years`]}
+            styles={styles.banner}
+          />
           <View style={styles.info}>
             {/* TODO- make below banner editable on edit icon click */}
             {this.state.editMode &&

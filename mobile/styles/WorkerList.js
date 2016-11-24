@@ -59,6 +59,11 @@ const styles = StyleSheet.create({
   contentContainer: {
     backgroundColor: '#fff',
   },
+  circularImage: {
+    width:70,
+    height: 70,
+    borderRadius: 35,
+  }
 });
 
 export default styles;

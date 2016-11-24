@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     padding: 8,
     marginTop: 0.5 * width,
   },
-})
+});
 
 class JobList extends React.Component {
   constructor(props) {

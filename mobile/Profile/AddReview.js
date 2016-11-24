@@ -152,18 +152,22 @@ class AddReview extends React.Component {
   handleSubmit(text, navigator, userInfo, currentLoggedInUser) {
     if (text) {
       const newId = userInfo.Reviews.length > 0 ? userInfo.Reviews[userInfo.Reviews.length - 1].id + 1 : 1
-      const reviewerName = currentLoggedInUser.name
-      const reviewerImage = currentLoggedInUser.profilePicUrl
-      const newReview = { rating: 4, ReviewFrom: 1, reviewerName: reviewerName, ReviewFor: userInfo.id, comment: text, reviewerImage: reviewerImage}
-
+      const reviewerName = currentLoggedInUser.name;
+      const reviewerImage = currentLoggedInUser.profilePicUrl;
+      const newReview = { 
+        rating: 4,
+        ReviewFrom: 1,
+        reviewerName: reviewerName,
+        ReviewFor: userInfo.id,
+        comment: text,
+        reviewerImage: reviewerImage,
+      }
       userInfo.Reviews.push(newReview)
-
       axios.post(`${settings.SERVER}/review`, newReview)
       .then(function (response) {
       })
       .catch(function (error) {
       });
-
       navigator.push(Router.getRoute('profile', { peerProfile: true, user: userInfo}))
     }
   }

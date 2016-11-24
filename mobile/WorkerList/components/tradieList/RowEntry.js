@@ -51,16 +51,13 @@ const TradieRow = ({ navigator, userInfo }) => {
   return (
     <TouchableOpacity onPress={pressUser}>
       <View className="tradieRow" style={rowStlyes.row}>
-        <Image
-          style={rowStlyes.posterImageIcon}
-          source={{ uri: userInfo.profilePicUrl }}
-        />
         <TradieBanner
           expertise={userInfo.profession}
           location={userInfo.location}
           reviews={userInfo.Reviews.length}
           styles={styles}
           Icon={renderIcon}
+          imageURL={userInfo.profilePicUrl}
           name={userInfo.name}
         />
       </View>
