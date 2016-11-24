@@ -34,10 +34,13 @@ const AddJobWhatWhereWhen = ({ route }) => {
       {userInput('description', 'Describe the job.', true, styles.tallInput)}
 
       <View>
-        <TouchableOpacity style={styles.bttn} onPress={() => {
-          methods.dispatchJobDetails();
-          methods.nextScene('workerList', { styles, methods });
-        }}>
+        <TouchableOpacity
+          style={styles.bttn}
+          onPress={() => {
+            methods.dispatchJobDetails();
+            methods.nextScene('workerList', { styles, methods });
+          }}
+        >
           <Text style={{ color: colors.primary }}> Submit </Text>
         </TouchableOpacity>
       </View>

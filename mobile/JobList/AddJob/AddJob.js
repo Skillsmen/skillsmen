@@ -2,10 +2,10 @@ import React from 'react';
 import {
   View,
   StyleSheet,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
-import Router from '../../navigation/Router.js';
+import Router from '../../navigation/Router';
 import colors from '../../constants/Colors';
 import Actions from '../../actions/index';
 import AddJobWhatWhereWhen from './AddJobWhatWhereWhen';
@@ -93,13 +93,9 @@ class AddJob extends React.Component {
 
 AddJob.propTypes = {
   navigator: React.PropTypes.object,
-  addJob: React.PropTypes.object,
+  addJob: React.PropTypes.func,
 };
-// const mapStateToProps = (state) => {
-//   // return {
-//   //   ownerId: state.profile.id
-//   // }
-// }
+
 const mapDispatchToProps = dispatch => ({
   addJob: jobDetails => dispatch(Actions.newJob(jobDetails)),
 });
