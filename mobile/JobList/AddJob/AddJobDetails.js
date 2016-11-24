@@ -27,7 +27,7 @@ const AddJobWhatWhereWhen = ({ route }) => {
     );
   return (
     <View style={styles.container}>
-    <BackButton navigator={methods.navigator} />
+      <BackButton navigator={methods.navigator} />
       {userInput('profession', 'What skills are needed?')}
       {userInput('hires', 'How many people?')}
       {userInput('pay', 'Whats the pay?')}

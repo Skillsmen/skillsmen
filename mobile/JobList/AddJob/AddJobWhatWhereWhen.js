@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TextInput,
-  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 import colors from '../../constants/Colors';
@@ -25,7 +24,7 @@ const AddJobWhatWhereWhen = ({ styles, methods }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={[styles.contentContainer, styles.container]} >
+    <View style={styles.container} >
       <BackButton navigator={methods.navigator} />
       {userInput('title', 'What is the Project?')}
       {userInput('location', 'Where?')}
@@ -34,7 +33,7 @@ const AddJobWhatWhereWhen = ({ styles, methods }) => {
           <Text style={{ color: colors.primary }}> NEXT </Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
