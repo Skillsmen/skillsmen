@@ -96,7 +96,7 @@ export default class BlueJobTile extends React.Component {
   }
 
   pressJob() {
-    this.props.pressJob();
+    this.props.navigator.push(Router.getRoute('jobProfile', { jobInfo: this.props.job }));
   }
 
   render() {

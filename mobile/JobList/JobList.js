@@ -54,6 +54,7 @@ class JobList extends React.Component {
   }
 
   render() {
+    console.log('this.state.jobData: ', this.state.jobData)
     if (!this.state.loading) {
       return (
         <View>

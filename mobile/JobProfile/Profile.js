@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Navigator,
 } from 'react-native';
-import BackButton from '../reusableComponents/BackButton.js';
+import BackButton from '../reusableComponents/BackButton';
 import Banner from '../reusableComponents/Banner/ModularBanner';
 import ProfileCard from './components/ProfileCard/ProfileCard';
 
@@ -40,13 +40,13 @@ class Profile extends React.Component {
     console.log('params.job from job profile', this.props);
   }
   render() {
-    const payrate = this.props.route.params.job.pay.toString();
+    const payrate = this.props.route.params.jobInfo.pay.toString();
     const propertyArr = [
       payrate, 
-      this.props.route.params.job.expertise,
-      this.props.route.params.job.location,
-      this.props.route.params.job.timeFrame,
-      this.props.route.params.job.vacancies,
+      this.props.route.params.jobInfo.profession,
+      this.props.route.params.jobInfo.location,
+      this.props.route.params.jobInfo.time,
+      this.props.route.params.jobInfo.hires,
     ];
     // if (job.vacancies > 1) { iconArr[4] = 'users'; }
     return (

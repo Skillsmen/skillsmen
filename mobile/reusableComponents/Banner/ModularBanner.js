@@ -17,6 +17,7 @@ const renderIcon = (name, size = 15, isSelected) =>
   );
 
 const ModularBanner = ({ iconArr, propertyArr, iconSize, styles, iconStyles }) => {
+  console.log('propertyArr: ', propertyArr)
   const banner = iconArr.map((icon, i) =>
     (
       <ModularBannerIcon

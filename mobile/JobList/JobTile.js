@@ -15,12 +15,17 @@ export default class JobTile extends React.Component {
     }
     if (isEven(this.props.job.id)) {
       return (
-        <BlueJobTile job={this.props.job} pressJob={this.props.pressJob} />
-      );
-    } else {
-      return (
-        <WhiteJobTile job={this.props.job} pressJob={this.props.pressJob} />
+        <BlueJobTile job={this.props.job} navigator={this.props.navigator} />
       );
     }
+    return (
+      <WhiteJobTile job={this.props.job} navigator={this.props.navigator} />
+    );
   }
 }
+
+
+JobTile.propTypes = {
+  job: React.PropTypes.object,
+  navigator: React.PropTypes.object,
+};
