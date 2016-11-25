@@ -38,9 +38,9 @@ console.disableYellowBox = true;
 // PLEASE STOP BREAKING MY LOGGER JUST GO COMMENT IT OUT
 // I NEED THIS FOR DEBUGGING - IT'S NOT TO FLOOD THE SCREEN
 const logger = store => next => action => {
-  console.log('action:', action);
+  console.log('[ ACTION ]:', action);
   const result = next(action);
-  console.log('next state:', store.getState());
+  console.log('[ NEXT STATE ]:', store.getState());
   return result;
 };
 
