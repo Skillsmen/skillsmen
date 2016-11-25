@@ -13,16 +13,16 @@ import Entry from '../containers/Entry';
 import SignUp from '../containers/SignUp';
 import WorkerList from '../components/WorkerListScreen';
 import JobList from '../containers/CreateJobList';
+import AddJob from '../containers/AddJob';
+import AddJobWhatWhereWhen from '../components/AddJob/AddJobWhatWhereWhen';
+import AddTimeFrame from '../components/AddJob/AddTimeFrame';
+import AddJobDetails from '../components/AddJob/AddJobDetails';
 // might want to refactor JobList a little to mirror style of WorkerListScreen et al.
 
 import Profile from '../Profile/Profile';
 // import JobList from '../JobList/JobList';
 import Messages from '../Messages/Messages';
 import JobProfile from '../JobProfile/Profile';
-import AddJob from '../JobList/AddJob/AddJob';
-import AddJobWhatWhereWhen from '../JobList/AddJob/AddJobWhatWhereWhen';
-import AddTimeFrame from '../JobList/AddJob/AddTimeFrame';
-import AddJobDetails from '../JobList/AddJob/AddJobDetails';
 import AddReview from '../Profile/AddReview';
 
 export default createRouter(() => ({

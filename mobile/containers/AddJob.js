@@ -5,10 +5,10 @@ import {
   Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
-import Router from '../../navigation/Router';
-import colors from '../../constants/Colors';
-import Actions from '../../actions/index';
-import AddJobWhatWhereWhen from './AddJobWhatWhereWhen';
+import Router from '../navigation/Router';
+import colors from '../constants/Colors';
+import Actions from '../actions/index';
+import AddJobWhatWhereWhen from '../components/AddJob/AddJobWhatWhereWhen';
 
 const { height, width } = Dimensions.get('window');
 const styles = StyleSheet.create({

@@ -18,6 +18,7 @@ class AddTimeFrame extends React.Component {
     };
 
     this.onDateChange = (date, key) => {
+      console.log('DATE:', date);
       this.setState({ date });
       this.props.route.params.methods.addJobDetail(key, date);
     };
