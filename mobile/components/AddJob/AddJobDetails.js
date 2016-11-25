@@ -38,7 +38,7 @@ const AddJobWhatWhereWhen = ({ route }) => {
           style={styles.bttn}
           onPress={() => {
             methods.dispatchJobDetails();
-            methods.nextScene('workerList', { styles, methods });
+            methods.nextScene('jobList', { styles, methods });
           }}
         >
           <Text style={{ color: colors.primary }}> Submit </Text>
