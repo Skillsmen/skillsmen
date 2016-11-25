@@ -6,11 +6,11 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import SearchBar from '../JobList/searchBar';
-import JobTypeFilter from '../JobList/jobTypeFilter';
-import MapListToggle from '../JobList/mapListToggle';
-import JobTile from '../JobList/JobTile';
-import AddJobButton from '../JobList/AddJob/AddJobButton';
+import SearchBar from './searchBar';
+import JobTypeFilter from './JobTypeFilter';
+import MapListToggle from './mapListToggle';
+import JobTile from './JobTile';
+import AddJobButton from '../components/AddJob/AddJobButton';
 
 const { width } = Dimensions.get('window');
 
@@ -34,8 +34,14 @@ class JobList extends React.Component {
   }
 
   componentDidMount() {
-    const { updateJobs } = this.props;
-    updateJobs();
+    // Had to comment this out because update jobs only needs
+    // to be called once (when the app starts). Consecutive calls
+    // will create duplicates. Would be ideal to have a function
+    // that refreshes the joblist though. (negligable for now).
+
+    // console.log('JobList mounted!');
+    // const { updateJobs } = this.props;
+    // updateJobs();
   }
 
   AddButton() {

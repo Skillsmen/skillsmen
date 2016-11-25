@@ -10,8 +10,10 @@ import {
   withNavigation,
 } from '@exponent/ex-navigation';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import Router from '../navigation/Router';
 import Actions from '../actions/index';
+import settings from '../settings';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,9 +32,17 @@ class App extends React.Component {
 
     this.fetchServerData = async () => {
       const { dispatch } = this.props;
-      dispatch(Actions.loadWorkerList());
-      dispatch(Actions.loadJobList());
-      dispatch(Actions.getToken());
+      try {
+        console.log('Fetching data from server . . .');
+        const workerRes = await axios.get(`${settings.SERVER}/user/`);
+        const jobRes = await axios.get(`${settings.SERVER}/job/`);
+        dispatch(Actions.setWorkerList(workerRes.data));
+        dispatch(Actions.setJobList(jobRes.data, new Date()));
+      } catch (e) {
+        console.log('Could not get workers/jobs on load!', e.message);
+      }
+      // dispatch(Actions.getToken());
+      console.log('Setting State');
       this.setState({
         dataReady: true,
       });

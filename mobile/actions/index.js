@@ -9,69 +9,19 @@ export default class Actions {
     };
   }
 
-  static getToken() {
+  static setWorkerList(workers) {
     return {
-      type: 'SOMETHINGELSE',
+      type: 'UPDATE_WORKERLIST',
+      workers,
     };
   }
 
-  static signIn(username, password) {
-    return (dispatch, getState) => {
-      if (username !== '' && password !== '') {
-        // TODO: Validate the user info by querying the server
-        axios.post(`${settings.SERVER}/signin/`, {
-          username,
-          password,
-        })
-        .then((response) => {
-          console.log('response from sign in POST', response.data);
-          // Update the global store with info from the server
-          dispatch(Actions.updateProfile(response.data[0]));
-          dispatch(Actions.grantAccess('token string generated from server'));
-        })
-        .catch((error) => {
-          console.log('[ERROR]: Bad login');
-        });
-      }
+  static setJobList(jobs, latest) {
+    return {
+      type: 'UPDATE_JOBLIST',
+      jobs,
+      latest,
     };
-  }
-
-  static loadWorkerList() {
-    return (dispatch, getState) => {
-      axios.get(`${settings.SERVER}/user/`)
-      .then((response) => {
-        console.log('got all users on startup');
-        if (response.data.length > 0) {
-          dispatch({
-            type: 'UPDATE_WORKERLIST',
-            workers: response.data,
-            latest: response.data[0].updatedAt,
-          });
-        }
-      })
-      .catch((error) => {
-        console.log('error loading worker list from db', error);
-      });
-    };
-  }
-
-  static loadJobList() {
-    return (dispatch, getState) => {
-      axios.get('http://localhost:3000/job')
-      .then((response) => {
-        if (response.data.length > 0) {
-          console.log('inside loadJobList response', response);
-          dispatch({
-            type: 'UPDATE_JOBLIST',
-            jobs: response.data,
-            // latest: response.data[0].updatedAt,
-          });
-        }
-      })
-      .catch((error) => {
-        console.log('error loading job list from db', error);
-      });
-    }
   }
 
   // Updates the profile on the store
@@ -119,12 +69,13 @@ export default class Actions {
         UserId: getState().profile.id,
       };
 
+      console.log('Posting:', jobDetails.from);
       axios.post(`${settings.SERVER}/job/`, newJob)
       .then(() => {
         dispatch({ type: 'ADD_JOB', job: newJob });
       })
       .catch((error) => {
-        console.log('error posting new user in database', error);
+        console.log('error posting new job to database', error.message);
       });
     };
   }
@@ -151,8 +102,8 @@ export default class Actions {
 
   static updateJobList() {
     return (dispatch, getState) => {
-      // const latest = getState.jobList.latest;
-      // console.log('the latest job', latest);
+      const latest = getState.jobList.latest;
+      console.log('the latest job', latest);
       axios.get('http://127.0.0.1:3000/job')
       .then((response) => {
         if (response.data.length > 0) {
