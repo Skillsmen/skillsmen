@@ -7,12 +7,24 @@ var bcrypt = require('bcrypt');
 module.exports = {
 // Retrieve all users
   findAllUsers(req, res) {
-    User.findAll({include: Review})
-      .then(function(users) {
-        res.json(users);
-      }).catch(function (error) {
-        res.status(500).json(error);
-      }); 
+    User.findAll({
+      include: Review,
+      attributes: [
+        'id',
+        'mobile',
+        'location',
+        'profession',
+        'description',
+        'name',
+        'experience',
+        'profilePicUrl'
+      ]
+    })
+    .then(function(users) {
+      res.json(users);
+    }).catch(function (error) {
+      res.status(500).json(error);
+    }); 
   },
 
 // Attempt to return user associated with a provided username & password
