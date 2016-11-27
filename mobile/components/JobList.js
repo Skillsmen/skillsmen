@@ -66,7 +66,7 @@ class JobList extends React.Component {
           <SearchBar filter={filter} changeFilter={changeFilter} rightButton={this.AddButton()} />
         </View>
         <JobTypeFilter />
-        <MapListToggle toggleShowMap={toggleShowMap} showMap={this.state.showMap} />
+        <MapListToggle toggleShowMap={toggleShowMap} showMap={showMap} />
         { !showMap &&
           <ScrollView>
             {jobs.map((job, i) =>
