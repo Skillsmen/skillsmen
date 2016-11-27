@@ -22,7 +22,6 @@ const jobListReducer = (state = initialState, action) => {
         jobList: [...state.jobList, ...action.jobs],
         filter: state.filter,
         showMap: false,
-        // latest: action.latest || state.latest,
       };
     case 'CHANGE_FILTER':
       return {

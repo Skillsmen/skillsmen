@@ -51,7 +51,7 @@ const searchStyles = StyleSheet.create({
   },
 });
 
-const searchBar = ({rightButton, changeFilter, filter}) => {
+const searchBar = ({ rightButton, changeFilter, filter }) => {
   return (
     <Image
       style={searchStyles.bluePattern}
@@ -65,7 +65,6 @@ const searchBar = ({rightButton, changeFilter, filter}) => {
           onChangeText={changeFilter}
           value={filter}
         >
-          {filter.length > 0 ? null : <FontAwesome name={'search'} size={18} style={searchStyles.searchIcon} color={'#ffffff'} />}
         </TextInput>
         {rightButton}
       </View>

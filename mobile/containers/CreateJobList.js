@@ -4,6 +4,11 @@ import JobList from '../components/JobList';
 import Actions from '../actions/index';
 
 const getFilteredJobs = (jobs, filter) => {
+  if (!filter) {
+    console.log('inside if statement!')
+    return jobs;
+  }
+  console.log('outside if statement! filter: ', filter)
   return jobs.filter((job) => { return (job.title.indexOf(filter) >= 0); });
 };
 
@@ -26,7 +31,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(Actions.updateJobList());
   },
   changeFilter: (filter) => {
-    console.log('calling change filter!');
     dispatch(Actions.changeJobFilter(filter));
   },
   toggleShowMap: (showMap) => {
