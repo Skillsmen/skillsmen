@@ -10,6 +10,7 @@ import SearchBar from './searchBar';
 import JobTypeFilter from './JobTypeFilter';
 import MapListToggle from './mapListToggle';
 import JobTile from './JobTile';
+import MapView from './MapView';
 import AddJobButton from '../components/AddJob/AddJobButton';
 
 const { width } = Dimensions.get('window');
@@ -27,10 +28,16 @@ class JobList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
       jobData: [],
       counter: 0,
     };
+    // toggleShowMap = () => {
+    //   console.log('toggleShowMap running!')
+    //   this.setState({
+    //     showMap: !this.state.showMap,
+    //   });
+    // };
+    // toggleShowMap.bind(this);
   }
 
   componentDidMount() {
@@ -49,17 +56,18 @@ class JobList extends React.Component {
   }
 
   render() {
-    const { jobs, goToJob, filter, changeFilter } = this.props;
+    const { jobs, goToJob, filter, changeFilter, toggleShowMap } = this.props;
     // Warning: this line will always be false. ![] is still false, ![anything] is also false
     const loading = !jobs;
+    const showMap = this.props.showMap;
     return (
       <View>
         <View>
           <SearchBar filter={filter} changeFilter={changeFilter} rightButton={this.AddButton()} />
         </View>
         <JobTypeFilter />
-        <MapListToggle />
-        { !loading &&
+        <MapListToggle toggleShowMap={toggleShowMap} showMap={this.state.showMap} />
+        { !showMap &&
           <ScrollView>
             {jobs.map((job, i) =>
               (<JobTile
@@ -69,12 +77,9 @@ class JobList extends React.Component {
               />))}
           </ScrollView>
         }
-        { loading &&
-          <ActivityIndicator
-            animating={this.state.animating}
-            style={[styles.centering, { height: 80 }]}
-            size="large"
-            color="black"
+        { showMap &&
+          <MapView
+            jobs={jobs}
           />
         }
       </View>
@@ -89,6 +94,7 @@ JobList.propTypes = {
   jobs: React.PropTypes.array.isRequired,
   goToJob: React.PropTypes.func.isRequired,
   navigator: React.PropTypes.object,
+  toggleShowMap: React.PropTypes.func.isRequired,
 };
 
 export default JobList;

@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
 // Eventually will get recommendations passed in through props and map
 // over the info to create each individual recommendation
 const RecommendationList = ({ isPeer, navigator, name, userInfo, reviews, currentLoggedInUser }) => {
-  console.log('recommendation list- reviews', reviews);
   if (reviews) {
     return (
       <View style={styles.recommendations}>

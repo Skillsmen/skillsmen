@@ -91,9 +91,6 @@ class Profile extends React.Component {
 
   render() {
     const userInfo = this.props.route.params.user || this.props.profile;
-    console.log('profile isPeer', this.props.route.params.peerProfile);
-    console.log('user info profilePicUrl', userInfo.profilePicUrl);
-    console.log('setUserInfoToUpdate', this.state.userInfoToUpdate.profilePicUrl);
     return (
       <View style={styles.container}>
         <Header

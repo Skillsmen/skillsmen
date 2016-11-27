@@ -6,6 +6,7 @@ import {
   View,
   Text,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 
 const Dimensions = React.Dimensions || require('Dimensions');
@@ -60,22 +61,29 @@ export default class MapListToggle extends React.Component {
     this.state = {
     };
   }
+
   render() {
     return (
       <View style={filterJobStyles.outerBox}>
-        <View style={filterJobStyles.listToggle}>
+        <TouchableOpacity style={filterJobStyles.listToggle} onPress={() => this.props.toggleShowMap(false)}>
           <Text style={filterJobStyles.buttonText}>
             <FontAwesome name={'list'} size={15} style={filterJobStyles.buttonTextWords} color={'black'} />
             <Text style={filterJobStyles.buttonTextWordsBold}>  LIST</Text>
           </Text>
-        </View>
-        <View style={filterJobStyles.mapToggle}>
+        </TouchableOpacity>
+        <TouchableOpacity style={filterJobStyles.mapToggle} onPress={() => this.props.toggleShowMap(true)}>
           <Text style={filterJobStyles.buttonText}>
             <FontAwesome name={'map-marker'} size={15} style={filterJobStyles.buttonTextWords} color={'gray'} />
             <Text style={filterJobStyles.buttonTextWords}> MAP</Text>
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   }
 }
+
+MapListToggle.propTypes = {
+  toggleShowMap: React.PropTypes.func.isRequired,
+  showMap: React.PropTypes.bool.isRequired,
+};
+

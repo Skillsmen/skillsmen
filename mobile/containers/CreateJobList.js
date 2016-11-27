@@ -11,6 +11,7 @@ const mapStateToProps = (state) => {
   return {
     jobs: getFilteredJobs(state.jobList.jobList, state.jobList.filter),
     filter: state.jobList.filter,
+    showMap: state.jobList.showMap,
   };
 };
 
@@ -28,7 +29,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     console.log('calling change filter!');
     dispatch(Actions.changeJobFilter(filter));
   },
+  toggleShowMap: (showMap) => {
+    dispatch(Actions.toggleShowMap(showMap));
+  },
 });
+
 
 const CreateJobList = connect(
   mapStateToProps,

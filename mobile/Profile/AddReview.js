@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
 });
 
 const whiteImg = require('../assets/whiteTexturedBackground.png');
-const profileIcon = 'http://www.solotradie.com/wp-content/uploads/2015/04/tradesman_laptop.jpg'
 
 class AddReview extends React.Component {
   constructor(props) {
@@ -149,7 +148,6 @@ class AddReview extends React.Component {
 
   handleSubmit(text, navigator, userInfo, currentLoggedInUser) {
     if (text) {
-      console.log('currentLoggedInUser from AddReview', currentLoggedInUser);
       const newId = userInfo.Reviews.length > 0 ? userInfo.Reviews[userInfo.Reviews.length - 1].id + 1 : 1;
       const reviewerName = currentLoggedInUser.name;
       const reviewerImage = currentLoggedInUser.profilePicUrl;
@@ -206,8 +204,8 @@ class AddReview extends React.Component {
           onChangeText={text => this.updateTextState(text)}
           value={this.state.text}
           multiline={true}
-          placeholder={'Recomend ' + this.props.name + '... '}>
-        </TextInput>
+          placeholder={'Recommend ' + this.props.name + '... '}
+        />
         <TouchableHighlight style={this.submitButtonFormatHandler()} onPress={function() {context.handleSubmit(text, navigator, userInfo, currentLoggedInUser) }}>
           <Text style={this.submitButtonFontHandler()}> SUBMIT </Text>
         </TouchableHighlight>

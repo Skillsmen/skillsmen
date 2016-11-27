@@ -24,6 +24,13 @@ export default class Actions {
     };
   }
 
+  static toggleShowMap(showMap) {
+    return {
+      type: 'TOGGLE_SHOW_MAP',
+      showMap,
+    };
+  }
+
   // Updates the profile on the store
   static updateProfile(diff, upload) {
     return (dispatch, getState) => {
@@ -103,7 +110,6 @@ export default class Actions {
   static updateJobList() {
     return (dispatch, getState) => {
       const latest = getState.jobList.latest;
-      console.log('the latest job', latest);
       axios.get('http://127.0.0.1:3000/job')
       .then((response) => {
         if (response.data.length > 0) {

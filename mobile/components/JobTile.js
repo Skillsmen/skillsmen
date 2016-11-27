@@ -17,10 +17,9 @@ export default class JobTile extends React.Component {
       return (
         <BlueJobTile job={this.props.job} pressJob={this.props.pressJob} />
       );
-    } else {
-      return (
-        <WhiteJobTile job={this.props.job} pressJob={this.props.pressJob} />
-      );
-    }
+    } 
+    return (
+      <WhiteJobTile job={this.props.job} pressJob={this.props.pressJob} />
+    );
   }
 }

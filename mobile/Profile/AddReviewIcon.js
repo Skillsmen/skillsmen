@@ -22,7 +22,6 @@ const addReviewHandler = (navigator, name, userInfo, currentLoggedInUser) => {
 };
 
 const AddReviewIcon = ({ isPeer, navigator, name, userInfo, currentLoggedInUser }) => {
-  console.log('currentLoggedInUser AddReviewIcon', currentLoggedInUser);
   if (isPeer) {
     return (
       <Text

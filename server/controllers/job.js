@@ -26,6 +26,7 @@ module.exports = {
       }
     })
     .then(function (jobs) {
+      console.log('about to send jobs back: ', jobs)
       res.status(200).json(jobs);
     }).catch(function (error) {
       console.log('[DB ERROR]:', error.message);
