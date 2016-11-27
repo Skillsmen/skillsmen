@@ -42,7 +42,7 @@ const filterJobStyles = StyleSheet.create({
     width: 49.6 * vw,
     marginRight: 0.2 * vw,
     backgroundColor: '#ffffff',
-    color:'#000000',
+    color: '#000000',
     borderColor: '#1F67A3',
     borderWidth: 1,
     marginLeft: 0.2 * vw,
@@ -50,7 +50,7 @@ const filterJobStyles = StyleSheet.create({
   onText: {
     textAlign: 'center',
     marginTop: 4 * vh,
-    color: 'white'
+    color: 'white',
   },
   offText: {
     textAlign: 'center',
@@ -78,11 +78,12 @@ export default class MapListToggle extends React.Component {
 
   render() {
     const showMap = this.props.showMap;
-    console.log('showMap:', showMap);
     return (
       <View style={filterJobStyles.outerBox}>
-
-        <TouchableOpacity style={showMap ? filterJobStyles.offBg : filterJobStyles.onBg} onPress={() => this.props.toggleShowMap(false)}>
+        <TouchableOpacity
+          style={showMap ? filterJobStyles.offBg : filterJobStyles.onBg}
+          onPress={() => this.props.toggleShowMap(false)}
+        >
           <Text style={filterJobStyles.buttonText}>
             <FontAwesome name={'list'} size={15} style={filterJobStyles.buttonTextWords} color={showMap ? '#1F67A3' : 'white'} />
             <Text style={showMap ? filterJobStyles.offText : filterJobStyles.onText}>  LIST</Text>
@@ -90,7 +91,10 @@ export default class MapListToggle extends React.Component {
         </TouchableOpacity>
 
 
-        <TouchableOpacity style={showMap ? filterJobStyles.onBg : filterJobStyles.offBg} onPress={() => this.props.toggleShowMap(true)}>
+        <TouchableOpacity
+          style={showMap ? filterJobStyles.onBg : filterJobStyles.offBg}
+          onPress={() => this.props.toggleShowMap(true)}
+        >
           <Text style={filterJobStyles.buttonText}>
             <FontAwesome name={'map-marker'} size={15} style={filterJobStyles.buttonTextWords} color={showMap ? 'white' : '#1F67A3'} />
             <Text style={showMap ? filterJobStyles.onText : filterJobStyles.offText}> MAP</Text>
