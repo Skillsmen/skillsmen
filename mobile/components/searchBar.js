@@ -65,6 +65,7 @@ const searchBar = ({ rightButton, changeFilter, filter }) => {
           onChangeText={changeFilter}
           value={filter}
         >
+         {filter ? null : <FontAwesome name={'search'} size={18} style={searchStyles.searchIcon} color={'#ffffff'} />}
         </TextInput>
         {rightButton}
       </View>
