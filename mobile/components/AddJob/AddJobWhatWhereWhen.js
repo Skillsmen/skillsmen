@@ -10,17 +10,30 @@ import BackButton from '../../reusableComponents/BackButton';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Geocoder from 'react-native-geocoding';
 
+const condenseAddress = (address) => {
+  let counter = 0;
+  let result;
+  address.split('').forEach( (character, index) => {
+    if (character === ',') {
+      counter += 1;
+    }
+    if (counter === 2 && character === ',') {
+      result = index;
+    }
+  });
+  return address.split('').slice(0, result).join('');
+};
 
 const AddJobWhatWhereWhen = ({ styles, methods }) => {
-  const userInput = (type, placeHolder) => {
+  const userInput = (jobType, placeHolder) => {
     return (
       <View style={styles.inputBox}>
         <TextInput
-          id={type}
+          id={jobType}
           style={styles.input}
           autoFocus
           placeholder={placeHolder}
-          onChangeText={text => methods.addJobDetail(type, text)}
+          onChangeText={text => methods.addJobDetail(jobType, text)}
         />
       </View>
     );
@@ -30,7 +43,6 @@ const AddJobWhatWhereWhen = ({ styles, methods }) => {
     <View style={styles.container} >
       <BackButton navigator={methods.navigator} />
       {userInput('title', 'What is the Project?')}
-      {userInput('location', 'Where?')}
       <GooglePlacesAutocomplete
         placeholder='Where?'
         style={styles.input}
@@ -40,16 +52,20 @@ const AddJobWhatWhereWhen = ({ styles, methods }) => {
         listViewDisplayed='auto'    // true/false/undefined
         fetchDetails={true}
         onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-          console.log('address: ', data.description);
+          const address = condenseAddress(data.description);
+          console.log('data: ', data)
           Geocoder.setApiKey('AIzaSyAxN1YpDLDVGxkvu5WjCloa_CYYG_nLh7Q'); // use a valid API key 
-          Geocoder.getFromLocation(data.description).then(
-            json => {
-              var location = json.results[0].geometry.location;
-              console.log(location.lat + ", " + location.lng);
+          Geocoder.getFromLocation(address).then(
+            (json) => {
+              const location = json.results[0].geometry.location;
+              // console.log('lng: ', location.lng);
+              // console.log('address ', address);
+              // console.log('methods: ', methods);
+              methods.addJobDetail('location', address, location.lat, location.lng);
             },
-            error => {
-              alert(error);
-            }
+            (error) => {
+              console.log(error);
+            },
           );
         }}
         query={{

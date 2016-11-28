@@ -119,7 +119,7 @@ export default class BlueJobTile extends React.Component {
             </View>
             <View style={blueTile.middleIcon}>
               <FontAwesome name={'map-marker'} size={15} style={blueTile.iconFormat} color={'white'}>
-                <Text style={blueTile.middleText}> {this.props.job.location}</Text>
+                <Text style={blueTile.middleText}> {this.props.job.address}</Text>
               </FontAwesome>
             </View>
             <View style={blueTile.rightIcon}>

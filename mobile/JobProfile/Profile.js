@@ -44,7 +44,7 @@ class Profile extends React.Component {
     const propertyArr = [
       payrate, 
       this.props.route.params.job.profession,
-      this.props.route.params.job.location,
+      this.props.route.params.job.address,
       this.props.route.params.job.time,
       this.props.route.params.job.hires,
     ];

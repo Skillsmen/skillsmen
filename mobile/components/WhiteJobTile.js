@@ -118,7 +118,7 @@ class WhiteJobTile extends React.Component {
             </View>
             <View style={whiteTile.middleIcon}>
               <FontAwesome name={'map-marker'} size={15} style={whiteTile.iconFormat} color={'gray'}>
-                <Text style={whiteTile.middleText}> {this.props.job.location}</Text>
+                <Text style={whiteTile.middleText}> {this.props.job.address}</Text>
               </FontAwesome>
             </View>
             <View style={whiteTile.rightIcon}>

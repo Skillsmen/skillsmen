@@ -65,10 +65,17 @@ class AddJob extends React.Component {
   nextScene(view, paramObj) {
     this.props.navigator.push(Router.getRoute(view, paramObj));
   }
-  addJobDetail(key, val) {
+  addJobDetail(jobType, text, lat, lng) {
     const newJob = this.state.newJob;
-    newJob[key] = val;
-    this.setState({ newJob });
+    newJob[jobType] = text;
+    if (lat && lng) {
+      newJob.lat = lat;
+      newJob.lng = lng;
+    }
+    const context = this;
+    this.setState({ newJob }, function() {
+      console.log('state has been changed: ', context.state);
+    });
   }
   dispatchJobDetails() {
     this.props.addJob(this.state.newJob);

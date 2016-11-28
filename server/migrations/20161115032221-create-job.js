@@ -11,8 +11,14 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
-      location: {
+      address: {
         type: Sequelize.STRING
+      },
+      lat: {
+        type: Sequelize.FLOAT
+      },
+      lng: {
+        type: Sequelize.FLOAT
       },
       timeFrame: {
         type: Sequelize.STRING

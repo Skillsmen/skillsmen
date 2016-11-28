@@ -66,7 +66,6 @@ export default class Actions {
     return (dispatch, getState) => {
       const newJob = {
         description: jobDetails.description,
-        location: jobDetails.location,
         from: jobDetails.from,
         to: jobDetails.to,
         hires: jobDetails.hires,
@@ -74,6 +73,9 @@ export default class Actions {
         pay: jobDetails.pay,
         profession: jobDetails.profession,
         UserId: getState().profile.id,
+        lat: jobDetails.lat,
+        lng: jobDetails.lng,
+        address: jobDetails.location,
       };
       axios.post(`${settings.SERVER}/job/`, newJob)
       .then(() => {
