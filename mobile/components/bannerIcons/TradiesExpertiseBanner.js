@@ -19,3 +19,8 @@ TradiesExpertiseBanner.propTypes = {
 };
 
 export default TradiesExpertiseBanner;
+
+TradiesExpertiseBanner.propTypes = {
+  expertise: React.PropTypes.string,
+  Icon: React.PropTypes.func,
+};
