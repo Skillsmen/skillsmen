@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   ScrollView,
-  ActivityIndicator,
   StyleSheet,
   Dimensions,
 } from 'react-native';
@@ -10,7 +9,7 @@ import SearchBar from './searchBar';
 import JobTypeFilter from './JobTypeFilter';
 import MapListToggle from './mapListToggle';
 import JobTile from './JobTile';
-import MapView from './MapView';
+import GoogleMap from './GoogleMap';
 import AddJobButton from '../components/AddJob/AddJobButton';
 
 const { width } = Dimensions.get('window');
@@ -73,13 +72,15 @@ class JobList extends React.Component {
               (<JobTile
                 job={job}
                 key={i}
+                index={i}
                 pressJob={() => { goToJob(job); }}
               />))}
           </ScrollView>
         }
         { showMap &&
-          <MapView
+          <GoogleMap
             jobs={jobs}
+            pressJob={() => { goToJob(); }}
           />
         }
       </View>

@@ -13,7 +13,7 @@ export default class JobTile extends React.Component {
     function isEven(n) {
       return n % 2 === 0;
     }
-    if (isEven(this.props.job.id)) {
+    if (isEven(this.props.index)) {
       return (
         <BlueJobTile job={this.props.job} pressJob={this.props.pressJob} />
       );

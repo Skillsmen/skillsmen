@@ -71,7 +71,6 @@ class AddJob extends React.Component {
     if (lat && lng) {
       newJob.lat = lat;
       newJob.lng = lng;
-      console.log('INSIDE LAT LONG CHANGE!')
     }
     const context = this;
     this.setState({ newJob }, function() {

@@ -6,3 +6,13 @@ Deployed server to heroku
 Added calendar picker for choosing start and end dates for jobs
 Built front end onboarding
 User form validation
+user-centric features:
+  Persistant user login
+
+Sam
+====
+- Job List
+- Add new review
+- Google Map
+- New Job Location form - google autocomplete API
+- Designs
