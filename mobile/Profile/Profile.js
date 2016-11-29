@@ -6,6 +6,8 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
+
 import Header from './Header';
 import MainInfo from './MainInfo';
 import EditInfo from './EditMode';
@@ -91,6 +93,7 @@ class Profile extends React.Component {
 
   render() {
     const userInfo = this.props.route.params.user || this.props.profile;
+    console.log('UserInfo - Jobs:', userInfo.Jobs);
     return (
       <View style={styles.container}>
         <Header
@@ -124,14 +127,17 @@ class Profile extends React.Component {
                 contactInfo={userInfo.mobile}
               />
             }
-            <RecommendationList
-              userInfo={userInfo}
-              isPeer={this.isPeer()}
-              navigator={this.props.navigator}
-              name={userInfo.name}
-              reviews={userInfo.Reviews}
-              currentLoggedInUser={this.props.profile}
-            />
+            <ScrollableTabView>
+              <RecommendationList
+                userInfo={userInfo}
+                isPeer={this.isPeer()}
+                navigator={this.props.navigator}
+                name={userInfo.name}
+                reviews={userInfo.Reviews}
+                currentLoggedInUser={this.props.profile}
+                tabLabel="Recommendations"
+              />
+            </ScrollableTabView>
           </View>
         </ScrollView>
       </View>
