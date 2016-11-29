@@ -11,6 +11,7 @@ import {
   Image,
 } from 'react-native';
 import { connect } from 'react-redux';
+import phoneFormatter from 'phone-formatter';
 
 import Router from '../navigation/Router';
 import colors from '../constants/Colors';
@@ -55,6 +56,16 @@ const styles = StyleSheet.create({
   },
 });
 
+const displayError = (bool, errorMsg) => {
+  if (bool) {
+    return (
+      <Text style={{ color: 'red', backgroundColor: 'rgba(0,0,0,0)' }}>
+        {errorMsg}
+      </Text>
+    );
+  }
+  return (null);
+};
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -63,7 +74,8 @@ class SignUp extends React.Component {
       input: this.props.route.params.questionIndex === 3 ? 'PROFESSION' : '',
       username: '',
       password: '',
-      erroneousInput: false,
+      nonNumericInput: false,
+      badLength: false,
     };
 
     this.populatePicker = set =>
@@ -73,6 +85,7 @@ class SignUp extends React.Component {
 
     this.userInput = () => {
       const questionIndex = this.props.route.params.questionIndex;
+      // profession question
       if (questionIndex === 3) {
         return (
           <Picker
@@ -90,6 +103,7 @@ class SignUp extends React.Component {
           <TextInput
             style={styles.input}
             autoFocus
+            keyboardType={questionIndex === 4 || questionIndex === 1 ? 'phone-pad' : 'default'}
             placeholder={questionSet[questionIndex][1]}
             onChangeText={text => this.setState({ input: text })}
           />
@@ -101,12 +115,22 @@ class SignUp extends React.Component {
       const { dispatch } = this.props;
       const questionIndex = this.props.route.params.questionIndex;
       const key = questionSet[questionIndex][0];
-      const value = this.state.input;
+      let value = this.state.input;
 
       // Makes sure years of experience is entered as a number
       if (questionIndex === 1 && isNaN(value)) {
-        this.setState({ erroneousInput: true });
+        this.setState({ nonNumericInput: true });
         return;
+      }
+
+      if (questionIndex === 4) {
+        const sanitized = value.slice().replace(/\D/g, '');
+        if (sanitized.length === 10) {
+          value = phoneFormatter.format(sanitized, '(NNN)NNN-NNNN');
+        } else {
+          this.setState({ badLength: true });
+          return;
+        }
       }
 
       const diff = {};
@@ -125,17 +149,6 @@ class SignUp extends React.Component {
           password: this.state.password,
         }));
       }
-    };
-
-    this.displayError = () => {
-      if (this.state.erroneousInput) {
-        return (
-          <Text style={{ color: 'red', backgroundColor: 'rgba(0,0,0,0)' }}>
-            Please enter a number
-          </Text>
-        );
-      }
-      return (null);
     };
   }
 
@@ -158,7 +171,8 @@ class SignUp extends React.Component {
           source={background.whiteBg}
         >
           <View style={styles.container}>
-            {this.displayError()}
+            {displayError(this.state.nonNumericInput, 'Enter years in numeric form')}
+            {displayError(this.state.badLength, 'Phone number should be 10 digits')}
             {this.userInput()}
             <View>
               <TouchableOpacity style={styles.bttn} onPress={this.nextScene}>
