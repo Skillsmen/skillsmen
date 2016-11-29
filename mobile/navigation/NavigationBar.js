@@ -6,7 +6,8 @@ import {
 } from '@exponent/ex-navigation';
 import {
   Text,
-  View
+  View,
+  StyleSheet,
 } from 'react-native';
 import {
   FontAwesome,
@@ -14,17 +15,32 @@ import {
 
 import Router from './Router';
 
+const styles = StyleSheet.create({
+  bar: {
+    backgroundColor: '#F6F6F6',
+  },
+  content: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    marginTop:1,
+  }
+});
+
 export default class RootNavigation extends React.Component {
   static renderIcon(name, isSelected, text) {
     const color = isSelected ? '#395b91' : '#434343';
     return (
-      <View>
+      <View style={styles.content}>
         <FontAwesome
           name={name}
-          size={30}
+          size={35}
           color={color}
         />
-        <Text style={{color}}>
+        <Text style={styles.text}>
           {text}
         </Text>
       </View>
@@ -38,12 +54,12 @@ export default class RootNavigation extends React.Component {
   render() {
     return (
       <TabNavigation
-        tabBarHeight={64}
+        tabBarHeight={60}
         initialTab="profile"
-        style={{ flex: 1, flexDirection: 'column', backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}
       >
         <TabNavigationItem
           id="profile"
+          style={styles.bar}
           renderIcon={isSelected => RootNavigation.renderIcon('home', isSelected, 'Profile')}
         >
           <StackNavigation
@@ -55,6 +71,7 @@ export default class RootNavigation extends React.Component {
         </TabNavigationItem>
         <TabNavigationItem
           id="jobList"
+          style={styles.bar}
           renderIcon={isSelected => RootNavigation.renderIcon('wrench', isSelected, 'Jobs')}
         >
           <StackNavigation
@@ -64,7 +81,8 @@ export default class RootNavigation extends React.Component {
         </TabNavigationItem>
         <TabNavigationItem
           id="workerList"
-          renderIcon={isSelected => RootNavigation.renderIcon('users', isSelected, 'Tradesman')}
+          style={styles.bar}
+          renderIcon={isSelected => RootNavigation.renderIcon('user-plus', isSelected, 'Tradesman')}
         >
           <StackNavigation
             id="workerList"
@@ -73,6 +91,7 @@ export default class RootNavigation extends React.Component {
         </TabNavigationItem>
         <TabNavigationItem
           id="chats"
+          style={styles.bar}
           renderIcon={isSelected => RootNavigation.renderIcon('envelope', isSelected, 'Messages')}
         >
           <StackNavigation
