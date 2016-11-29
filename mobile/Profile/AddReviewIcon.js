@@ -37,9 +37,7 @@ const AddReviewIcon = ({ isPeer, navigator, name, userInfo, currentLoggedInUser 
       </Text>
     );
   }
-  return (
-    <Text></Text>
-  );
+  return (null);
 };
 
 export default AddReviewIcon;

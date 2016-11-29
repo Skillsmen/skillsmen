@@ -7,12 +7,12 @@ import {
   Image,
   TextInput,
   View,
-
+  Dimensions,
 } from 'react-native';
 
 const blueImg = require('../assets/bluePatternBackground.png');
 
-const { width, height } = require('Dimensions').get('window');
+const { width, height } = Dimensions.get('window');
 
 const vh = height / 100;
 const vw = width / 100;
@@ -70,6 +70,12 @@ const searchBar = ({ rightButton, changeFilter, filter }) => {
       </View>
     </Image>
   );
+};
+
+searchBar.propTypes = {
+  rightButton: React.PropTypes.object,
+  changeFilter: React.PropTypes.func,
+  filter: React.PropTypes.string,
 };
 
 export default searchBar;
