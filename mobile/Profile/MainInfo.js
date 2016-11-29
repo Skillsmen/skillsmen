@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Linking,
 } from 'react-native';
 import {
   FontAwesome,
@@ -30,22 +31,33 @@ const styles = StyleSheet.create({
   },
 })
 
-const MainInfo = ({name, experience, contactInfo}) => (
-  <View>
-
-    <Text style={styles.name}> {name}</Text>
-    <Text style={styles.experience}>
-      {experience}
-    </Text>
-    <Text style={styles.contact}>
-      <FontAwesome
-        name="phone"
-        size={20}
-        color="#006600"
-      />
-      {`     ${contactInfo}`}
-    </Text>
-  </View>
-)
+const MainInfo = ({name, experience, contactInfo}) => {
+    const handleClick = () => {
+      Linking.canOpenURL(contactInfo).then(supported => {
+        if (supported) {
+          Linking.openURL(contactInfo);
+        } else {
+          console.log('Don\'t know how to open URI: ' + contactInfo);
+        }
+      });
+    };
+    return (
+      <View>
+        <Text style={styles.name}> {name}</Text>
+        <Text style={styles.experience}>
+          {experience}
+        </Text>
+        <Text style={styles.contact} onPress={handleClick}>
+          <FontAwesome
+            name="phone"
+            size={20}
+            color="#006600"
+          />
+          {`     ${contactInfo}`}
+        </Text>
+      </View>
+    )
+  
+}
 
 export default MainInfo;
