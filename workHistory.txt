@@ -2,5 +2,7 @@
 Wallace
 =======
 Built easy scene transitions for sign up screens
-user-centric features:
-  Persistant user login
+Deployed server to heroku
+Added calendar picker for choosing start and end dates for jobs
+Built front end onboarding
+User form validation
