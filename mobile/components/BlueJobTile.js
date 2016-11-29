@@ -23,6 +23,7 @@ const blueTile = StyleSheet.create({
   bluePanel: {
     height: 30 * vh,
     width: 100 * vw,
+    paddingTop: -0.5 * vh
   },
   bluePanelHeading: {
     marginTop: 5 * vh,
