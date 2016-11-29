@@ -65,19 +65,21 @@ export default class MapViewComponent extends React.Component {
   renderCallout(job) {
     return (
       <Components.MapView.Callout tooltip>
-        <View style={styling.bubble} >
-          <View style={styling.leftBox}>
-            <Image source={{ uri: job.User.profilePicUrl }} style={styling.bubblePic} />
+        <TouchableHighlight onPress={this.pressJob}>
+          <View style={styling.bubble} >
+            <View style={styling.leftBox}>
+              <Image source={{ uri: job.User.profilePicUrl }} style={styling.bubblePic} />
+            </View>
+            <View style={styling.rightBox}>
+              <Text style={styling.bubbleTitle}>
+                {job.title}
+              </Text>
+              <Text style={styling.info}>
+                {moment(job.from).format('MMM Do YY').slice(0, moment(job.from).format('MMM Do YY').length - 3)}, {job.hires} spots, {job.pay}
+              </Text>
+            </View>
           </View>
-          <View style={styling.rightBox}>
-            <Text style={styling.bubbleTitle}>
-              {job.title}
-            </Text>
-            <Text style={styling.info}>
-              {moment(job.from).format('MMM Do YY').slice(0, moment(job.from).format('MMM Do YY').length - 3)}, {job.hires} spots, {job.pay}
-            </Text>
-          </View>
-        </View>
+        </TouchableHighlight>
       </Components.MapView.Callout>
     );
   }

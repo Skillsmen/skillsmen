@@ -32,17 +32,21 @@ const whiteTile = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   leftIcon: {
-    marginLeft: 15 * vw,
+    marginLeft: 6 * vw,
     width: 20 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
   },
   middleIcon: {
-    width: 30 * vw,
+    width: 44 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
-    paddingLeft: 2 * vw,
+    paddingLeft: 0 * vw,
+    textAlign: 'center',
+    flex:1,
+    alignItems:'center' 
   },
   rightIcon: {
-    width: 25 * vw,
+    paddingLeft: 3 * vw,
+    width: 28 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
   },
   iconSection: {
@@ -63,8 +67,8 @@ const whiteTile = StyleSheet.create({
     marginLeft: 27 * vw,
     marginRight: 2 * vw,
     borderRadius: 4 * vh,
-    borderColor: 'gray',
-    borderWidth: 0.5,
+    borderColor: '#f5f5f5',
+    borderWidth: 1.5,
   },
   posterNameText: {
     color: 'black',
@@ -83,6 +87,8 @@ const whiteTile = StyleSheet.create({
     textAlign: 'center',
     color: 'black',
     fontSize: 12,
+    flex:1,
+    alignItems:'center' 
   },
 });
 

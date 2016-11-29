@@ -33,17 +33,21 @@ const blueTile = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   leftIcon: {
-    marginLeft: 20 * vw,
+    marginLeft: 10 * vw,
     width: 20 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
   },
   middleIcon: {
-    width: 25 * vw,
+    width: 40 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
     paddingLeft: 2 * vw,
+    textAlign: 'center',
+    flex:1,
+    alignItems:'center' 
   },
   rightIcon: {
-    width: 35 * vw,
+    paddingLeft: 3 * vw,
+    width: 28 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
   },
   iconSection: {
@@ -84,6 +88,8 @@ const blueTile = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     fontSize: 12,
+    flex:1,
+    alignItems:'center' 
   },
 });
 
