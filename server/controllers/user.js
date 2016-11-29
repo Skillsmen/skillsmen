@@ -45,7 +45,7 @@ module.exports = {
         'experience',
         'profilePicUrl'
       ],
-      include: Review
+      include: [Review, Job]
     })
     .then(function(userRecord) {
 
@@ -57,10 +57,10 @@ module.exports = {
         delete userRecord[0].password
       }
       if (match) {
-        console.log('match condition IS met')
+        console.log('[ ' + userRecord[0].name + ' ]' + ' signing in!');
         res.json(userRecord[0]);
       } else {
-        console.log('match condition NOT met')
+        console.log('[ ' + userRecord[0].name + ' ]' + ' entered the wrong password!')
         res.status(400).json();
       }
     }).catch(function (error) {
@@ -72,11 +72,11 @@ module.exports = {
     User.findById(req.params.id, {
       include: Review
     })
-      .then(function(user) {
-        res.json(user);
-      }).catch(function (error) {
-        res.status(500).json(error);
-      });
+    .then(function(user) {
+      res.json(user);
+    }).catch(function (error) {
+      res.status(500).json(error);
+    });
   },
 // Create a new user
   createUser(req, res) {
@@ -94,11 +94,11 @@ module.exports = {
       profilePicUrl: req.body.profilePicUrl,
     }
     User.create(newUser)
-      .then(function(user) {
-        res.json(user);
-      }).catch(function (error) {
-        res.status(500).json(error);
-      });
+    .then(function(user) {
+      res.json(user);
+    }).catch(function (error) {
+      res.status(500).json(error);
+    });
   },
 // Update users information
   updateUser(req, res) {
@@ -108,6 +108,22 @@ module.exports = {
       }
     }).then(function (updatedUser) {
       res.status(200).json(updatedUser);
+    }).catch(function (error){
+      res.status(500).json(error);
+    });
+  },
+
+  exists(req, res) {
+    const username = req.params.username;
+    console.log('Username!', username);
+    User.findAll({ 
+      where: { 
+        username: username,
+      },
+    })
+    .then(function(userRecord) {
+      console.log('userRecord', userRecord);
+      res.status(200).send(!!userRecord.length);
     }).catch(function (error){
       res.status(500).json(error);
     });

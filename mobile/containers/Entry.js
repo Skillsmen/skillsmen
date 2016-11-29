@@ -25,11 +25,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  failedAttempt: {
-    marginTop: 0.05 * height,
-    marginBottom: 0.01 * height,
-    width,
-  },
   boot: {
     width: width * 0.65 * 1.26,
     height: width * 0.65,
@@ -61,11 +56,18 @@ const styles = StyleSheet.create({
     height: 30,
     width: width * 0.7,
   },
-  center: {
-    textAlign: 'center',
-    color: 'red',
-  },
 });
+
+const displayError = (bool, errorMsg) => {
+  if (bool) {
+    return (
+      <Text style={{ color: 'red', backgroundColor: 'rgba(0,0,0,0)' }}>
+        {errorMsg}
+      </Text>
+    );
+  }
+  return null;
+};
 
 const boot = require('../assets/theBoot.png');
 
@@ -75,64 +77,53 @@ class Entry extends React.Component {
     this.state = {
       user: '',
       pass: '',
-      failedAttempt: false,
+      badSignIn: false,
+      badSignUp: false,
     };
 
     this.signin = () => {
       const username = this.state.user;
       const password = this.state.pass;
-      const context = this;
       if (username !== '' && password !== '') {
         axios.post(`${settings.SERVER}/signin/`, {
           username,
           password,
         })
         .then((response) => {
-          // If valid user, update the global store with profile info from the server
-          if (response.status === 200) {
-            const { dispatch } = context.props;
-            dispatch(Actions.grantAccess('token string generated from server'));
-            dispatch(Actions.updateProfile(response.data));
-            dispatch(Actions.grantAccess('token string generated from server'));
-          } else {
-            console.log('response from sign in NOT FOUND 400!');
-            context.setState({ failedAttempt: true });
-          }
+          const { dispatch } = this.props;
+          dispatch(Actions.updateProfile(response.data));
+          dispatch(Actions.grantAccess('token string generated from server'));
         })
         .catch((error) => {
-          console.log('[ERROR]: Signin failed', error.message);
-          this.setState({ failedAttempt: true });
+          console.log('[ERROR] SignIn failed:', error.message);
+          this.setState({ badSignIn: true, badSignUp: false });
         });
       }
     };
-    this.signup = this.signup.bind(this);
-  }
 
-
-  signup() {
-    const username = this.state.user;
-    const password = this.state.pass;
-    // TODO: Make a request to server to see if username already exists
-    if (username !== '' && password !== '') {
-      this.props.navigator.push(Router.getRoute('signup', {
-        questionIndex: 0,
-        username,
-        password,
-      }));
-    }
-  }
-
-  failedSignInAttempt() {
-    if (this.state.failedAttempt) {
-      return (
-        <View style={styles.failedAttempt}>
-          <Text style={styles.center}>
-            Invalid username or password
-          </Text>
-        </View>
-      );
-    }
-    return null;
+    this.signup = () => {
+      const username = this.state.user;
+      const password = this.state.pass;
+      console.log('Sending', username);
+      if (username !== '' && password !== '') {
+        axios.get(`${settings.SERVER}/exists/${username}`)
+        .then((response) => {
+          console.log(response.data);
+          if (response.data) {
+            this.setState({ badSignIn: false, badSignUp: true });
+          } else {
+            this.props.navigator.push(Router.getRoute('signup', {
+              questionIndex: 0,
+              username,
+              password,
+            }));
+          }
+        })
+        .catch((error) => {
+          console.log('[ERROR] SignUp failed:', error.message);
+        });
+      }
+    };
   }
 
   render() {
@@ -151,7 +142,8 @@ class Entry extends React.Component {
               style={styles.boot}
               source={boot}
             />
-            {this.failedSignInAttempt()}
+            {displayError(this.state.badSignIn, 'Invalid username or password')}
+            {displayError(this.state.badSignUp, 'Username already in use')}
             <View style={styles.inputBox}>
               <TextInput
                 style={styles.input}

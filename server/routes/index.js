@@ -17,6 +17,8 @@ router.get('/user/:id', userController.findOneUser);
 router.put('/user/:id', userController.updateUser);
 // Attempt to sign in
 router.post('/signin', userController.signIn);
+// Attempt to sign up
+router.get('/exists/:username', userController.exists);
 
 // REVIEWS
 // Create a new review

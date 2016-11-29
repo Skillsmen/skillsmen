@@ -63,12 +63,13 @@ class SignUp extends React.Component {
       input: this.props.route.params.questionIndex === 3 ? 'PROFESSION' : '',
       username: '',
       password: '',
+      erroneousInput: false,
     };
 
     this.populatePicker = set =>
-    set.map((occupation, index) => (
-      <Picker.Item key={index}label={occupation} value={occupation} />
-    ));
+      set.map((occupation, index) => (
+        <Picker.Item key={index}label={occupation} value={occupation} />
+      ));
 
     this.userInput = () => {
       const questionIndex = this.props.route.params.questionIndex;
@@ -102,10 +103,16 @@ class SignUp extends React.Component {
       const key = questionSet[questionIndex][0];
       const value = this.state.input;
 
+      // Makes sure years of experience is entered as a number
+      if (questionIndex === 1 && isNaN(value)) {
+        this.setState({ erroneousInput: true });
+        return;
+      }
+
       const diff = {};
       diff[key] = value;
+      // Last question
       if (questionIndex === 5) {
-        // THIS IS WHERE ONBOARDING FINISHES AND GETS PASSED TO PROFILE
         diff.username = this.state.username;
         diff.password = this.state.password;
         dispatch(Actions.updateProfile(diff, true));
@@ -118,6 +125,17 @@ class SignUp extends React.Component {
           password: this.state.password,
         }));
       }
+    };
+
+    this.displayError = () => {
+      if (this.state.erroneousInput) {
+        return (
+          <Text style={{ color: 'red', backgroundColor: 'rgba(0,0,0,0)' }}>
+            Please enter a number
+          </Text>
+        );
+      }
+      return (null);
     };
   }
 
@@ -140,6 +158,7 @@ class SignUp extends React.Component {
           source={background.whiteBg}
         >
           <View style={styles.container}>
+            {this.displayError()}
             {this.userInput()}
             <View>
               <TouchableOpacity style={styles.bttn} onPress={this.nextScene}>
