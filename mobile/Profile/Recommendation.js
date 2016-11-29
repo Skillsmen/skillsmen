@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
 
 export default ({ comment, rating, ReviewFor, ReviewFrom, createdAt, key, reviewerName, reviewerImage }) => {
   console.log('reviewerImage: ', reviewerImage);
+  reviewerImage = reviewerImage || 'some/fake/uri'; // quick fix to the NSNULL error
   return (
     <View style={styles.card}>
       <View style={styles.cardLeft}>
