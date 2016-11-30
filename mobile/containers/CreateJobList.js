@@ -5,10 +5,8 @@ import Actions from '../actions/index';
 
 const getFilteredJobs = (jobs, filter) => {
   if (!filter) {
-    console.log('inside if statement!')
     return jobs;
   }
-  console.log('outside if statement! filter: ', filter)
   return jobs.filter((job) => { return (job.title.indexOf(filter) >= 0); });
 };
 

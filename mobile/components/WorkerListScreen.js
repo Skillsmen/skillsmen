@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   View,
+  ScrollView
 } from 'react-native';
 import SearchBar from '../containers/WorkerSearchBar';
 import JobTypeFilter from '../components/JobTypeFilter';
@@ -12,7 +13,9 @@ const WorkerListScreen = ({ navigator }) => (
       <SearchBar />
       <JobTypeFilter />
     </View>
-    <WorkerList navigator={navigator} />
+    <ScrollView>
+      <WorkerList navigator={navigator} />
+    </ScrollView>
   </View>
 );
 

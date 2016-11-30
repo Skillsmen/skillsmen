@@ -23,8 +23,9 @@ const styles = StyleSheet.create({
 
 
 const AddJobButton = ({ navigator }) => {
-  const addJob = () =>
+  const addJob = () => {
     navigator.push(Router.getRoute('addJob'));
+  };
   return (
     <View style={styles.add}>
       <TouchableOpacity onPress={addJob} >

@@ -7,8 +7,9 @@ const initialState = {
 const jobListReducer = (state = initialState, action) => {
   switch (action.type) {
     case ('ADD_JOB'):
+    console.log('in ADD JOB reducer! action: ', action);
       return {
-        jobList: [...state.jobList, action.newJob],
+        jobList: [...state.jobList, action.job],
         filter: state.filter,
         showMap: false,
       };

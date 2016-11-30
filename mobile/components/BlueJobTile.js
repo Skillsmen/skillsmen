@@ -90,7 +90,7 @@ const blueTile = StyleSheet.create({
     color: 'white',
     fontSize: 12,
     flex:1,
-    alignItems:'center' 
+    alignItems:'center'
   },
 });
 

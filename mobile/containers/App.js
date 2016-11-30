@@ -92,7 +92,6 @@ class App extends React.Component {
     if (!this.state.assetsReady || !this.state.dataReady) {
       return <Exponent.Components.AppLoading />;
     }
-
     return (
       <View style={styles.container}>
         <StackNavigation

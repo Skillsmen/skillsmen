@@ -32,14 +32,14 @@ const whiteTile = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   leftIcon: {
-    marginLeft: 6 * vw,
+    marginLeft: 10 * vw,
     width: 20 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
   },
   middleIcon: {
-    width: 44 * vw,
+    width: 40 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
-    paddingLeft: 0 * vw,
+    paddingLeft: 2 * vw,
     textAlign: 'center',
     flex:1,
     alignItems:'center' 

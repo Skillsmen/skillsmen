@@ -18,6 +18,7 @@ import Router from './Router';
 const styles = StyleSheet.create({
   bar: {
     backgroundColor: '#F6F6F6',
+    borderWidth: 0,
   },
   content: {
     flex: 1,
@@ -26,11 +27,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    marginTop:1,
-  }
+    marginTop: 1,
+  },
+  wholebar: {
+  },
 });
 
 export default class RootNavigation extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   static renderIcon(name, isSelected, text) {
     const color = isSelected ? '#395b91' : '#434343';
     return (
@@ -47,15 +54,12 @@ export default class RootNavigation extends React.Component {
     );
   }
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <TabNavigation
         tabBarHeight={60}
         initialTab="profile"
+        style={styles.wholebar}
       >
         <TabNavigationItem
           id="profile"
