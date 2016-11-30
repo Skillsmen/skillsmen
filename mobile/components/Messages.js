@@ -46,12 +46,10 @@ class Messages extends React.Component {
       text: this.state.message,
       UserId: this.props.profile.id,
     });
-
     this.setState({
       message: '',
     });
   }
-
   render() {
     return (
       <View style={styles.container}>
@@ -120,6 +118,7 @@ Messages.propTypes = {
   chatId: React.PropTypes.number,
   peer: React.PropTypes.object,
   route: React.PropTypes.object,
+  navigator: React.PropTypes.object,
 };
 
 export default Messages;
