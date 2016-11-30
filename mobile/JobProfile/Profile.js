@@ -37,12 +37,11 @@ class Profile extends React.Component {
     super(props);
     this.state = {
     };
-    console.log('params.job from job profile', this.props);
   }
   render() {
     const payrate = this.props.route.params.job.pay.toString();
     const propertyArr = [
-      payrate, 
+      payrate,
       this.props.route.params.job.profession,
       this.props.route.params.job.address,
       this.props.route.params.job.time,
@@ -55,7 +54,7 @@ class Profile extends React.Component {
           style={styles.backgroundImage, styles.container}
           source={bgImg}
         >
-          <BackButton navigator={this.props.navigator}/>
+          <BackButton navigator={this.props.navigator} />
           {/* job title here */}
           <Text style={styles.topTitle}>
             {this.props.route.params.job.title}
