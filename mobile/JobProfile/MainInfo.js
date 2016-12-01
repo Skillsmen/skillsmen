@@ -85,7 +85,7 @@ const MainInfo = ({ propertyArr, title, description, User, start, end }) => {
           size={15}
           color={'green'}
         />
-        {start}
+        {new Date(start).toString()}
       </Text>
       <Text>
         <FontAwesome
@@ -93,7 +93,7 @@ const MainInfo = ({ propertyArr, title, description, User, start, end }) => {
           size={15}
           color={'red'}
         />
-        {end}
+        {new Date(end).toString()}
       </Text>
       {/* job description here */}
       <View style={styles.description}>

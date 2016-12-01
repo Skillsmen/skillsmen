@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   Modal,
 } from 'react-native';
+import CalendarPicker from 'react-native-calendar-picker';
+
 import Banner from '../reusableComponents/Banner/ModularBanner';
 import ProfileCard from './components/ProfileCard/ProfileCard';
 
@@ -64,17 +66,25 @@ class EditInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modelVisable: false,
+      fromModelVisable: false,
+      toModalVisible: false,
     };
 
-    this.setModalVisible = (visible) => {
+    this.setModalVisible = (visible, key) => {
       console.log('Settubg visible');
-      this.setState({ modalVisible: visible });
+      console.log(key);
+      console.log('from', this.state.fromModalVisible);
+      console.log('to', this.state.toModalVisible);
+      if (key === 'from') {
+        this.setState({ fromModalVisible: visible });
+      } else {
+        this.setState({ toModalVisible: visible });
+      }
     };
   }
 
   componentWillMount() {
-    this.setState({ modalVisible: false });
+    this.setState({ fromModalVisible: false, toModalVisible: false });
   }
 
   render() {
@@ -109,18 +119,50 @@ class EditInfo extends React.Component {
           <Modal
             animationType={'slide'}
             transparent={false}
-            visible={this.state.modalVisible}
+            visible={this.state.fromModalVisible}
           >
             <View style={{ marginTop: 22 }}>
               <View>
-                <Text>Hello World!</Text>
+                <CalendarPicker
+                  selectedDate={new Date(start)}
+                  onDateChange={date => textChange('from', date)}
+                  screenWidth={Dimensions.get('window').width}
+                  selectedBackgroundColor={'#5ce600'}
+                />
 
                 <TouchableOpacity
                   onPress={() => {
-                    this.setModalVisible(!this.state.modalVisible);
+                    this.setModalVisible(!this.state.fromModalVisible, 'from');
                   }}
                 >
-                  <Text>Hide Modal</Text>
+                  <Text> OK </Text>
+                </TouchableOpacity>
+
+              </View>
+            </View>
+          </Modal>
+        </View>
+        <View>
+          <Modal
+            animationType={'slide'}
+            transparent={false}
+            visible={this.state.toModalVisible}
+          >
+            <View style={{ marginTop: 22 }}>
+              <View>
+                <CalendarPicker
+                  selectedDate={new Date(end)}
+                  onDateChange={date => textChange('to', date)}
+                  screenWidth={Dimensions.get('window').width}
+                  selectedBackgroundColor={'#5ce600'}
+                />
+
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setModalVisible(!this.state.toModalVisible, 'to');
+                  }}
+                >
+                  <Text> OK </Text>
                 </TouchableOpacity>
 
               </View>
@@ -130,13 +172,17 @@ class EditInfo extends React.Component {
 
         <TouchableOpacity
           onPress={() => {
-            this.setModalVisible(true);
+            this.setModalVisible(true, 'from');
           }}
         >
-          <Text>{start}</Text>
+          <Text>{start.toString()}</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>{end}</Text>
+        <TouchableOpacity
+          onPress={() => {
+            this.setModalVisible(true, 'to');
+          }}
+        >
+          <Text>{end.toString()}</Text>
         </TouchableOpacity>
         {/* job description here */}
         <Text style={styles.title}>

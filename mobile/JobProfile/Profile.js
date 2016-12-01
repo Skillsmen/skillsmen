@@ -19,6 +19,7 @@ import BackButton from '../reusableComponents/BackButton';
 import MainInfo from './MainInfo';
 import EditInfo from './EditInfo';
 import Actions from '../actions/index';
+import settings from '../settings';
 
 const bgImg = require('../assets/whiteTexturedBackground.png');
 
@@ -92,8 +93,19 @@ class Profile extends React.Component {
     this.clickOnEdit = () => {
       if (this.state.editMode) {
         const { job } = this.props;
-        console.log('Pushing up to the server!');
-        console.log(job);
+        axios.put(`${settings.SERVER}/job/${job.id}`, {
+          pay: job.pay,
+          title: job.title,
+          profession: job.profession,
+          address: job.address,
+          hires: job.hires,
+          to: job.to,
+          from: job.from,
+        })
+        .then(() => {
+          console.log('Success updating job!');
+        })
+        .catch(err => console.log('Error editing jobs', err.message));
       }
       this.setState({
         editMode: !this.state.editMode,
@@ -128,7 +140,7 @@ class Profile extends React.Component {
       payrate,
       job.profession,
       job.address,
-      job.hires,
+      job.hires.toString(),
     ];
 
     // if (job.vacancies > 1) { iconArr[4] = 'users'; }
@@ -154,8 +166,8 @@ class Profile extends React.Component {
             title={job.title}
             description={job.description}
             User={job.User}
-            start={job.from}
-            end={job.to}
+            start={new Date(job.from).toString()}
+            end={new Date(job.to).toString()}
             updateJob={this.updateJobBinded}
           />
         }

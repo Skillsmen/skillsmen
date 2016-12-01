@@ -150,15 +150,17 @@ class Profile extends React.Component {
                 currentLoggedInUser={this.props.profile}
                 tabLabel="Recommendations"
               />
-              <View tabLabel="Your Jobs">
-                {this.props.yourJobs.map((job, i) => {
-                  return (<JobTile
-                    job={job}
-                    key={i}
-                    pressJob={() => { this.goToJob(job.id, true); }}
-                  />);
-                })}
-              </View>
+              { !this.isPeer() &&
+                <View tabLabel="Your Jobs">
+                  {this.props.yourJobs.map((job, i) => {
+                    return (<JobTile
+                      job={job}
+                      key={i}
+                      pressJob={() => { this.goToJob(job.id, true); }}
+                    />);
+                  })}
+                </View>
+              }
             </ScrollableTabView>
           </View>
         </ScrollView>

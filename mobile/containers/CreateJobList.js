@@ -15,13 +15,15 @@ const mapStateToProps = (state) => {
     jobs: getFilteredJobs(state.jobList.jobList, state.jobList.filter),
     filter: state.jobList.filter,
     showMap: state.jobList.showMap,
+    userId: state.profile.id,
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  goToJob: (jobId) => {
+  goToJob: (jobId, isOwner = false) => {
     const params = {
       jobId,
+      isOwner,
     };
     ownProps.navigator.push(Router.getRoute('jobProfile', params));
   },

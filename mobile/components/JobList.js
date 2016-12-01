@@ -55,7 +55,7 @@ class JobList extends React.Component {
   }
 
   render() {
-    const { jobs, goToJob, filter, changeFilter, toggleShowMap } = this.props;
+    const { jobs, goToJob, filter, changeFilter, toggleShowMap, userId } = this.props;
     const showMap = this.props.showMap;
     return (
       <View>
@@ -71,7 +71,7 @@ class JobList extends React.Component {
                 job={job}
                 key={i}
                 index={i}
-                pressJob={() => { goToJob(job.id); }}
+                pressJob={() => { goToJob(job.id, userId === job.User.id); }}
               />))}
           </ScrollView>
         }
