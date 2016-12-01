@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import {
   View,
   Text,
@@ -7,82 +7,22 @@ import {
   Dimensions,
   StyleSheet,
   Navigator,
+  TouchableHighlight,
 } from 'react-native';
-import BackButton from '../reusableComponents/BackButton.js';
-import Banner from '../reusableComponents/Banner/ModularBanner';
-import ProfileCard from './components/ProfileCard/ProfileCard';
+
+import {
+  FontAwesome,
+} from '@exponent/vector-icons';
+
+import axios from 'axios';
+import BackButton from '../reusableComponents/BackButton';
+import MainInfo from './MainInfo';
+import EditInfo from './EditInfo';
+import Actions from '../actions/index';
 
 const bgImg = require('../assets/whiteTexturedBackground.png');
 
 const { height, width } = Dimensions.get('window');
-
-const iconArr = ['money', 'wrench', 'location-arrow', 'clock-o', 'user'];
-// temp props placeholders
-const jobInfo = {
-  id: 1,
-  pay: 26,
-  expertise: 'delivery',
-  location: 'Tenderloin',
-  time: 'Mar 28 - Oct 05',
-  hires: 10,
-  title: 'The Big Drop',
-  description: 'This is the largest shipment of blackened shrimp we have had all year! The client is a returning customer. All hands on deck and dont let me down!',
-  ownerName: 'Bill',
-  mobile: '(555) 555-5555',
-};
-
-
-class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-  render() {
-    const payrate = this.props.route.params.job.pay.toString();
-    const propertyArr = [
-      payrate,
-      this.props.route.params.job.profession,
-      this.props.route.params.job.address,
-      this.props.route.params.job.time,
-      this.props.route.params.job.hires,
-    ];
-    // if (job.vacancies > 1) { iconArr[4] = 'users'; }
-    return (
-      <View style={styles.container}>
-        <Image
-          style={styles.backgroundImage, styles.container}
-          source={bgImg}
-        >
-          <BackButton navigator={this.props.navigator} />
-          {/* job title here */}
-          <Text style={styles.topTitle}>
-            {this.props.route.params.job.title}
-          </Text>
-          {/* banner : job type pay rate location time range vacancies */}
-          <Banner
-            iconArr={iconArr}
-            propertyArr={propertyArr}
-            iconSize={25}
-            styles={styles.banner}
-            iconStyles={{ flex: 1 }}
-          />
-          {/* job description here */}
-          <View style={styles.description}>
-            <Text style={styles.title}>
-              {'The Job'}
-            </Text>
-            <Text>
-              {this.props.route.params.job.description}
-            </Text>
-          </View>
-          {/* owner profile card here */}
-          <ProfileCard jobOwner={this.props.route.params.job.User} picStyles={styles.contactPic} />
-        </Image>
-      </View>
-    );
-  }
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -121,7 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   banner: {
-    flex: 2,
+    flex: 1,
     justifyContent: 'flex-start',
     flexDirection: 'column',
     marginLeft: 15,
@@ -132,6 +72,120 @@ const styles = StyleSheet.create({
     margin: 15,
     backgroundColor: 'transparent',
   },
+  editIcon: {
+    backgroundColor: 'transparent',
+    // marginTop: 0.03 * height,
+    // marginRight: 5,
+    // alignSelf: 'flex-end',
+  },
 });
 
-export default Profile;
+
+/* Job Profile */
+class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      editMode: false,
+    };
+
+    this.clickOnEdit = () => {
+      if (this.state.editMode) {
+        const { job } = this.props;
+        console.log('Pushing up to the server!');
+        console.log(job);
+      }
+      this.setState({
+        editMode: !this.state.editMode,
+      });
+    };
+    const { updateJob, job } = this.props;
+    this.updateJobBinded = updateJob.bind(null, job.id);
+
+    this.showEditBar = (navigator, editMode) => {
+      const editBtn = (
+        <TouchableHighlight onPress={this.clickOnEdit}>
+          <FontAwesome
+            style={styles.editIcon}
+            name="pencil-square-o"
+            size={42}
+            color={editMode ? '#7dc4ff' : '#DCDCDC'}
+          />
+        </TouchableHighlight>
+      );
+      if (this.props.route.params.isOwner) {
+        return (
+          <BackButton navigator={navigator} rightComponent={editBtn} />
+        );
+      }
+      return (<BackButton navigator={navigator} />);
+    };
+  }
+  render() {
+    const { navigator, job } = this.props;
+    const payrate = job.pay.toString();
+    const propertyArr = [
+      payrate,
+      job.profession,
+      job.address,
+      job.hires,
+    ];
+
+    // if (job.vacancies > 1) { iconArr[4] = 'users'; }
+    return (
+      <Image
+        style={[styles.backgroundImage, styles.container]}
+        source={bgImg}
+      >
+        {this.showEditBar(navigator, this.state.editMode)}
+        {!this.state.editMode &&
+          <MainInfo
+            propertyArr={propertyArr}
+            title={job.title}
+            description={job.description}
+            User={job.User}
+            start={job.from}
+            end={job.to}
+          />
+        }
+        {this.state.editMode &&
+          <EditInfo
+            propertyArr={propertyArr}
+            title={job.title}
+            description={job.description}
+            User={job.User}
+            start={job.from}
+            end={job.to}
+            updateJob={this.updateJobBinded}
+          />
+        }
+      </Image>
+    );
+  }
+}
+
+Profile.propTypes = {
+  route: React.PropTypes.object,
+  navigator: React.PropTypes.object,
+  job: React.PropTypes.object,
+  updateJob: React.PropTypes.func,
+};
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    job: state.jobList.jobList.filter(job => job.id === ownProps.route.params.jobId)[0],
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  updateJob: (id, diff) => {
+    dispatch(Actions.updateJob(id, diff));
+  },
+});
+
+const ProfileConnected = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Profile);
+
+export default ProfileConnected;

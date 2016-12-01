@@ -8,6 +8,7 @@ export default class JobTile extends React.Component {
     super(props);
     this.state = {
     };
+    console.log(this.props.job);
   }
   render() {
     function isEven(n) {

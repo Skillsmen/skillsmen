@@ -187,4 +187,12 @@ export default class Actions {
       });
     };
   }
+
+  static updateJob(id, diff) {
+    return {
+      type: 'UPDATE_JOB',
+      id,
+      diff,
+    };
+  }
 }

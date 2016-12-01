@@ -56,9 +56,6 @@ class JobList extends React.Component {
 
   render() {
     const { jobs, goToJob, filter, changeFilter, toggleShowMap } = this.props;
-    console.log('jobs: ', jobs)
-    // Warning: this line will always be false. ![] is still false, ![anything] is also false
-    const loading = !jobs;
     const showMap = this.props.showMap;
     return (
       <View>
@@ -74,7 +71,7 @@ class JobList extends React.Component {
                 job={job}
                 key={i}
                 index={i}
-                pressJob={() => { goToJob(job); }}
+                pressJob={() => { goToJob(job.id); }}
               />))}
           </ScrollView>
         }
@@ -90,7 +87,6 @@ class JobList extends React.Component {
 }
 
 JobList.propTypes = {
-  updateJobs: React.PropTypes.func.isRequired,
   changeFilter: React.PropTypes.func.isRequired,
   filter: React.PropTypes.string.isRequired,
   jobs: React.PropTypes.array.isRequired,

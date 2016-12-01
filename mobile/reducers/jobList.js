@@ -1,3 +1,14 @@
+const jobListEntry = (state, action) => {
+  switch (action.type) {
+    case 'UPDATE_JOB':
+      if (state.id !== action.id) {
+        return state;
+      }
+      return Object.assign({}, state, action.diff);
+    default: return state;
+  }
+};
+
 const initialState = {
   jobList: [],
   filter: '',
@@ -6,19 +17,19 @@ const initialState = {
 
 const jobListReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ('ADD_JOB'):
-    console.log('in ADD JOB reducer! action: ', action);
+    case 'ADD_JOB':
       return {
         jobList: [...state.jobList, action.job],
         filter: state.filter,
         showMap: false,
       };
-    case ('TOGGLE_SHOW_MAP'):
+    case 'TOGGLE_SHOW_MAP':
       return {
         jobList: [...state.jobList],
+        filter: state.filter,
         showMap: action.showMap,
       };
-    case ('UPDATE_JOBLIST'):
+    case 'UPDATE_JOBLIST':
       return {
         jobList: [...state.jobList, ...action.jobs],
         filter: state.filter,
@@ -28,9 +39,17 @@ const jobListReducer = (state = initialState, action) => {
       return {
         jobList: state.jobList,
         filter: action.filter,
+        showMap: state.showMap,
+      };
+    case 'UPDATE_JOB':
+      return {
+        jobList: state.jobList.map(job => jobListEntry(job, action)),
+        filter: state.filter,
+        showMap: state.showMap,
       };
     default: return state;
   }
 };
+
 
 export default jobListReducer;

@@ -45,7 +45,7 @@ module.exports = {
         'experience',
         'profilePicUrl'
       ],
-      include: [Review, Job]
+      include: [Review]
     })
     .then(function(userRecord) {
 

@@ -19,9 +19,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  goToJob: (jobObj) => {
+  goToJob: (jobId) => {
     const params = {
-      job: jobObj,
+      jobId,
     };
     ownProps.navigator.push(Router.getRoute('jobProfile', params));
   },
