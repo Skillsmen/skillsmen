@@ -12,7 +12,6 @@ const mainReducer = combineReducers({
   workerList: workerListReducer,
   chats: chatsReducer,
   jobList: jobListReducer,
-  messagesReducer,
   jobPageReducer,
 });
 
