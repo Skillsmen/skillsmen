@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import {
   View,
   StyleSheet,
@@ -35,10 +34,6 @@ class EditInfo extends React.Component {
   constructor(props) {
     super(props);
 
-    // console.log('profile from edit component', this.props.profile);
-    // These will reflect default text values shown in input boxes
-    // Right now, changes to these aren't reflected back in profile...
-    // They will eventually trigger a PUT request to the db which will then render back on profile
     this.state = {
       nameText: '',
       experienceText: '',
@@ -66,7 +61,7 @@ class EditInfo extends React.Component {
           defaultValue={name}
         />
         <TextInput
-          style={[styles.editTextBox, { height: 80 }]}
+          style={[styles.editTextBox, { height: 80, borderTopWidth: 0, borderBottomWidth: 0 }]}
           onChangeText={text => setUserInfoToUpdate('description', text)}
           defaultValue={description}
           multiline
