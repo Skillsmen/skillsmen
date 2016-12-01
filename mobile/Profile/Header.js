@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   Dimensions,
+  Text,
   TouchableHighlight,
 } from 'react-native';
 import {
@@ -28,10 +29,19 @@ const styles = StyleSheet.create({
     marginTop: 0.05 * height,
     alignSelf: 'center',
   },
+  editText: {
+    backgroundColor: 'transparent',
+    fontSize: 16,
+    marginRight: 8,
+    lineHeight: 15,
+  },
+  editButton: {
+    alignItems: 'flex-end',
+    marginRight: 5,
+  },
   editIcon: {
     backgroundColor: 'transparent',
-    marginTop: 0.05 * height,
-    marginRight: 5,
+    marginTop: 0.04 * height,
     alignSelf: 'flex-end',
   },
   addReviewIcon: {
@@ -55,12 +65,17 @@ const showEdit = (navigator, peer, clickOnEdit, editMode) => {
   if (!peer) {
     return (
       <TouchableHighlight onPress={clickOnEdit}>
-        <FontAwesome
-          style={styles.editIcon}
-          name="pencil-square-o"
-          size={40}
-          color={editMode ? '#7dc4ff' : '#DCDCDC'}
-        />
+        <View style={styles.editButton}>
+          <FontAwesome
+            style={styles.editIcon}
+            name="pencil-square-o"
+            size={40}
+            color={editMode ? '#7dc4ff' : '#DCDCDC'}
+          />
+          <Text style={[styles.editText, { color: editMode ? '#7dc4ff' : '#DCDCDC' }]} >
+            Edit
+          </Text>
+        </View>
       </TouchableHighlight>
     );
   }

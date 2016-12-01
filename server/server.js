@@ -18,7 +18,6 @@ app.use(bodyParser.json());
 //     console.log('A user disconnectd');
 //   });
 // });
-//
 
 // Routes
 const routes = require('./routes/index.js');
