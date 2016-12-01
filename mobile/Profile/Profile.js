@@ -12,9 +12,10 @@ import Header from './Header';
 import MainInfo from './MainInfo';
 import EditInfo from './EditMode';
 import RecommendationList from './RecommendationList';
-import ModularBanner from '../reusableComponents/Banner/ModularBanner';
 import settings from '../settings';
 import Actions from '../actions/index';
+import JobTile from '../components/JobTile';
+import Router from '../navigation/Router';
 
 const styles = StyleSheet.create({
   container: {
@@ -46,12 +47,12 @@ class Profile extends React.Component {
     this.clickOnEdit = this.clickOnEdit.bind(this);
     this.isPeer = this.isPeer.bind(this);
     this.setUserInfoToUpdate = this.setUserInfoToUpdate.bind(this);
+    this.goToJob = this.goToJob.bind(this);
     // Populate arrays to send into 'ModularBanner' component deleting icons next to descriptions
     this.icons = ['wrench', 'globe', 'clock-o'];
   }
 
   // Toggles edit mode for rendering text boxes or regular info
-
   setUserInfoToUpdate(userInfoProperty, userInfoInput) {
     const userInfoToUpdate = this.state.userInfoToUpdate;
     userInfoToUpdate[userInfoProperty] = userInfoInput;
@@ -69,6 +70,9 @@ class Profile extends React.Component {
         description: this.state.userInfoToUpdate.description,
         mobile: this.state.userInfoToUpdate.mobile,
         profilePicUrl: this.state.userInfoToUpdate.profilePicUrl,
+        profession: this.state.userInfoToUpdate.profession,
+        location: this.state.userInfoToUpdate.location,
+        experience: this.state.userInfoToUpdate.experience,
       })
       .then((results) => {
         // TODO: Inside of here, need to send a dispatch to update store w/ new profile info
@@ -81,6 +85,9 @@ class Profile extends React.Component {
             description: this.state.userInfoToUpdate.description,
             mobile: this.state.userInfoToUpdate.mobile,
             profilePicUrl: this.state.userInfoToUpdate.profilePicUrl,
+            profession: this.state.userInfoToUpdate.profession,
+            location: this.state.userInfoToUpdate.location,
+            experience: this.state.userInfoToUpdate.experience,
           },
         });
       })
@@ -90,6 +97,14 @@ class Profile extends React.Component {
       editMode: !this.state.editMode,
       userInfoToUpdate: this.state.userInfoToUpdate,
     });
+  }
+
+  goToJob(jobId, isOwner = false) {
+    const params = {
+      jobId,
+      isOwner,
+    };
+    this.props.navigator.push(Router.getRoute('jobProfile', params));
   }
 
   render() {
@@ -108,11 +123,6 @@ class Profile extends React.Component {
           userPic={userInfo.profilePicUrl}
         />
         <ScrollView contentContainerStyle={styles.contentContainer} alwaysBounceVertical>
-          <ModularBanner
-            iconArr={this.icons}
-            propertyArr={[userInfo.profession, userInfo.location, `${userInfo.experience} years`]}
-            styles={styles.banner}
-          />
           <View style={styles.info}>
             {/* TODO- make below banner editable on edit icon click */}
             {this.state.editMode &&
@@ -140,6 +150,15 @@ class Profile extends React.Component {
                 currentLoggedInUser={this.props.profile}
                 tabLabel="Recommendations"
               />
+              <View tabLabel="Your Jobs">
+                {this.props.yourJobs.map((job, i) => {
+                  return (<JobTile
+                    job={job}
+                    key={i}
+                    pressJob={() => { this.goToJob(job.id, true); }}
+                  />);
+                })}
+              </View>
             </ScrollableTabView>
           </View>
         </ScrollView>
@@ -154,11 +173,13 @@ Profile.propTypes = {
   route: React.PropTypes.object,
   dispatch: React.PropTypes.func,
   goToChat: React.PropTypes.func,
+  yourJobs: React.PropTypes.array,
 };
 
 const mapStateToProps = (state) => {
   return {
     profile: state.profile,
+    yourJobs: state.jobList.jobList.filter(job => job.UserId === state.profile.id),
   };
 };
 

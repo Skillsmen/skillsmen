@@ -11,10 +11,16 @@ const vw = width / 100;
 
 const backButton = StyleSheet.create({
   back: {
-    marginTop: 2 * vh,
-    marginLeft: 2 * vw,
+    marginTop: 3 * vh,
     color: '#3E8CF1',
     fontSize: 16,
+  },
+  container: {
+    width,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
 
@@ -41,11 +47,12 @@ class BackButton extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={backButton.container}>
         <Text onPress={this.goBack} style={backButton.back}>
           <FontAwesome name={'chevron-left'} left={20} color={'#3E8CF1'} size={16}></FontAwesome>
-          <Text>{this.generateBackText()}</Text>
+          {this.generateBackText()}
         </Text>
+        {this.props.rightComponent}
       </View>
     );
   }

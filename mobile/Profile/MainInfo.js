@@ -13,6 +13,7 @@ import {
 import axios from 'axios';
 import settings from '../settings';
 import Router from '../navigation/Router';
+import ModularBanner from '../reusableComponents/Banner/ModularBanner';
 
 const { width } = Dimensions.get('window');
 
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 34,
   },
-  experience: {
+  description: {
     fontSize: 14,
     marginTop: 10,
   },
@@ -44,8 +45,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#395b91',
     height: 22,
   },
+  banner: {
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    marginTop: 20,
+    marginBottom: 10,
+    width,
+  },
+  icon: {
+  },
 });
 
+const icons = ['wrench', 'globe', 'clock-o'];
 // userInfo and ownInfo are different when looking at a peer's profile.
 // these are used when a new chat is created
 const MainInfo = ({ peer, userInfo, ownInfo, navigator, goToChat }) => {
@@ -84,6 +95,12 @@ const MainInfo = ({ peer, userInfo, ownInfo, navigator, goToChat }) => {
 
   return (
     <View style={styles.container}>
+      <ModularBanner
+        iconArr={icons}
+        propertyArr={[userInfo.profession, userInfo.location, `${userInfo.experience} years`]}
+        styles={styles.banner}
+        iconStyles={styles.icon}
+      />
       <Text style={styles.name}> {userInfo.name}</Text>
       <Text style={styles.experience}>
         {userInfo.description}
@@ -114,5 +131,6 @@ MainInfo.propTypes = {
   goToChat: React.PropTypes.func,
   navigator: React.PropTypes.object,
 };
+
 
 export default MainInfo;

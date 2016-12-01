@@ -1,6 +1,8 @@
 import React from 'react';
 import {
   View,
+  StyleSheet,
+  Dimensions,
 } from 'react-native';
 import {
   FontAwesome,
@@ -16,7 +18,21 @@ const renderIcon = (name, size = 15, isSelected) =>
     />
   );
 
-const ModularBanner = ({ iconArr, propertyArr, iconSize, styles, iconStyles }) => {
+const { width } = Dimensions.get('window');
+
+const ModularBanner = ({ iconArr, propertyArr, iconSize, styles, iconStyles, editMode, editModeKeys, setUserInfoToUpdate, textBoxStyle }) => {
+  const defaultStyle = StyleSheet.create({
+    textBox: {
+      height: 40,
+      width: width / iconArr.length,
+      fontSize: 16,
+      borderColor: 'gray',
+      borderWidth: 1,
+      paddingLeft: 10,
+      paddingRight: 10,
+    },
+  });
+
   const banner = iconArr.map((icon, i) =>
     (
       <ModularBannerIcon
@@ -31,6 +47,10 @@ const ModularBanner = ({ iconArr, propertyArr, iconSize, styles, iconStyles }) =
           justifyContent: 'space-around',
           alignItems: 'center',
         }}
+        editMode={editMode}
+        editKey={editMode ? editModeKeys[i] : (null)}
+        setUserInfoToUpdate={setUserInfoToUpdate}
+        textBoxStyle={textBoxStyle || defaultStyle.textBox}
       />
     ),
   );
