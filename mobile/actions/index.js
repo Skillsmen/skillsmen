@@ -64,7 +64,6 @@ export default class Actions {
 
   static newJob(jobDetails) {
     return (dispatch, getState) => {
-
       const newJob = {
         description: jobDetails.description,
         from: jobDetails.from,

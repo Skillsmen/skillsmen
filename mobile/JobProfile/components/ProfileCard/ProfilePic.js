@@ -22,12 +22,12 @@ const proPicLoad = (jobOwner, width, height) => {
   return (
     <View>
       <Image
-        source={{uri: jobOwner.jobOwner.profilePicUrl}}
+        source={{ uri: jobOwner.jobOwner.profilePicUrl }}
         style={{
           borderRadius: 40,
           width: 80,
           height: 80,
-          marginLeft: width*0.1
+          marginLeft: width * 0.1,
         }}
       />
     </View>

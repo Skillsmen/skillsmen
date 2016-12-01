@@ -5,8 +5,10 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import moment from 'moment';
 import colors from '../../constants/Colors';
 import BackButton from '../../reusableComponents/BackButton';
+
 
 const CalendarPicker = require('react-native-calendar-picker');
 
@@ -39,11 +41,12 @@ class AddTimeFrame extends React.Component {
     const nextFrame = time === 'from' ? 'addTimeFrame' : 'addJobDetails';
     const timeParam = time === 'from' ? 'to' : null;
     const timeContext = time === 'from' ? 'START DATE' : 'END DATE';
+    const text = moment(this.state.date).format('ddd, MMM Do');
 
     return (
       <View style={styles.container}>
         <BackButton navigator={methods.navigator} />
-        <Text>{timeContext}: { this.state.date.toString() } </Text>
+        <Text>{timeContext}: {text} </Text>
         <CalendarPicker
           selectedDate={this.state.date}
           onDateChange={date => this.onDateChange(date, time)}

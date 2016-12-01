@@ -9,13 +9,13 @@ import {
 
 const ProfileCardContact = ({iconObj, text}) =>
   (
-    <TouchableOpacity style={{ flex: 1, flexDirection: 'row' }}>
+    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
       <FontAwesome
         name={iconObj.name || 'phone'}
         size={iconObj.size || 15}
         color={iconObj.color || 'blue'}
       />
-      <Text>{text}</Text>
+      <Text style={{ marginLeft: 15 }}>{text}</Text>
     </TouchableOpacity>
   );
 

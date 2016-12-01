@@ -9,7 +9,7 @@ import {
   Modal,
 } from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
-
+import moment from 'moment';
 import Banner from '../reusableComponents/Banner/ModularBanner';
 import ProfileCard from './components/ProfileCard/ProfileCard';
 
@@ -60,6 +60,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
+  time: {
+    marginLeft: 15,
+    backgroundColor: 'transparent',
+  },
 });
 
 class EditInfo extends React.Component {
@@ -71,10 +75,6 @@ class EditInfo extends React.Component {
     };
 
     this.setModalVisible = (visible, key) => {
-      console.log('Settubg visible');
-      console.log(key);
-      console.log('from', this.state.fromModalVisible);
-      console.log('to', this.state.toModalVisible);
       if (key === 'from') {
         this.setState({ fromModalVisible: visible });
       } else {
@@ -122,7 +122,7 @@ class EditInfo extends React.Component {
             visible={this.state.fromModalVisible}
           >
             <View style={{ marginTop: 22 }}>
-              <View>
+              <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                 <CalendarPicker
                   selectedDate={new Date(start)}
                   onDateChange={date => textChange('from', date)}
@@ -149,7 +149,7 @@ class EditInfo extends React.Component {
             visible={this.state.toModalVisible}
           >
             <View style={{ marginTop: 22 }}>
-              <View>
+              <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                 <CalendarPicker
                   selectedDate={new Date(end)}
                   onDateChange={date => textChange('to', date)}
@@ -175,14 +175,19 @@ class EditInfo extends React.Component {
             this.setModalVisible(true, 'from');
           }}
         >
-          <Text>{start.toString()}</Text>
+          <Text style={styles.time}>
+            {moment(new Date(start.toString())).format('ddd, MMM Do')}
+          </Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           onPress={() => {
             this.setModalVisible(true, 'to');
           }}
         >
-          <Text>{end.toString()}</Text>
+          <Text style={styles.time}>
+            {moment(new Date(end.toString())).format('ddd, MMM Do')}
+          </Text>
         </TouchableOpacity>
         {/* job description here */}
         <Text style={styles.title}>
