@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    marginTop: 5,
   },
   middleIcon: {
     width: 32 * vw,
@@ -39,9 +40,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   row: {
-    height: 70,
+    height: 100,
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   tileRight: {
     flexDirection: 'column',
