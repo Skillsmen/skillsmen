@@ -23,17 +23,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   name: {
-    fontSize: 34,
+    fontSize: 26,
+    fontWeight: '300',
+    marginTop: 15,
+    marginBottom: 15,
   },
-  description: {
-    fontSize: 14,
-    marginTop: 10,
+  experience: {
+    fontSize: 12,
+    lineHeight: 20,
+    width: width * 0.85,
+    marginBottom: 10,
   },
   contact: {
     width,
     marginTop: 10,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   phoneNumber: {
@@ -41,18 +46,42 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontSize: 20,
   },
+  button: {
+    width: width * 0.35,
+    height: 70,
+    borderRadius: 10,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   chatButton: {
-    backgroundColor: '#395b91',
-    height: 22,
+    borderColor: '#385B96',
+    marginRight: 10,
+  },
+  callButton: {
+    borderColor: '#15AC25',
+    marginLeft: 10,
+  },
+  chatText: {
+    color: '#385B96',
+    fontSize: 16,
+    marginTop: 5,
+  },
+  callText: {
+    color: '#15AC25',
+    fontSize: 16,
+    marginTop: 5,
   },
   banner: {
     justifyContent: 'space-around',
     flexDirection: 'row',
-    marginTop: 20,
-    marginBottom: 10,
+    marginBottom: 15,
     width,
   },
-  icon: {
+  bannerText: {
+    fontSize: 12,
+    fontWeight: '200',
+    color: '#424242',
   },
 });
 
@@ -95,31 +124,37 @@ const MainInfo = ({ peer, userInfo, ownInfo, navigator, goToChat }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.name}> {userInfo.name}</Text>
       <ModularBanner
         iconArr={icons}
         propertyArr={[userInfo.profession, userInfo.location, `${userInfo.experience} years`]}
         styles={styles.banner}
         iconStyles={styles.icon}
+        textStyle={styles.bannerText}
       />
-      <Text style={styles.name}> {userInfo.name}</Text>
       <Text style={styles.experience}>
         {userInfo.description}
       </Text>
+      { peer &&
       <View style={styles.contact}>
-        <Text style={styles.phoneNumber} onPress={handlePhoneClick}>
+        <TouchableOpacity style={[styles.button, styles.chatButton]} onPress={handleChatClick}>
+          <FontAwesome
+            name="envelope"
+            size={26}
+            color="#385B96"
+          />
+          <Text style={styles.chatText}> Message </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.callButton]} onPress={handlePhoneClick}>
           <FontAwesome
             name="phone"
-            size={20}
-            color="#006600"
+            size={26}
+            color="#15AC25"
           />
-          {` ${userInfo.mobile}`}
-        </Text>
-        { peer &&
-        <TouchableOpacity style={styles.chatButton} onPress={handleChatClick}>
-          <Text style={{ color: 'white' }}> Chat </Text>
+          <Text style={styles.callText}>Call Mobile</Text>
         </TouchableOpacity>
-        }
       </View>
+      }
     </View>
   );
 };

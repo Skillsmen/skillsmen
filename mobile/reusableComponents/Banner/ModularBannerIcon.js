@@ -5,7 +5,7 @@ import {
   TextInput,
 } from 'react-native';
 
-const ModularBannerIcon = ({ text, Icon, iconSize, renderIcon, iconStyles, editMode, editKey, setUserInfoToUpdate, textBoxStyle }) => {
+const ModularBannerIcon = ({ text, Icon, iconSize, renderIcon, iconStyles, editMode, editKey, setUserInfoToUpdate, textBoxStyle, textStyle }) => {
   if (editMode) {
     if (editKey === 'experience') {
       text = text.split(' ')[0];
@@ -27,10 +27,10 @@ const ModularBannerIcon = ({ text, Icon, iconSize, renderIcon, iconStyles, editM
       </View>
     );
   }
-
+  const txtStyle = textStyle ? textStyle : { backgroundColor: 'transparent'};
   return (
     <View style={iconStyles}>
-      <Text style={{ backgroundColor: 'transparent' }} >
+      <Text style={txtStyle} >
         { renderIcon(Icon, iconSize) }{ ' '.concat(text) }
       </Text>
     </View>

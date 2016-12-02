@@ -20,7 +20,7 @@ const renderIcon = (name, size = 15, isSelected) =>
 
 const { width } = Dimensions.get('window');
 
-const ModularBanner = ({ iconArr, propertyArr, iconSize, styles, iconStyles, editMode, editModeKeys, setUserInfoToUpdate, textBoxStyle }) => {
+const ModularBanner = ({ iconArr, propertyArr, iconSize, styles, iconStyles, editMode, editModeKeys, setUserInfoToUpdate, textBoxStyle, textStyle }) => {
   const defaultStyle = StyleSheet.create({
     textBox: {
       height: 40,
@@ -39,6 +39,7 @@ const ModularBanner = ({ iconArr, propertyArr, iconSize, styles, iconStyles, edi
         key={i}
         Icon={icon}
         text={propertyArr[i]}
+        textStyle={textStyle}
         renderIcon={renderIcon}
         iconSize={iconSize}
         iconStyles={iconStyles || {
