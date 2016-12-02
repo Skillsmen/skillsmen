@@ -115,29 +115,27 @@ class Profile extends React.Component {
     this.updateJobBinded = updateJob.bind(null, job.id);
 
     this.showEditBar = (navigator, editMode) => {
-      const editBtn = (
-        <TouchableHighlight
-          style={{
-            // position: 'absolute',
-            // left: 5,
-            // top: height * 0.03,
-          }}
-          onPress={this.clickOnEdit}
-        >
-          <FontAwesome
-            style={styles.editIcon}
-            name="pencil-square-o"
-            size={42}
-            color={editMode ? '#7dc4ff' : '#DCDCDC'}
-          />
-        </TouchableHighlight>
+      return (
+        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', width, height: 40 }}>
+          <BackButton navigator={navigator} />
+          {this.props.route.params.isOwner &&
+          <TouchableHighlight
+            style={{
+              marginRight: 10,
+              marginTop: 20,
+            }}
+            onPress={this.clickOnEdit}
+          >
+            <FontAwesome
+              style={styles.editIcon}
+              name="pencil-square-o"
+              size={36}
+              color={editMode ? '#7dc4ff' : '#3A3A3A'}
+            />
+          </TouchableHighlight>
+          }
+        </View>
       );
-      if (this.props.route.params.isOwner) {
-        return (
-          <BackButton navigator={navigator} rightComponent={editBtn} />
-        );
-      }
-      return (<BackButton navigator={navigator} />);
     };
   }
   render() {
@@ -157,7 +155,7 @@ class Profile extends React.Component {
         source={bgImg}
       >
         {this.showEditBar(navigator, this.state.editMode)}
-        <View style={{ marginTop: 45 }}>
+        <View style={{ marginTop: 15 }}>
           {!this.state.editMode &&
             <MainInfo
               propertyArr={propertyArr}
