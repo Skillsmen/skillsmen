@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
-
+import moment from 'moment';
 
 const { width } = Dimensions.get('window');
 
@@ -15,6 +15,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 5,
+    width: width * 0.85,
+  },
+  topRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+  },
+  date: {
+    color: '#2A2A2A',
+    fontSize: 12,
   },
   cardLeft: {
     flex: 1,
@@ -48,9 +58,14 @@ export default ({ comment, rating, ReviewFor, ReviewFrom, createdAt, key, review
       </View>
       <View style={styles.cardRight}>
         <View>
-          <Text style={styles.name}>
-            { reviewerName}
-          </Text>
+          <View style={styles.topRow}>
+            <Text style={styles.name}>
+              { reviewerName}
+            </Text>
+            <Text style={styles.date}>
+              {moment(createdAt).format('MMM Do YYYY')}
+            </Text>
+          </View>
           <Text style={styles.recText}>
             { comment }
           </Text>
