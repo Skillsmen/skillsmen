@@ -124,7 +124,6 @@ class Profile extends React.Component {
         />
         <ScrollView contentContainerStyle={styles.contentContainer} alwaysBounceVertical>
           <View style={styles.info}>
-            {/* TODO- make below banner editable on edit icon click */}
             {this.state.editMode &&
               <EditInfo
                 setUserInfoToUpdate={this.setUserInfoToUpdate}
@@ -140,7 +139,10 @@ class Profile extends React.Component {
                 navigator={this.props.navigator}
               />
             }
-            <ScrollableTabView>
+            <ScrollableTabView
+              tabBarActiveTextColor="#395b91"
+              tabBarUnderlineStyle={{ backgroundColor: '#395b91' }}
+            >
               <RecommendationList
                 userInfo={userInfo}
                 isPeer={this.isPeer()}
