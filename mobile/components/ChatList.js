@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import styles from '../styles/ChatList';
 import ChatTile from '../components/ChatTile';
+import SearchBar from './searchBar';
 
 const blueImg = require('../assets/bluePatternBackground.png');
 
@@ -17,7 +18,9 @@ class ChatList extends React.Component {
         <Image
           style={styles.bluePattern}
           source={blueImg}
-        />
+        >
+          <SearchBar startText={'      Search workers'} />
+        </Image>
         <ScrollView
           contentContainerStyle={styles.contentContainer}
           showsVerticalScrollIndicator={false}

@@ -51,16 +51,16 @@ const searchStyles = StyleSheet.create({
   },
 });
 
-const searchBar = ({ rightButton, changeFilter, filter }) => {
+const searchBar = ({ rightButton, changeFilter, filter, startText }) => {
   return (
     <Image
       style={searchStyles.bluePattern}
       source={blueImg}
     >
-      <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
         <TextInput
           style={searchStyles.searchBar}
-          placeholder="     Search jobs, professions, locations"
+          placeholder={startText || '     Search jobs, professions, locations'}
           placeholderTextColor="white"
           onChangeText={changeFilter}
           value={filter}

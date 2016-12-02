@@ -72,7 +72,7 @@ export default class searchBar extends React.Component {
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
         <TextInput
           style={searchStyles.searchBar}
-          placeholder="     Search projects"
+          placeholder="     Search workers"
           placeholderTextColor="white"
           onChangeText={text => this.hideSearchIcon(text)}
           value={this.state.searchText}

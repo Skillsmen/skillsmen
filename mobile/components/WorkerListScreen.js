@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   View,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import SearchBar from '../containers/WorkerSearchBar';
 import JobTypeFilter from '../components/JobTypeFilter';
