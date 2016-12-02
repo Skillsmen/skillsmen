@@ -30,7 +30,7 @@ const AddJobWhatWhereWhen = ({ styles, methods }) => {
   };
 
   return (
-    <View style={styles.container} >
+    <View style={[styles.container, {marginTop: height * 0.3}]} >
       {userInput('title', 'What is the Project?')}
       <AutoCompleteLocation methods={methods} />
       <View>
