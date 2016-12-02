@@ -5,6 +5,8 @@ const app = express();
 const http = require('http').Server(app);
 // const io = require('socket.io')(http);
 
+const imageMagick = require('imagemagick');
+
 app.use(bodyParser.json());
 
 // io.on('connection', function(socket){
@@ -120,7 +122,7 @@ app.get('/sign-s3', (req, res) => {
 });
 
 app.get('/s3-uploader', (req, res) => {
-  const picSrc = req.query.picSrc;
+  const picSrc = imageMagick(req.query.picSrc);
   const result = {};
   client.upload(picSrc, {}, function(err, images, meta) {
     if (err) {
