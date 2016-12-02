@@ -35,6 +35,7 @@ class App extends React.Component {
       try {
         console.log('Fetching data from server . . .');
         console.log(settings.SERVER);
+        
         const workerRes = await axios.get(`${settings.SERVER}/user/`);
         const jobRes = await axios.get(`${settings.SERVER}/job/`);
         dispatch(Actions.setWorkerList(workerRes.data));
