@@ -38,6 +38,7 @@ export default class Actions {
       if (upload) {
         const profile = getState().profile;
         // upload profile to the server after completing onboarding questions
+
         axios.post(`${settings.SERVER}/user/`, {
           username: profile.username,
           password: profile.password,

@@ -124,6 +124,11 @@ class SignUp extends React.Component {
         return;
       }
 
+      if (questionIndex === 3) {
+        const lower = value.toLowerCase();
+        value = lower.charAt(0).toUpperCase() + lower.slice(1);
+      }
+
       if (questionIndex === 4) {
         const sanitized = value.slice().replace(/\D/g, '');
         if (sanitized.length === 10) {

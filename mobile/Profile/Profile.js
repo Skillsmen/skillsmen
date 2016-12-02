@@ -91,7 +91,7 @@ class Profile extends React.Component {
           },
         });
       })
-      .catch(err => console.log('PUT error', err));
+      .catch(err => console.log('PUT error', err.message));
     }
     this.setState({
       editMode: !this.state.editMode,
