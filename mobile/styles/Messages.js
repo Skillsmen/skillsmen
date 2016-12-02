@@ -19,14 +19,15 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
+    width,
   },
   headerMid: {
     marginTop: 20,
     flexDirection: 'column',
     alignItems: 'center',
     width: width * 0.6,
-    // marginLeft: 30,
+    marginLeft: 0.32 * width,
   },
   placeHolder: {
     width: width * 0.3,

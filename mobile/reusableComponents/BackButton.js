@@ -11,18 +11,21 @@ const vw = width / 100;
 
 const backButton = StyleSheet.create({
   back: {
-    marginTop: 3 * vh,
+    // marginTop: 3 * vh,
     color: '#3E8CF1',
     backgroundColor: 'transparent',
     fontSize: 16,
   },
 
   container: {
-    width: width * 0.30,
+    position: 'absolute',
+    left: 5,
+    top: height * 0.03,
+    width: width * 0.3,
     // flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
   },
 });
 

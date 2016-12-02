@@ -9,7 +9,6 @@ import {
   Text,
 } from 'react-native';
 import { Facebook } from 'exponent';
-import FadeIn from '@exponent/react-native-fade-in-image';
 import settings from '../settings';
 import axios from 'axios'
 import Router from '../navigation/Router';
