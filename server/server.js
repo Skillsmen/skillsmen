@@ -1,11 +1,18 @@
 /* eslint-disable */
 const express = require('express');
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const fs = require('fs');
+const upload = multer({ dest: 'uploads/' });
+
+
 const app = express();
 const http = require('http').Server(app);
 // const io = require('socket.io')(http);
 
-const imageMagick = require('imagemagick');
+// const imageMagick = require('imagemagick');
+// const gm = require('gm');
+// const imageMagick = gm.subClass({ imageMagick: true });
 
 app.use(bodyParser.json());
 
@@ -40,7 +47,7 @@ http.listen(app.get('port'), function() {
 //   require('dotenv').config()
 // }
 
-// require('dotenv').config({path: __dirname + '/.env'});
+require('dotenv').config({path: __dirname + '/.env'});
 
 const S3_BUCKET = process.env.S3_BUCKET;
 const S3_KEY = process.env.S3_KEY;
@@ -121,8 +128,9 @@ app.get('/sign-s3', (req, res) => {
   });
 });
 
-app.get('/s3-uploader', (req, res) => {
-  const picSrc = imageMagick(req.query.picSrc);
+app.post('/s3-uploader', upload.single('image'), (req, res) => {
+  console.log('[ REQUEST ] ', req.file);
+  const picSrc = req.file.path;
   const result = {};
   client.upload(picSrc, {}, function(err, images, meta) {
     if (err) {
@@ -134,6 +142,14 @@ app.get('/s3-uploader', (req, res) => {
       res.send(JSON.stringify(result));
       res.end();
     }
+    
+    fs.unlink(picSrc, function(res, err) {
+      if(err) {
+        console.log('Error deleting file');
+      } else {
+        console.log('Deleted.', res);
+      }
+    });
   });
 })
 
