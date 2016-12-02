@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     fontSize: 26,
     marginTop: 5,
-    alignSelf: 'center',
   },
   circularImage: {
     width: 70,

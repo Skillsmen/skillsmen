@@ -16,7 +16,7 @@ import {
 // doesn't seem necessary for the time being
 // import './UserAgent';
 
-import io from 'socket.io-client/dist/socket.io';
+// import io from 'socket.io-client/dist/socket.io';
 import styles from '../styles/Messages';
 import BackButton from '../reusableComponents/BackButton';
 
