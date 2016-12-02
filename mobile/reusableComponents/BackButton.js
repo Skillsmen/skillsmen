@@ -57,7 +57,9 @@ class BackButton extends React.Component {
           <FontAwesome name={'chevron-left'} left={20} color={'#3E8CF1'} size={16}></FontAwesome>
           {this.generateBackText()}
         </Text>
-        {this.props.rightComponent}
+        <View style={{ position: 'absolute', marginLeft: 60 }}>
+          {this.props.rightComponent}
+        </View>
       </View>
     );
   }

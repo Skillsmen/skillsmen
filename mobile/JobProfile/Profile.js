@@ -116,7 +116,14 @@ class Profile extends React.Component {
 
     this.showEditBar = (navigator, editMode) => {
       const editBtn = (
-        <TouchableHighlight onPress={this.clickOnEdit}>
+        <TouchableHighlight
+          style={{
+            // position: 'absolute',
+            // left: 5,
+            // top: height * 0.03,
+          }}
+          onPress={this.clickOnEdit}
+        >
           <FontAwesome
             style={styles.editIcon}
             name="pencil-square-o"
@@ -150,27 +157,29 @@ class Profile extends React.Component {
         source={bgImg}
       >
         {this.showEditBar(navigator, this.state.editMode)}
-        {!this.state.editMode &&
-          <MainInfo
-            propertyArr={propertyArr}
-            title={job.title}
-            description={job.description}
-            User={job.User}
-            start={job.from}
-            end={job.to}
-          />
-        }
-        {this.state.editMode &&
-          <EditInfo
-            propertyArr={propertyArr}
-            title={job.title}
-            description={job.description}
-            User={job.User}
-            start={new Date(job.from).toString()}
-            end={new Date(job.to).toString()}
-            updateJob={this.updateJobBinded}
-          />
-        }
+        <View style={{ marginTop: 45 }}>
+          {!this.state.editMode &&
+            <MainInfo
+              propertyArr={propertyArr}
+              title={job.title}
+              description={job.description}
+              User={job.User}
+              start={job.from}
+              end={job.to}
+            />
+          }
+          {this.state.editMode &&
+            <EditInfo
+              propertyArr={propertyArr}
+              title={job.title}
+              description={job.description}
+              User={job.User}
+              start={new Date(job.from).toString()}
+              end={new Date(job.to).toString()}
+              updateJob={this.updateJobBinded}
+            />
+          }
+        </View>
       </Image>
     );
   }
