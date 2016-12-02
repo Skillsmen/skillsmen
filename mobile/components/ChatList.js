@@ -31,6 +31,7 @@ class ChatList extends React.Component {
             (<ChatTile
               key={i}
               chat={chat}
+              ind={i}
               goToChat={goToChat}
               profile={profile}
             />),

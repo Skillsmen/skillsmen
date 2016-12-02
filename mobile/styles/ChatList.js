@@ -13,24 +13,44 @@ const styles = StyleSheet.create({
     height: 0.1 * height,
     width,
   },
+  tileRight: {
+    alignItems: 'flex-start',
+    width: 0.70 * width,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  tileMessage: {
+    fontWeight: '300',
+    fontSize: 10,
+    marginTop: 5,
+    color: '#242424',
+  },
+  tileDate: {
+    fontWeight: '200',
+    fontSize: 10,
+    fontStyle: 'italic',
+    color: '#242424',
+  },
   row: {
     borderRadius: 4,
     borderWidth: 0.5,
     borderColor: '#d6d7da',
     height: 100,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   name: {
-    fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: '300',
+    fontSize: 26,
     marginTop: 5,
-    marginLeft: 30,
+    alignSelf: 'center',
   },
   circularImage: {
     width: 70,
     height: 70,
     borderRadius: 35,
+    marginLeft: 10,
   },
 });
 

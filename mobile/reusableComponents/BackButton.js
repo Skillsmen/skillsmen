@@ -13,13 +13,16 @@ const backButton = StyleSheet.create({
   back: {
     marginTop: 3 * vh,
     color: '#3E8CF1',
+    backgroundColor: 'transparent',
     fontSize: 16,
   },
+
   container: {
-    width,
-    flex: 1,
+    width: width * 0.30,
+    // flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
 });
 

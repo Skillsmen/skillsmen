@@ -17,6 +17,30 @@ const styles = StyleSheet.create({
     height: 0.1 * height,
     width,
   },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  headerMid: {
+    marginTop: 20,
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: width * 0.6,
+    // marginLeft: 30,
+  },
+  placeHolder: {
+    width: width * 0.3,
+  },
+  headerName: {
+    fontSize: 16,
+    backgroundColor: 'transparent',
+    color: 'white',
+  },
+  headerText: {
+    fontSize: 12,
+    color: 'white',
+    backgroundColor: 'transparent',
+  },
   sendRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -27,7 +51,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   inputText: {
-    width: width * 0.7,
+    width: width * 0.85,
     height: 30,
     borderColor: '#092a4c',
     borderWidth: 1,
@@ -36,11 +60,11 @@ const styles = StyleSheet.create({
     marginTop: 3,
     fontSize: 14,
   },
-  ownMessage: {
-    color: '#eff3f9',
+  peerMessage: {
+    color: '#dadee8',
     fontSize: 14,
   },
-  peerMessage: {
+  ownMessage: {
     color: '#092a4c',
     fontSize: 14,
   },
@@ -51,12 +75,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   ownContainer: {
-    backgroundColor: '#092a4c',
+    backgroundColor: '#dadee8',
     alignSelf: 'flex-start',
     marginLeft: 5,
   },
   peerContainer: {
-    backgroundColor: '#eff3f9',
+    backgroundColor: '#092a4c',
     alignSelf: 'flex-end',
     marginRight: 5,
   },

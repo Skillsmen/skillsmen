@@ -28,14 +28,13 @@ class Messages extends React.Component {
     this.state = {
       message: '',
     };
-    console.log('params from message constructor', this.props.route.params);
 
     this.chatId = this.props.route.params.id || this.props.chatId;
     this.ownId = this.props.profile.id;
 
     // Right now, just using local host for testing... switch to ${settings.SERVER}/
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.socket = io('http://localhost:3000', { transports: ['websocket'] });
+    // this.socket = io('http://localhost:3000', { transports: ['websocket'] });
     // can use socket throughout this module by referencing this.socket.io
   }
 
@@ -57,7 +56,14 @@ class Messages extends React.Component {
           style={styles.bluePattern}
           source={blueImg}
         >
-          <BackButton navigator={this.props.navigator} />
+          <View style={styles.header}>
+            <BackButton navigator={this.props.navigator} />
+            <View style={styles.headerMid}>
+              <Text style={styles.headerText}>Chat with</Text>
+              <Text style={styles.headerName}>{ this.props.peer.name }</Text>
+            </View>
+            <View style={styles.placeHolder} />
+          </View>
         </Image>
         <ScrollView
           contentContainerStyle={styles.contentContainer}
@@ -97,6 +103,7 @@ class Messages extends React.Component {
               this.setState({ message });
             }}
             value={this.state.message}
+            placeholder={`Type a message to ${this.props.peer.name}`}
           />
           <TouchableOpacity onPress={this.handleSubmit}>
             <FontAwesome
