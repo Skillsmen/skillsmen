@@ -17,7 +17,7 @@ const TradieBanner = ({ profession, location, rating }) =>
       </View>
       <View style={[styles.middleIcon, { alignItems: 'center', flexDirection: 'row' }]}>
         <FontAwesome name={'location-arrow'} size={15} style={styles.iconFormat} color={'868686'} />
-          <Text style={[styles.middleText, { color: '868686' }]}> {location}</Text>
+          <Text style={[styles.iconText, { color: '868686' }]}> {location}</Text>
       </View>
       <View style={[styles.rightIcon, { alignItems: 'center', flexDirection: 'row' }]}>
         <FontAwesome name={'star-o'} size={15} style={styles.iconFormat} color={'868686'} />

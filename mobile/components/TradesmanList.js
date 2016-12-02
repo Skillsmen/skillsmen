@@ -106,9 +106,9 @@ class TradesmanList extends React.Component {
           {users.map((user, i) => {
             let background;
             if (i % 2 === 0) {
-              background = '#f4f4f4';
+              background = 'transparent';
             } else {
-              background = '#EDEDED';
+              background = '#F0F0F0';
             }
             return (
               <Tradesman

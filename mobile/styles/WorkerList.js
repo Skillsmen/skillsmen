@@ -9,9 +9,9 @@ const vw = width / 100;
 
 const styles = StyleSheet.create({
   posterImageIcon: {
-    width: 8 * vh,
-    height: 8 * vh,
-    borderRadius: 4 * vh,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     borderColor: '#f5f5f5',
     borderWidth: 1.5,
   },
@@ -21,35 +21,35 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   leftIcon: {
-    marginLeft: 15 * vw,
-    width: 20 * vw,
+    width: 27 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
   },
   iconSection: {
-    flexWrap: 'wrap',
     alignItems: 'flex-start',
     flexDirection: 'row',
-    width: 100 * vw,
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
   },
   middleIcon: {
-    width: 30 * vw,
+    width: 32 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
     paddingLeft: 2 * vw,
   },
   rightIcon: {
-    width: 25 * vw,
+    width: 7 * vw,
     backgroundColor: 'rgba(0,0,0,0)',
   },
-  middleText: {
-    textAlign: 'center',
-    color: 'black',
-    fontSize: 12,
-  },
   row: {
-    height: 150,
-    justifyContent: 'center',
-    padding: 10,
+    height: 70,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  tileRight: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    paddingTop: 7,
+    paddingBottom: 7,
+    marginLeft: 5,
   },
   leftRow: {
     flexDirection: 'row',
