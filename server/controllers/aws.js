@@ -1,10 +1,12 @@
 const Upload = require('s3-uploader');
+const fs = require('fs');
+const aws = require('aws-sdk');
 
-require('dotenv').config({path: __dirname + '/../.env'});
+require('dotenv').config({ path: __dirname + '/../.env' });
 
 const S3_KEY = process.env.S3_KEY;
 const S3_SECRET = process.env.S3_SECRET;
-const aws = require('aws-sdk');
+
 aws.config.update({
   accessKeyId: S3_KEY,
   secretAccessKey: S3_SECRET,
@@ -50,19 +52,27 @@ const client = new Upload('puffyshirts', {
 });
 
 const s3Uploader = (req, res) => {
-  const picSrc = req.query.picSrc;
+  console.log('[ REQUEST ] ', req.file);
+  const picSrc = req.file.path;
   const result = {};
-  let i;
-  client.upload(picSrc, {}, (err, images) => {
+  client.upload(picSrc, {}, function(err, images, meta) {
     if (err) {
       console.error('ERROR IN S3UPLOADER ', err);
     } else {
-      for (i = 0; i < images.length; i++) {
+      for (var i = 0; i < images.length; i++) {
         result['image'.concat(i)] = images[i].url;
       }
       res.send(JSON.stringify(result));
       res.end();
     }
+   
+    fs.unlink(picSrc, function(res, err) {
+      if (err) {
+        console.log('Error deleting file');
+      } else {
+        console.log('Deleted.', res);
+      }
+    });
   });
 };
 
